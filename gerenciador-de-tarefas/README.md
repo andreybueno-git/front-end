@@ -1,25 +1,48 @@
-# Plano de Estudos — E3: consumo de dados com `fetch` e os quatro estados da tela
+# E3 — Consumo de dados com `fetch` e os quatro estados da tela
 
-Terceira etapa do gerenciador de tarefas acadêmicas. Parte do projeto da E2 e troca a origem dos dados: sai o array escrito em `js/dados.js`, entra o arquivo `dados.json` carregado pela rede com `fetch`.
+> **Documento único da etapa.** Tudo sobre a E3 está aqui: o que foi feito, por quê, como testar e o histórico de versões. É um documento vivo: cada mudança no código vira uma linha na seção **Versionamento** (no fim) e uma tag no git.
 
-## Como abrir
+| Item | Estado |
+|---|---|
+| Código: quatro estados e três tipos de erro | ✅ pronto e testado no navegador (local e no GitHub Pages) |
+| Revisão contra os itens mínimos do enunciado (26 itens) | ✅ 26/26 · correções aplicadas na v1.0.1 |
+| Documento único com roteiro de testes | ✅ esta página |
+| Versionamento (tags `e3-vX.Y.Z`) | ✅ seção 9 |
+| Entrega | 🕗 prazo 08/09 (quarta) ou 09/09 (quinta), 23h59 |
 
-Precisa ser servido por HTTP (não por `file:`), porque `fetch` e módulos ES não funcionam abrindo o arquivo direto.
+Página publicada: https://andreybueno-git.github.io/front-end/e3-fetch/
+
+---
+
+## 1. O que a etapa faz
+
+Terceira etapa do gerenciador de tarefas acadêmicas. Parte do projeto da E2 e **troca a origem dos dados**: sai o array escrito em `js/dados.js`, entra o arquivo `dados.json` carregado pela rede com `fetch`. Como a rede pode demorar, falhar ou voltar vazia, a tela passa a ter **quatro estados**: carregando, sucesso, vazio e erro.
+
+## 2. Como abrir
+
+Precisa ser servido por **HTTP**. Abrir o `index.html` direto (`file://`) não funciona: o navegador bloqueia o `fetch` e os módulos ES.
+
+**Opção A — terminal**, na raiz do repositório:
 
 ```bash
-cd e3-fetch
-python3 -m http.server 8000
+python3 -m http.server 8080
 ```
 
-Depois abrir `http://localhost:8000` no navegador.
+Depois abrir `http://localhost:8080/e3-fetch/`.
 
-## Estrutura
+**Opção B — VS Code** com a extensão *Live Server*: botão direito em `e3-fetch/index.html` → *Open with Live Server*.
+
+## 3. Estrutura
 
 ```
 e3-fetch/
 ├── index.html          região de status vazia + <script type="module" src="js/main.js">
 ├── styles.css          E2 + estilos dos quatro estados
 ├── dados.json          { "tarefas": [ ... 9 tarefas ... ] }
+├── README.md           este documento
+├── testes/
+│   ├── dados-vazio.json      { "tarefas": [] }  → estado vazio
+│   └── dados-quebrado.json   JSON inválido de propósito → erro de formato
 └── js/
     ├── main.js         ponto de entrada: ordem e tratamento de erro
     ├── api.js          OBTER: carregarTarefas() — fetch, response.ok, json. Não toca o DOM.
@@ -28,46 +51,62 @@ e3-fetch/
     └── dados.js        array da aula 5/6. Continua no repositório; não é mais importado.
 ```
 
-## Os quatro estados
+## 4. Os quatro estados
 
-| Estado | Quando | O que aparece |
+| Estado | Quando | O que aparece na região de status |
 |---|---|---|
 | carregando | antes do `await`, enquanto a rede responde | "Carregando tarefas…" |
 | sucesso | array com itens | os cartões + "N tarefas carregadas." |
-| vazio | `tarefas.length === 0` | "Nenhuma tarefa cadastrada ainda…" |
-| erro | qualquer exceção no `try` | mensagem diferente por tipo de falha |
+| vazio | `tarefas.length === 0` | "Nenhuma tarefa cadastrada ainda. Quando houver, elas aparecem aqui." |
+| erro | qualquer exceção no `try` | mensagem diferente por tipo de falha (seção 5) |
 
-Os três tipos de erro produzem textos distintos, decididos por `erro.name` em `estados.js`:
+A região é o `<p id="status" role="status" aria-live="polite">`, que existe vazio no HTML desde o início e é preenchido por `textContent`.
 
-| Tipo | Como acontece | `erro.name` |
-|---|---|---|
-| rede | offline, DNS, servidor fora. O `fetch` **rejeita** com `TypeError`; `api.js` dá ao erro um nome próprio. | `NetworkError` |
-| protocolo | servidor respondeu 404/500. O `fetch` **resolve**; nós lançamos ao ver `!response.ok`. | `HttpError` |
-| formato | corpo não é JSON válido, ou não tem a chave `tarefas`. | `SyntaxError` |
+## 5. Os três tipos de erro
 
-## Decisões
+Decididos por `erro.name` em `estados.js`:
 
-- **`response.ok` antes do corpo.** `fetch` não rejeita em 404: para ele a rede funcionou. Só o status diz se o conteúdo presta. Por isso a checagem vem antes de `resposta.json()`, e lança um erro com o status.
-- **Duas esperas.** A primeira (`await fetch`) resolve quando os cabeçalhos chegam. A segunda (`await resposta.json()`) baixa e interpreta o corpo. São dois momentos diferentes da rede.
+| Tipo | Como acontece | `erro.name` | Mensagem na tela |
+|---|---|---|---|
+| rede | offline, DNS, servidor fora. O `fetch` **rejeita** com `TypeError`; `api.js` captura e dá ao erro um nome próprio. | `NetworkError` | "Não foi possível conectar. Verifique sua internet e tente recarregar a página." |
+| protocolo | servidor respondeu 404/500. O `fetch` **resolve**; nós lançamos ao ver `!response.ok`. | `HttpError` | "O servidor não conseguiu entregar as tarefas (status 404). Tente novamente mais tarde." |
+| formato | corpo não é JSON válido, ou não tem a chave `tarefas` com um array. | `SyntaxError` | "Os dados chegaram, mas estão em um formato inválido. O arquivo de tarefas precisa ser corrigido." |
+| outro (bug no código) | qualquer outra exceção | — | "Algo deu errado ao carregar as tarefas." |
+
+## 6. Decisões (as perguntas do Q3)
+
+- **Por que `fetch` não rejeita em 404?** Para o `fetch`, 404 é uma resposta bem-sucedida: a rede funcionou, o servidor respondeu. Ele só rejeita quando **não há resposta** (rede). Por isso quem diz se o conteúdo presta é o `response.ok` (status 200–299), checado **antes** de ler o corpo; quando falha, lançamos um erro com o status.
+- **Por que dois `await`?** O primeiro (`await fetch`) resolve quando os **cabeçalhos** chegam. O segundo (`await resposta.json()`) baixa e interpreta o **corpo**. São dois momentos diferentes da rede, e cada um pode falhar de um jeito.
+- **Onde cada erro é tratado?** Rede: capturado em `api.js` e relançado como `NetworkError`. Protocolo: lançado em `api.js` (`HttpError`) ao ver `!response.ok`. Formato: `resposta.json()` rejeita com `SyntaxError`, ou `api.js` lança um ao ver a forma errada. **Todos** caem no único `catch` de `main.js`, que entrega o erro a `estados.js`; lá o texto é escolhido por `erro.name`.
+- **Por que o vazio não está no `catch`?** Lista vazia é uma resposta **válida**: o servidor respondeu, o JSON é bom, só não há tarefas. Tratar isso como falha seria mentir. Ela é detectada no caminho de sucesso, por `length === 0`.
+- **Por que a região de status precisa existir antes?** O leitor de tela só anuncia mudanças em regiões `aria-live` que **já estavam** na árvore de acessibilidade. Se fosse criada só na hora, nada seria anunciado. Pelo mesmo motivo o CSS não usa `display: none` na região vazia (isso a tiraria da árvore); só remove a caixa.
 - **Carregando antes do `await`.** Se viesse depois, a tela ficaria em branco durante toda a espera.
-- **Vazio fora do `catch`.** Lista vazia é uma resposta válida, não uma falha. Ela é detectada no caminho de sucesso, por `length === 0`.
-- **Região de status pré-existente.** O `<p role="status" aria-live="polite">` está no HTML desde o início, vazio. Assim o leitor de tela já a observa quando o texto muda. Se fosse criada só na hora, nada seria anunciado. Por isso o CSS não usa `display: none` na região vazia (isso a tiraria da árvore de acessibilidade); só remove a caixa.
-- **Erro de rede com nome próprio.** O `fetch` rejeita com um `TypeError` genérico. `api.js` o captura e relança como `NetworkError`; assim um `TypeError` causado por bug no código não é apresentado como "sua internet caiu": cai no texto genérico.
-- **Estado de erro zera o quadro.** Antes da mensagem, `renderizarTarefas([])` deixa contadores e colunas coerentes com o que a tela diz.
 - **`textContent`, nunca `innerHTML`.** Todo texto, inclusive o que vem do JSON, entra como texto. Nada é interpretado como HTML.
 - **`renderizacao.js` não mudou.** Ele recebe um array e desenha; não sabe de onde o array veio. Trocar a origem não exigiu tocar nele: esse é o acoplamento resolvido.
+- **Erro de rede com nome próprio.** O `fetch` rejeita com um `TypeError` genérico. Se a tela confiasse só nesse nome, um `TypeError` causado por bug no código seria apresentado como "sua internet caiu". Por isso `api.js` relança como `NetworkError`, e o resto cai no texto genérico.
+- **Estado de erro zera o quadro.** Antes da mensagem, `renderizarTarefas([])` deixa contadores e colunas coerentes com o que a tela diz.
 - **Sem `await` de nível superior.** A inicialização acontece dentro de `iniciar()`.
 
-## Fora do escopo desta entrega
+## 7. Fora do escopo desta entrega
 
-Busca e filtros continuam existindo na tela, mas não operam. Cadastro/edição, estado centralizado e botão de tentar novamente ficam para as próximas etapas.
+Conforme o enunciado: API pública externa (segunda metade do semestre), busca e filtros operando (os controles continuam na tela, sem operar), cadastro/edição/exclusão, estado centralizado (aula 7), botão de tentar novamente (bem-vindo, não exigido) e qualquer biblioteca ou framework.
 
-## Como verificar
+## 8. Roteiro de testes
 
-1. **Carregando:** DevTools → Network → throttling `Slow 4G` → recarregar. A mensagem de carregamento aparece antes dos cartões.
-2. **Vazio:** apontar `api.js` temporariamente para um arquivo com `{"tarefas": []}`.
-3. **404:** apontar para um caminho que não existe. Deve mostrar a mensagem de protocolo, com o status.
-4. **Offline:** DevTools → Network → `Offline` → recarregar. Mensagem diferente da do 404.
-5. **JSON quebrado:** vírgula sobrando no array → mensagem de formato, não de rede.
-6. **Região viva:** DevTools → Elements, antes de qualquer interação: `#status` existe e está vazio.
-7. **Acoplamento:** `renderizacao.js` é o mesmo da aula 5.
+Os testes 2, 3 e 5 trocam o caminho **nesta linha** de `js/api.js`, salvam e recarregam a página:
+
+```js
+resposta = await fetch('dados.json');
+```
+
+| # | Teste | Como fazer | Resultado esperado |
+|---|---|---|---|
+| 1 | Carregando | DevTools → *Network* → throttling **Slow 4G** → recarregar | "Carregando tarefas…" aparece **antes** dos cartões |
+| 2 | Vazio | trocar por `'testes/dados-vazio.json'` | mensagem de vazio, 0 cartões, contadores em 0, **sem** a palavra "erro" |
+| 3 | 404 (protocolo) | trocar por `'nao-existe.json'` | mensagem com **status 404** |
+| 4 | Offline (rede) | DevTools → *Network* → **Offline** → recarregar | mensagem de rede, **diferente** da do 404 |
+| 5 | JSON quebrado (formato) | trocar por `'testes/dados-quebrado.json'` | mensagem de formato, não de rede |
+| 6 | Região viva | DevTools → *Elements*, antes de qualquer interação | `#status` existe, está vazio, e a regra `.status:empty` **não** usa `display: none` |
+| 7 | Acoplamento | abrir `js/renderizacao.js` | não há `fetch` nem qualquer referência à origem dos dados |
+
+Ao terminar: voltar o caminho para `'dados.json'` e o throttling para *No throttling*. No caminho de sucesso o console fica limpo; nos de erro, o `console.error` é proposital (o objeto do erro vai para o console **além** da mensagem na tela).
