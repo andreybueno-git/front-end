@@ -110,3 +110,30 @@ resposta = await fetch('dados.json');
 | 7 | Acoplamento | abrir `js/renderizacao.js` | não há `fetch` nem qualquer referência à origem dos dados |
 
 Ao terminar: voltar o caminho para `'dados.json'` e o throttling para *No throttling*. No caminho de sucesso o console fica limpo; nos de erro, o `console.error` é proposital (o objeto do erro vai para o console **além** da mensagem na tela).
+
+## 9. Versionamento
+
+Toda mudança nesta etapa vira **uma linha nesta tabela** e **uma tag anotada no git** no formato `e3-vMAIOR.MENOR.CORREÇÃO`:
+
+- **MAIOR** sobe quando a etapa fica completa ou quando o comportamento pedido pelo enunciado muda;
+- **MENOR** sobe quando entra algo novo que não quebra o que existia (documentação, arquivos de teste);
+- **CORREÇÃO** sobe quando é só conserto.
+
+| Versão | Data | Commit | O que mudou | Estado |
+|---|---|---|---|---|
+| e3-v0.1.0 | 03/09/2026 | `a0ba297` | Base das aulas 5 e 6: `dados.js` e `renderizacao.js` desenhando a partir de um array | ✅ |
+| e3-v0.2.0 | 03/09/2026 | `5d71412` | `dados.json` com 9 tarefas e `carregarTarefas()` com `fetch`, `response.ok` e `resposta.json()` | ✅ |
+| e3-v1.0.0 | 03/09/2026 | `bac2034` | **Primeira versão completa**: quatro estados, região de status, `main.js` com carregando antes do `await` e vazio fora do `catch` | ✅ |
+| e3-v1.0.1 | 03/09/2026 | `670a9ae` | Correções da revisão: região vazia sem `display:none`, `NetworkError`, quadro zerado no erro, texto do erro HTTP, rádio `concluidas` | ✅ |
+| e3-v1.1.0 | 03/09/2026 | tag `e3-v1.1.0` | Documento único, arquivos de teste em `testes/`, esta seção de versionamento e as tags | ✅ **atual** |
+
+Como ver o histórico:
+
+```bash
+git log --oneline -- e3-fetch      # os commits desta pasta
+git tag -n -l 'e3-*'               # as versões, com a descrição de cada tag
+```
+
+No GitHub: aba **Commits** para a linha do tempo e **Tags** para as versões.
+
+Próximas etapas (E4…) terão a própria numeração (`e4-v…`); esta continua em `e3-v1.x` só se houver conserto ou melhoria pedida na correção.
