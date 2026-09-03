@@ -23,7 +23,7 @@
       </div>
 
       <div class="cabecalho__resumo">
-        <strong>8 tarefas</strong>
+        <strong id="total-tarefas">…</strong>
         <span>2 para esta semana</span>
       </div>
     </header>
@@ -81,54 +81,18 @@
         <p>Organize as entregas por etapa e acompanhe o avanço do semestre.</p>
       </div>
 
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
       <div class="quadro">
         <section class="coluna coluna--a-fazer" id="a-fazer" aria-labelledby="titulo-a-fazer">
           <header class="coluna__cabecalho">
             <span class="coluna__indicador" aria-hidden="true"></span>
             <h3 id="titulo-a-fazer">A fazer</h3>
-            <span class="coluna__quantidade" aria-hidden="true">3</span>
-            <span class="somente-leitor">3 tarefas</span>
+            <span class="coluna__quantidade" aria-hidden="true">0</span>
+            <span class="somente-leitor">0 tarefas</span>
           </header>
 
           <ul class="coluna__tarefas">
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Implementar layout responsivo com Flexbox e Grid">Implementar layout responsivo com Flexbox e Grid</h4>
-                <span class="prioridade prioridade--alta">Alta</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Interface Acadêmica</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-08-26">26 ago</time>
-                <span>Entrega</span>
-              </footer>
-            </article></li>
-
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Revisar funções e listas em Python">Revisar funções e listas em Python</h4>
-                <span class="prioridade prioridade--media">Média</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Fundamentos Python</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-08-29">29 ago</time>
-                <span>Estudo</span>
-              </footer>
-            </article></li>
-
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Ler capítulo sobre normalização de bancos de dados relacionais">Ler capítulo sobre normalização de bancos de dados relacionais</h4>
-                <span class="prioridade prioridade--baixa">Baixa</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Acervo Digital</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-09-01">01 set</time>
-                <span>Leitura</span>
-              </footer>
-            </article></li>
           </ul>
         </section>
 
@@ -136,36 +100,11 @@
           <header class="coluna__cabecalho">
             <span class="coluna__indicador" aria-hidden="true"></span>
             <h3 id="titulo-andamento">Em andamento</h3>
-            <span class="coluna__quantidade" aria-hidden="true">2</span>
-            <span class="somente-leitor">2 tarefas</span>
+            <span class="coluna__quantidade" aria-hidden="true">0</span>
+            <span class="somente-leitor">0 tarefas</span>
           </header>
 
           <ul class="coluna__tarefas">
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Preparar apresentação do projeto integrador">Preparar apresentação do projeto integrador</h4>
-                <span class="prioridade prioridade--alta">Alta</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Campus Conectado</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-08-28">28 ago</time>
-                <span>Apresentação</span>
-              </footer>
-            </article></li>
-
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Modelar diagrama de classes do sistema">Modelar diagrama de classes do sistema</h4>
-                <span class="prioridade prioridade--media">Média</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Sistema de Biblioteca</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-09-02">02 set</time>
-                <span>Atividade</span>
-              </footer>
-            </article></li>
           </ul>
         </section>
 
@@ -173,23 +112,11 @@
           <header class="coluna__cabecalho">
             <span class="coluna__indicador" aria-hidden="true"></span>
             <h3 id="titulo-revisao">Em revisão</h3>
-            <span class="coluna__quantidade" aria-hidden="true">1</span>
+            <span class="coluna__quantidade" aria-hidden="true">0</span>
             <span class="somente-leitor">1 tarefa</span>
           </header>
 
           <ul class="coluna__tarefas">
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Corrigir relatório da aula de laboratório">Corrigir relatório da aula de laboratório</h4>
-                <span class="prioridade prioridade--media">Média</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Laboratório de Redes</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-08-27">27 ago</time>
-                <span>Relatório</span>
-              </footer>
-            </article></li>
           </ul>
         </section>
 
@@ -197,36 +124,11 @@
           <header class="coluna__cabecalho">
             <span class="coluna__indicador" aria-hidden="true"></span>
             <h3 id="titulo-concluidas">Concluídas</h3>
-            <span class="coluna__quantidade" aria-hidden="true">2</span>
-            <span class="somente-leitor">2 tarefas</span>
+            <span class="coluna__quantidade" aria-hidden="true">0</span>
+            <span class="somente-leitor">0 tarefas</span>
           </header>
 
           <ul class="coluna__tarefas">
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Criar estrutura semântica da página">Criar estrutura semântica da página</h4>
-                <span class="prioridade prioridade--alta">Alta</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Interface Acadêmica</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-08-19">19 ago</time>
-                <span>Entregue</span>
-              </footer>
-            </article></li>
-
-            <li><article class="cartao">
-              <div class="cartao__topo">
-                <h4 title="Resolver lista de lógica proposicional">Resolver lista de lógica proposicional</h4>
-                <span class="prioridade prioridade--baixa">Baixa</span>
-              </div>
-              <p class="cartao__projeto"><span>Projeto</span> Caderno de Exercícios</p>
-              <p class="cartao__responsavel"><span>Responsável</span> Andrey Bueno</p>
-              <footer class="cartao__rodape">
-                <time datetime="2026-08-21">21 ago</time>
-                <span>Entregue</span>
-              </footer>
-            </article></li>
           </ul>
         </section>
       </div>
@@ -235,5 +137,6 @@
     <footer class="rodape-pagina">
       <p>Andrey Bueno <span aria-hidden="true">·</span> Desenvolvimento Frontend 2026.2</p>
     </footer>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>

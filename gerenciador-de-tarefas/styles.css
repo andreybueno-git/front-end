@@ -577,3 +577,22 @@ input:focus-visible {
     transition: none !important;
   }
 }
+
+/* E3 — região de status (os quatro estados da tela) */
+/* Existe no HTML desde o início, vazia. Vazia, não ocupa espaço;
+   continua no DOM, então o leitor de tela já a observa. */
+.status {
+  margin: 0 0 var(--espaco-2);
+  padding: var(--espaco-2);
+  border: 1px solid var(--cor-borda);
+  border-radius: 0.5rem;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+}
+.status:empty { display: none; }
+
+.status--carregando { border-color: var(--cor-andamento); color: var(--cor-andamento); }
+.status--sucesso    { border-color: var(--cor-concluida); color: var(--cor-concluida); }
+.status--vazio      { border-style: dashed; color: var(--cor-texto-suave); }
+.status--erro       { border-color: var(--cor-a-fazer); color: var(--cor-a-fazer); font-weight: 600; }
