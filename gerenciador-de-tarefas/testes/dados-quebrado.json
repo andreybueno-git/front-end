@@ -1,0 +1,5 @@
+{
+  "tarefas": [
+    { "id": 1, "titulo": "Este arquivo é inválido de propósito", "status": "a-fazer", "prioridade": "alta", "prazo": "2026-09-01" },
+  ]
+}
