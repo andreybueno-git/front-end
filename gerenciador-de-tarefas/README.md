@@ -10,13 +10,13 @@
 | Versionamento (tags `e3-vX.Y.Z`) | ✅ seção 9 |
 | Entrega | 🕗 prazo 08/09 (quarta) ou 09/09 (quinta), 23h59 |
 
-Página publicada: https://andreybueno-git.github.io/front-end/e3-fetch/
+Página publicada: https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/
 
 ---
 
 ## 1. O que a etapa faz
 
-Terceira etapa do gerenciador de tarefas acadêmicas. Parte do projeto da E2 e **troca a origem dos dados**: sai o array escrito em `js/dados.js`, entra o arquivo `dados.json` carregado pela rede com `fetch`. Como a rede pode demorar, falhar ou voltar vazia, a tela passa a ter **quatro estados**: carregando, sucesso, vazio e erro.
+Terceira etapa do gerenciador de tarefas acadêmicas. É **a mesma pasta da E2, evoluída** (a E2 como foi entregue está na tag `e2-v1.0.0`). A E3 **troca a origem dos dados**: sai o array escrito em `js/dados.js`, entra o arquivo `dados.json` carregado pela rede com `fetch`. Como a rede pode demorar, falhar ou voltar vazia, a tela passa a ter **quatro estados**: carregando, sucesso, vazio e erro.
 
 ## 2. Como abrir
 
@@ -28,14 +28,14 @@ Precisa ser servido por **HTTP**. Abrir o `index.html` direto (`file://`) não f
 python3 -m http.server 8080
 ```
 
-Depois abrir `http://localhost:8080/e3-fetch/`.
+Depois abrir `http://localhost:8080/gerenciador-de-tarefas/`.
 
-**Opção B — VS Code** com a extensão *Live Server*: botão direito em `e3-fetch/index.html` → *Open with Live Server*.
+**Opção B — VS Code** com a extensão *Live Server*: botão direito em `gerenciador-de-tarefas/index.html` → *Open with Live Server*.
 
 ## 3. Estrutura
 
 ```
-e3-fetch/
+gerenciador-de-tarefas/
 ├── index.html          região de status vazia + <script type="module" src="js/main.js">
 ├── styles.css          E2 + estilos dos quatro estados
 ├── dados.json          { "tarefas": [ ... 9 tarefas ... ] }
@@ -121,17 +121,19 @@ Toda mudança nesta etapa vira **uma linha nesta tabela** e **uma tag anotada no
 
 | Versão | Data | Commit | O que mudou | Estado |
 |---|---|---|---|---|
-| e3-v0.1.0 | 03/09/2026 | `a0ba297` | Base das aulas 5 e 6: `dados.js` e `renderizacao.js` desenhando a partir de um array | ✅ |
-| e3-v0.2.0 | 03/09/2026 | `5d71412` | `dados.json` com 9 tarefas e `carregarTarefas()` com `fetch`, `response.ok` e `resposta.json()` | ✅ |
-| e3-v1.0.0 | 03/09/2026 | `bac2034` | **Primeira versão completa**: quatro estados, região de status, `main.js` com carregando antes do `await` e vazio fora do `catch` | ✅ |
-| e3-v1.0.1 | 03/09/2026 | `670a9ae` | Correções da revisão: região vazia sem `display:none`, `NetworkError`, quadro zerado no erro, texto do erro HTTP, rádio `concluidas` | ✅ |
-| e3-v1.1.0 | 03/09/2026 | tag `e3-v1.1.0` | Documento único, arquivos de teste em `testes/`, esta seção de versionamento e as tags | ✅ **atual** |
+| e3-v0.1.0 | 03/09/2026 | `5ce46cb` | Base das aulas 5 e 6: `dados.js` e `renderizacao.js` desenhando a partir de um array | ✅ |
+| e3-v0.2.0 | 03/09/2026 | `c5b1f18` | `dados.json` com 9 tarefas e `carregarTarefas()` com `fetch`, `response.ok` e `resposta.json()` | ✅ |
+| e3-v1.0.0 | 03/09/2026 | `735f4d6` | **Primeira versão completa**: quatro estados, região de status, `main.js` com carregando antes do `await` e vazio fora do `catch` | ✅ |
+| e3-v1.0.1 | 03/09/2026 | `efb6cc7` | Correções da revisão: região vazia sem `display:none`, `NetworkError`, quadro zerado no erro, texto do erro HTTP, rádio `concluidas` | ✅ |
+| e3-v1.1.0 | 03/09/2026 | `51da3d7` | Documento único, arquivos de teste em `testes/`, esta seção de versionamento e as tags | ✅ |
+| e3-v1.1.1 | 03/09/2026 | tag `e3-v1.1.1` | Reorganização: a E3 passa a viver na **pasta da E2** (`gerenciador-de-tarefas/`), com o histórico reescrito para cada commit alterar os arquivos da E2 no lugar; a tag `e2-v1.0.0` marca a E2 como foi entregue | ✅ **atual** |
 
 Como ver o histórico:
 
 ```bash
-git log --oneline -- e3-fetch      # os commits desta pasta
-git tag -n -l 'e3-*'               # as versões, com a descrição de cada tag
+git log --oneline -- gerenciador-de-tarefas   # os commits desta pasta (E2 e E3)
+git tag -n -l 'e*-v*'                          # as versões (E2 e E3), com a descrição de cada tag
+git checkout e2-v1.0.0                         # ver a pasta como era na entrega da E2 (volte com: git checkout main)
 ```
 
 No GitHub: aba **Commits** para a linha do tempo e **Tags** para as versões.
