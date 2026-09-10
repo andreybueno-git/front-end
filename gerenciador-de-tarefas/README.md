@@ -1,141 +1,141 @@
-# E3 — Consumo de dados com `fetch` e os quatro estados da tela
+# E4 — Estado da interface, busca, filtros e publicação
 
-> **Documento único da etapa.** Tudo sobre a E3 está aqui: o que foi feito, por quê, como testar e o histórico de versões. É um documento vivo: cada mudança no código vira uma linha na seção **Versionamento** (no fim) e uma tag no git.
+> **Documento único da etapa.** O que foi feito, por quê, como testar e o histórico de versões. A E3 continua documentada na seção 10 e na tag `e3-v1.1.1`.
 
 | Item | Estado |
 |---|---|
-| Código: quatro estados e três tipos de erro | ✅ pronto e testado no navegador (local e no GitHub Pages) |
-| Revisão contra os itens mínimos do enunciado (26 itens) | ✅ 26/26 · correções aplicadas na v1.0.1 |
-| Documento único com roteiro de testes | ✅ esta página |
-| Versionamento (tags `e3-vX.Y.Z`) | ✅ seção 9 |
-| Entrega | 🕗 prazo 08/09 (quarta) ou 09/09 (quinta), 23h59 |
+| Estado único + derivação pura + ciclo evento → estado → renderização | ✅ |
+| Busca, status, prioridade, ordenação por prazo e "Limpar filtros" operando em conjunto | ✅ |
+| Quatro mensagens distintas: carregando, erro, origem vazia, resultado vazio | ✅ |
+| Botão de cartão com evento delegado (sobrevive à re-renderização) | ✅ |
+| Roteiro de testes do enunciado (8 testes) | ✅ seção 8 |
+| Publicação no GitHub Pages | ✅ URL abaixo |
+| Versionamento (`e4-vX.Y.Z`) | ✅ seção 9 |
 
-Página publicada: https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/
+**Página publicada:** https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/
 
 ---
 
 ## 1. O que a etapa faz
 
-Terceira etapa do gerenciador de tarefas acadêmicas. É **a mesma pasta da E2, evoluída** (a E2 como foi entregue está na tag `e2-v1.0.0`). A E3 **troca a origem dos dados**: sai o array escrito em `js/dados.js`, entra o arquivo `dados.json` carregado pela rede com `fetch`. Como a rede pode demorar, falhar ou voltar vazia, a tela passa a ter **quatro estados**: carregando, sucesso, vazio e erro.
+Quarta etapa do gerenciador de tarefas. Parte da E3 (dados por `fetch`, quatro estados de carregamento) e faz os controles **operarem de verdade**: busca por título, filtro por status, filtro por prioridade, ordenação por prazo e "Limpar filtros".
+
+A regra central: **o estado é a fonte; a tela é uma projeção.** Existe um único objeto de estado. Todo evento altera esse objeto e chama o mesmo ponto de renderização. Cartões, contagem, mensagem e controles são recalculados a partir dele — por isso nunca discordam entre si.
 
 ## 2. Como abrir
 
-Precisa ser servido por **HTTP**. Abrir o `index.html` direto (`file://`) não funciona: o navegador bloqueia o `fetch` e os módulos ES.
-
-**Opção A — terminal**, na raiz do repositório:
+Precisa de HTTP (o `fetch` e os módulos ES não funcionam em `file://`). Na raiz do repositório:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Depois abrir `http://localhost:8080/gerenciador-de-tarefas/`.
-
-**Opção B — VS Code** com a extensão *Live Server*: botão direito em `gerenciador-de-tarefas/index.html` → *Open with Live Server*.
+Abrir `http://localhost:8080/gerenciador-de-tarefas/`. Ou, no VS Code, *Open with Live Server* em `gerenciador-de-tarefas/index.html`.
 
 ## 3. Estrutura
 
 ```
 gerenciador-de-tarefas/
-├── index.html          região de status vazia + <script type="module" src="js/main.js">
-├── styles.css          E2 + estilos dos quatro estados
+├── index.html          controles (busca, status, prioridade, ordenação, limpar) + região de status
+├── styles.css          E2 + E3 + estilos dos novos controles e dos detalhes do cartão
 ├── dados.json          { "tarefas": [ ... 9 tarefas ... ] }
-├── README.md           este documento
-├── testes/
-│   ├── dados-vazio.json      { "tarefas": [] }  → estado vazio
-│   └── dados-quebrado.json   JSON inválido de propósito → erro de formato
+├── testes/             dados-vazio.json e dados-quebrado.json (E3)
 └── js/
-    ├── main.js         ponto de entrada: ordem e tratamento de erro
-    ├── api.js          OBTER: carregarTarefas() — fetch, response.ok, json. Não toca o DOM.
-    ├── estados.js      DESENHAR O ESTADO: renderizarEstado(estado, dados). Não faz requisição.
-    ├── renderizacao.js DESENHAR OS DADOS: renderizarTarefas(tarefas). Igual à aula 5.
-    └── dados.js        array da aula 5/6. Continua no repositório; não é mais importado.
+    ├── main.js         ponto de entrada: ouvintes + atualizar() — o ciclo único
+    ├── estado.js       NOVO: o objeto de estado e derivarVisiveis(estado)
+    ├── tela.js         NOVO (era estados.js): renderizar(estado) — o único ponto de renderização
+    ├── api.js          carregarTarefas() — só obtém. Não lê controles, não toca o DOM. Igual à E3.
+    ├── renderizacao.js renderizarTarefas(array) — desenha o que recebe. Ganhou o botão "Detalhes".
+    └── dados.js        array da aula 5. Não é importado (registro histórico).
 ```
 
-## 4. Os quatro estados
+## 4. O estado
 
-| Estado | Quando | O que aparece na região de status |
-|---|---|---|
-| carregando | antes do `await`, enquanto a rede responde | "Carregando tarefas…" |
-| sucesso | array com itens | os cartões + "N tarefas carregadas." |
-| vazio | `tarefas.length === 0` | "Nenhuma tarefa cadastrada ainda. Quando houver, elas aparecem aqui." |
-| erro | qualquer exceção no `try` | mensagem diferente por tipo de falha (seção 5) |
+```js
+export const estado = {
+  tarefas: [],             // o array como veio de carregarTarefas(). NUNCA reordenado ou reduzido.
+  busca: '',               // texto do campo de busca
+  status: 'todos',         // 'todos' | 'a-fazer' | 'em-andamento' | 'em-revisao' | 'concluidas'
+  prioridade: 'todas',     // 'todas' | 'baixa' | 'media' | 'alta'
+  ordenacao: 'original',   // 'original' | 'prazo-asc' | 'prazo-desc'
+  carregamento: 'inicial', // 'inicial' | 'carregando' | 'sucesso' | 'erro'
+  erro: null               // o Error, quando carregamento === 'erro'
+};
+```
 
-A região é o `<p id="status" role="status" aria-live="polite">`, que existe vazio no HTML desde o início e é preenchido por `textContent`.
+Não existe `tarefasFiltradas` no estado. A lista visível é **derivada** a cada ciclo por `derivarVisiveis(estado)` e descartada depois.
 
-## 5. Os três tipos de erro
+## 5. O ciclo
 
-Decididos por `erro.name` em `estados.js`:
+```
+evento (input / change / click)
+  → ouvinte escreve no estado          (main.js)
+  → atualizar()  =  renderizar(estado) (tela.js)
+       1. visiveis = derivarVisiveis(estado)   (estado.js — pura, sem DOM)
+       2. renderizarTarefas(visiveis)          (renderizacao.js — replaceChildren)
+       3. contagem "N de M" + mensagem na região aria-live
+       4. controles sincronizados a partir do estado
+```
 
-| Tipo | Como acontece | `erro.name` | Mensagem na tela |
-|---|---|---|---|
-| rede | offline, DNS, servidor fora. O `fetch` **rejeita** com `TypeError`; `api.js` captura e dá ao erro um nome próprio. | `NetworkError` | "Não foi possível conectar. Verifique sua internet e tente recarregar a página." |
-| protocolo | servidor respondeu 404/500. O `fetch` **resolve**; nós lançamos ao ver `!response.ok`. | `HttpError` | "O servidor não conseguiu entregar as tarefas (status 404). Tente novamente mais tarde." |
-| formato | corpo não é JSON válido, ou não tem a chave `tarefas` com um array. | `SyntaxError` | "Os dados chegaram, mas estão em um formato inválido. O arquivo de tarefas precisa ser corrigido." |
-| outro (bug no código) | qualquer outra exceção | — | "Algo deu errado ao carregar as tarefas." |
+Cada ouvinte faz só duas coisas: escreve no estado e chama `atualizar()`. Nenhum ouvinte filtra, esconde cartão, lê outro controle ou toca o DOM.
 
-## 6. Decisões (as perguntas do Q3)
+## 6. Decisões (as perguntas do Q4)
 
-- **Por que `fetch` não rejeita em 404?** Para o `fetch`, 404 é uma resposta bem-sucedida: a rede funcionou, o servidor respondeu. Ele só rejeita quando **não há resposta** (rede). Por isso quem diz se o conteúdo presta é o `response.ok` (status 200–299), checado **antes** de ler o corpo; quando falha, lançamos um erro com o status.
-- **Por que dois `await`?** O primeiro (`await fetch`) resolve quando os **cabeçalhos** chegam. O segundo (`await resposta.json()`) baixa e interpreta o **corpo**. São dois momentos diferentes da rede, e cada um pode falhar de um jeito.
-- **Onde cada erro é tratado?** Rede: capturado em `api.js` e relançado como `NetworkError`. Protocolo: lançado em `api.js` (`HttpError`) ao ver `!response.ok`. Formato: `resposta.json()` rejeita com `SyntaxError`, ou `api.js` lança um ao ver a forma errada. **Todos** caem no único `catch` de `main.js`, que entrega o erro a `estados.js`; lá o texto é escolhido por `erro.name`.
-- **Por que o vazio não está no `catch`?** Lista vazia é uma resposta **válida**: o servidor respondeu, o JSON é bom, só não há tarefas. Tratar isso como falha seria mentir. Ela é detectada no caminho de sucesso, por `length === 0`.
-- **Por que a região de status precisa existir antes?** O leitor de tela só anuncia mudanças em regiões `aria-live` que **já estavam** na árvore de acessibilidade. Se fosse criada só na hora, nada seria anunciado. Pelo mesmo motivo o CSS não usa `display: none` na região vazia (isso a tiraria da árvore); só remove a caixa.
-- **Carregando antes do `await`.** Se viesse depois, a tela ficaria em branco durante toda a espera.
-- **`textContent`, nunca `innerHTML`.** Todo texto, inclusive o que vem do JSON, entra como texto. Nada é interpretado como HTML.
-- **`renderizacao.js` não mudou.** Ele recebe um array e desenha; não sabe de onde o array veio. Trocar a origem não exigiu tocar nele: esse é o acoplamento resolvido.
-- **Erro de rede com nome próprio.** O `fetch` rejeita com um `TypeError` genérico. Se a tela confiasse só nesse nome, um `TypeError` causado por bug no código seria apresentado como "sua internet caiu". Por isso `api.js` relança como `NetworkError`, e o resto cai no texto genérico.
-- **Estado de erro zera o quadro.** Antes da mensagem, `renderizarTarefas([])` deixa contadores e colunas coerentes com o que a tela diz.
-- **Sem `await` de nível superior.** A inicialização acontece dentro de `iniciar()`.
+- **Por que a lista filtrada não é guardada no estado?** Guardá-la criaria uma **segunda fonte de verdade**. No momento em que um filtro muda e alguém esquece de recalcular a lista guardada, tela e estado discordam. Derivando a cada ciclo, a lista está sempre certa por construção: ela é uma função dos critérios atuais, e só.
 
-## 7. Fora do escopo desta entrega
+- **Por que `sort()` pode alterar o array original?** `Array.prototype.sort()` ordena **no próprio array** (in place) e o devolve — não cria cópia. `estado.tarefas.sort(...)` destruiria a ordem original para sempre, e "Ordem original" deixaria de existir. Por isso a derivação ordena uma **cópia**: `[...visiveis].sort(...)`. (O `filter()` já devolve array novo; o spread é a garantia explícita.)
 
-Conforme o enunciado: API pública externa (segunda metade do semestre), busca e filtros operando (os controles continuam na tela, sem operar), cadastro/edição/exclusão, estado centralizado (aula 7), botão de tentar novamente (bem-vindo, não exigido) e qualquer biblioteca ou framework.
+- **A sequência evento → estado → derivação → renderização.** O evento não desenha nada: ele só muda dados. Quem desenha é sempre a mesma função, lendo sempre o mesmo objeto. Por isso mudar os controles em ordens diferentes dá o mesmo resultado: o que importa é o valor atual do estado, não o histórico de cliques.
+
+- **Por que zero resultados não é erro?** Erro é quando a **obtenção** falhou (rede, 404, JSON inválido) — isso cai no `catch` de `iniciar()`. Zero resultados é a obtenção tendo funcionado e os **critérios** não encontrando nada — decidido por `visiveis.length === 0` dentro de `renderizar()`, no caminho de sucesso. São coisas diferentes e a tela diz coisas diferentes: "Nenhuma das 9 tarefas corresponde… Altere os critérios ou use Limpar filtros" vs. "O servidor não conseguiu entregar (status 404)". Há ainda a **origem vazia** (`estado.tarefas.length === 0`): dados válidos, só não há tarefas — terceira mensagem.
+
+- **Por que local funciona e a URL publicada dá 404?** Três causas típicas: (1) **caminho absoluto** (`/js/main.js`) — local resolve para a raiz do servidor, mas no Pages a raiz é `usuario.github.io/`, e o projeto vive em `/front-end/`; por isso tudo aqui é **relativo** (`js/main.js`, `dados.json`, `styles.css`). (2) **Maiúsculas/minúsculas** — Windows e macOS ignoram, o servidor do Pages (Linux) não: `Styles.css` ≠ `styles.css`. (3) **Pasta/branch errada** nas configurações do Pages, ou o arquivo não commitado (funciona local porque está no disco, não no repositório).
+
+- **Por que delegação no `.quadro` e não ouvinte por cartão?** `replaceChildren` **substitui** os cartões a cada render. Um ouvinte preso a um cartão morre com ele (clique não faz nada). Reinstalar a cada render acumula ouvintes (clique dispara N vezes). Um ouvinte no ancestral, instalado uma vez, resolve os dois: `evento.target.closest('button[data-acao="detalhes"]')`.
+
+- **Por que o `renderizar()` só escreve nos controles quando o valor difere?** Reatribuir `input.value` durante a digitação mexe no cursor. Comparar antes de escrever mantém a sincronização (necessária para "Limpar filtros") sem atrapalhar quem digita.
+
+- **Por que "Limpar filtros" é `type="button"` e não `type="reset"`?** `reset` limparia só os controles; o estado continuaria com os filtros antigos — duas fontes de verdade. O botão restaura o **estado** (`Object.assign(estado, criterioInicial())`) e a renderização restaura os controles a partir dele.
+
+- **Busca ignora caixa e acentos.** `normalize('NFD')` + remoção dos diacríticos + `toLowerCase()`, aplicado ao termo e ao título: "funcoes" encontra "funções".
+
+- **Foco.** Nada em `renderizar()` chama `focus()`; a região `#status` é atualizada por `textContent`. O teclado fica onde estava.
+
+## 7. Fora do escopo (conforme enunciado)
+
+Frameworks, bundler, API externa, cadastro/edição/exclusão, persistência, paginação, drag-and-drop, Redux/reducer/store. O desafio opcional (`URLSearchParams`) não foi feito.
 
 ## 8. Roteiro de testes
 
-Os testes 2, 3 e 5 trocam o caminho **nesta linha** de `js/api.js`, salvam e recarregam a página:
+Todos executados na versão local e na publicada. Para inspecionar o estado no console: `const { estado } = await import('./js/estado.js')`.
 
-```js
-resposta = await fetch('dados.json');
-```
-
-| # | Teste | Como fazer | Resultado esperado |
+| # | Teste | Como fazer | Esperado |
 |---|---|---|---|
-| 1 | Carregando | DevTools → *Network* → throttling **Slow 4G** → recarregar | "Carregando tarefas…" aparece **antes** dos cartões |
-| 2 | Vazio | trocar por `'testes/dados-vazio.json'` | mensagem de vazio, 0 cartões, contadores em 0, **sem** a palavra "erro" |
-| 3 | 404 (protocolo) | trocar por `'nao-existe.json'` | mensagem com **status 404** |
-| 4 | Offline (rede) | DevTools → *Network* → **Offline** → recarregar | mensagem de rede, **diferente** da do 404 |
-| 5 | JSON quebrado (formato) | trocar por `'testes/dados-quebrado.json'` | mensagem de formato, não de rede |
-| 6 | Região viva | DevTools → *Elements*, antes de qualquer interação | `#status` existe, está vazio, e a regra `.status:empty` **não** usa `display: none` |
-| 7 | Acoplamento | abrir `js/renderizacao.js` | não há `fetch` nem qualquer referência à origem dos dados |
-
-Ao terminar: voltar o caminho para `'dados.json'` e o throttling para *No throttling*. No caminho de sucesso o console fica limpo; nos de erro, o `console.error` é proposital (o objeto do erro vai para o console **além** da mensagem na tela).
+| 1 | Fonte original | `estado.tarefas.map(t => t.id)` antes e depois de filtrar e ordenar | `[1..9]` nas duas vezes |
+| 2 | Combinados | busca "re" + A fazer + Média; limpar; Média + "re" + A fazer | mesmo cartão nas duas ordens |
+| 3 | Limpar | ativar tudo → Limpar filtros | campos iniciais, 9 cartões, "9 de 9" |
+| 4 | Resultado vazio | busca "zzz" | mensagem orienta a limpar; sem "erro"; console limpo |
+| 5 | Re-render | trocar status 10× → Detalhes | abre uma vez; Ocultar fecha |
+| 6 | Teclado | Tab, digitar, setas nos rádios, Enter em Limpar | foco visível, não pula, Enter na busca não recarrega |
+| 7 | URL pública | janela anônima, Network | 200 em `dados.json`, `styles.css`, `js/*.js`; console limpo |
+| 8 | Largura | 320px → largo | sem rolagem horizontal |
+| 9 | Origem vazia | trocar `fetch('dados.json')` por `testes/dados-vazio.json` | "Nenhuma tarefa cadastrada ainda…" |
+| 10 | Erro | trocar por `nao-existe.json` | "…status 404" |
 
 ## 9. Versionamento
 
-Toda mudança nesta etapa vira **uma linha nesta tabela** e **uma tag anotada no git** no formato `e3-vMAIOR.MENOR.CORREÇÃO`:
-
-- **MAIOR** sobe quando a etapa fica completa ou quando o comportamento pedido pelo enunciado muda;
-- **MENOR** sobe quando entra algo novo que não quebra o que existia (documentação, arquivos de teste);
-- **CORREÇÃO** sobe quando é só conserto.
-
-| Versão | Data | Commit | O que mudou | Estado |
-|---|---|---|---|---|
-| e3-v0.1.0 | 03/09/2026 | `5ce46cb` | Base das aulas 5 e 6: `dados.js` e `renderizacao.js` desenhando a partir de um array | ✅ |
-| e3-v0.2.0 | 03/09/2026 | `c5b1f18` | `dados.json` com 9 tarefas e `carregarTarefas()` com `fetch`, `response.ok` e `resposta.json()` | ✅ |
-| e3-v1.0.0 | 03/09/2026 | `735f4d6` | **Primeira versão completa**: quatro estados, região de status, `main.js` com carregando antes do `await` e vazio fora do `catch` | ✅ |
-| e3-v1.0.1 | 03/09/2026 | `efb6cc7` | Correções da revisão: região vazia sem `display:none`, `NetworkError`, quadro zerado no erro, texto do erro HTTP, rádio `concluidas` | ✅ |
-| e3-v1.1.0 | 03/09/2026 | `51da3d7` | Documento único, arquivos de teste em `testes/`, esta seção de versionamento e as tags | ✅ |
-| e3-v1.1.1 | 03/09/2026 | tag `e3-v1.1.1` | Reorganização: a E3 passa a viver na **pasta da E2** (`gerenciador-de-tarefas/`), com o histórico reescrito para cada commit alterar os arquivos da E2 no lugar; a tag `e2-v1.0.0` marca a E2 como foi entregue | ✅ **atual** |
-
-Como ver o histórico:
+| Versão | Data | O que mudou | Estado |
+|---|---|---|---|
+| e4-v0.1.0 | 10/09/2026 | `estado.js`: objeto único e `derivarVisiveis()` | ✅ |
+| e4-v0.2.0 | 10/09/2026 | `tela.js` (ex-`estados.js`) e `main.js`: ciclo único, ouvintes, delegação | ✅ |
+| e4-v0.3.0 | 10/09/2026 | HTML/CSS: ordenação, "Limpar filtros", botão "Detalhes" no cartão | ✅ |
+| e4-v1.0.0 | 10/09/2026 | **Primeira versão completa**: testes do enunciado passando, documento único | ✅ **atual** |
 
 ```bash
-git log --oneline -- gerenciador-de-tarefas   # os commits desta pasta (E2 e E3)
-git tag -n -l 'e*-v*'                          # as versões (E2 e E3), com a descrição de cada tag
-git checkout e2-v1.0.0                         # ver a pasta como era na entrega da E2 (volte com: git checkout main)
+git tag -n -l 'e4-v*'
+git checkout e3-v1.1.1   # ver a E3 como foi entregue (volte com: git checkout main)
 ```
 
-No GitHub: aba **Commits** para a linha do tempo e **Tags** para as versões.
+## 10. Histórico da E3 (resumo)
 
-Próximas etapas (E4…) terão a própria numeração (`e4-v…`); esta continua em `e3-v1.x` só se houver conserto ou melhoria pedida na correção.
+Consumo de `dados.json` com `fetch`, `response.ok` e `resposta.json()`; quatro estados (carregando, sucesso, vazio, erro) e três tipos de erro (`NetworkError`, `HttpError`, `SyntaxError`) decididos por `erro.name`. Região `#status` com `role="status"` e `aria-live="polite"` presente no HTML desde o início. Tudo isso **continua valendo** na E4: `api.js` não mudou; as mensagens de erro migraram de `estados.js` para `tela.js`. Documento completo da E3: tag `e3-v1.1.1`.
