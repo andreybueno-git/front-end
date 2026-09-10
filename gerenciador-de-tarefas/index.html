@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
       name="description"
-      content="Quadro acadêmico responsivo para organização de tarefas."
+      content="Quadro acadêmico com busca, filtros e ordenação de tarefas."
     >
     <title>Plano de Estudos | Quadro Acadêmico</title>
     <link rel="stylesheet" href="styles.css">
@@ -69,6 +69,21 @@
               <label for="prioridade-alta">Alta</label>
             </div>
           </fieldset>
+
+          <div class="filtros__acoes">
+            <div class="campo-ordenacao">
+              <label for="ordenacao">Ordenar por prazo</label>
+              <select id="ordenacao" name="ordenacao">
+                <option value="original" selected>Ordem original</option>
+                <option value="prazo-asc">Prazo mais próximo primeiro</option>
+                <option value="prazo-desc">Prazo mais distante primeiro</option>
+              </select>
+            </div>
+
+            <button id="limpar-filtros" class="botao-limpar" type="button">
+              Limpar filtros
+            </button>
+          </div>
         </form>
       </section>
 
