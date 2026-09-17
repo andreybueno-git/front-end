@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeção do Estado</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+  <style>
+  :root {
+    --ink: #07081a;
+    --ink-2: #10122b;
+    --ink-3: #191c3d;
+    --line: #2b2f5e;
+    --paper: #ece6d6;
+    --paper-dim: #a9a6b8;
+    --beam: #ff5d3a;
+    --phosphor: #7ef0c2;
+    --violet: #8b7bff;
+    --amber: #ffc857;
+    --danger: #ff4d6d;
+    --display: "Syne", "Avenir Next", "Segoe UI", sans-serif;
+    --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; padding-inline: clamp(16px, 4vw, 48px); padding-block: 0 96px;
+    background: radial-gradient(1200px 600px at 20% -10%, #1c1a4d 0%, transparent 60%),
+                radial-gradient(900px 500px at 100% 20%, #3a1230 0%, transparent 55%),
+                var(--ink);
+    color: var(--paper); font-family: var(--body); font-size: 16px; line-height: 1.55;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--beam); color: var(--ink); }
+  a { color: var(--phosphor); }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); font-weight: 800; line-height: 1.05; }
+  h3 { font-size: 1.1rem; font-weight: 700; }
+  p { margin: 0; max-width: 64ch; }
+  code, pre, .mono { font-family: var(--mono); }
+  code { background: var(--ink-3); padding: .1em .4em; border-radius: 4px; font-size: .9em; color: var(--amber); }
+  pre { background: var(--ink-2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-size: .82rem; line-height: 1.55; margin: 0; }
+  button { font: inherit; cursor: pointer; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  .eyebrow { font-family: var(--mono); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--phosphor); }
+  .wrap { max-width: 1180px; margin-inline: auto; }
+  section { padding-block: 72px; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: 0; }
+  .lead { color: var(--paper-dim); font-size: 1.05rem; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; align-items: start; }
+
+  /* ---------- HERO ---------- */
+  .hero { padding-block: 56px 40px; }
+  .hero h1 { font-size: clamp(2.4rem, 7vw, 5.4rem); font-weight: 800; line-height: .98; }
+  .hero h1 em { font-style: normal; color: var(--beam); }
+  .hero h1 .proj { color: transparent; -webkit-text-stroke: 1.5px var(--paper); }
+  .hero { overflow: hidden; margin-inline: calc(-1 * clamp(16px, 4vw, 48px)); padding-inline: clamp(16px, 4vw, 48px); }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; font-family: var(--mono); font-size: .78rem; color: var(--paper-dim); }
+  .hero-meta b { color: var(--paper); font-weight: 600; }
+  .floaters { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; }
+  .floaters span { position: absolute; font-family: var(--mono); font-size: .75rem; color: var(--violet); opacity: .35; animation: drift 14s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-40px) rotate(3deg); } }
+  header { position: relative; }
+
+  /* ---------- LAB (estado → projeção) ---------- */
+  .lab { display: grid; grid-template-columns: minmax(280px, 1fr) 90px minmax(280px, 1.4fr); gap: 0; margin-top: 40px; align-items: stretch; }
+  .source, .screen { background: var(--ink-2); border: 1px solid var(--line); border-radius: 16px; padding: 20px; min-width: 0; }
+  .source { box-shadow: 0 0 0 1px rgba(255,93,58,.15), 0 0 60px rgba(255,93,58,.12); }
+  .source h3, .screen h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .source h3 small, .screen h3 small { font: 500 .7rem var(--mono); color: var(--paper-dim); letter-spacing: .08em; }
+  .controls { display: grid; gap: 12px; margin-top: 14px; }
+  .controls label { display: grid; gap: 4px; font-size: .78rem; color: var(--paper-dim); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+  .controls input[type=search], .controls select {
+    font: 500 .95rem var(--body); color: var(--paper); background: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; width: 100%;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1px solid var(--line); background: transparent; color: var(--paper); border-radius: 999px; padding: 5px 11px; font-size: .82rem; }
+  .chip[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); font-weight: 600; }
+  .btn { border: 1px solid var(--beam); color: var(--beam); background: transparent; border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: .9rem; transition: background .15s, color .15s; }
+  .btn:hover { background: var(--beam); color: var(--ink); }
+  .btn.ghost { border-color: var(--line); color: var(--paper); }
+  .btn.ghost:hover { background: var(--ink-3); color: var(--paper); }
+  .state-json { margin-top: 14px; font-size: .78rem; }
+  .state-json .k { color: var(--violet); } .state-json .s { color: var(--phosphor); } .state-json .n { color: var(--amber); }
+  .state-json .hot { background: rgba(255,93,58,.25); border-radius: 3px; transition: background 1.2s; }
+
+  .beam { position: relative; display: grid; place-items: center; }
+  .beam svg { width: 100%; height: 100%; overflow: visible; }
+  .beam .ray { stroke: var(--beam); stroke-width: 2; fill: none; stroke-dasharray: 6 6; animation: flow 1.2s linear infinite; opacity: .8; }
+  .beam .ray-fill { fill: url(#g); opacity: .18; }
+  @keyframes flow { to { stroke-dashoffset: -24; } }
+  .beam .fn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font: 600 .68rem var(--mono); color: var(--paper); background: var(--ink); border: 1px solid var(--beam); border-radius: 999px; padding: 4px 8px; white-space: nowrap; }
+  .beam.flash .ray { animation-duration: .25s; }
+  .beam.flash .fn { box-shadow: 0 0 22px var(--beam); }
+
+  .screen { position: relative; }
+  .screen::before { content: ""; position: absolute; inset: 0; border-radius: 16px; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); }
+  .status { font-size: .88rem; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; color: var(--paper-dim); margin-top: 12px; }
+  .status[data-kind="sucesso"] { border-color: var(--phosphor); color: var(--phosphor); }
+  .status[data-kind="sem-resultado"] { border-color: var(--violet); color: var(--violet); }
+  .status[data-kind="vazio"] { border-color: var(--paper-dim); }
+  .status[data-kind="erro"] { border-color: var(--danger); color: var(--danger); border-style: solid; }
+  .status[data-kind="carregando"] { border-color: var(--amber); color: var(--amber); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 14px; min-height: 96px; }
+  .card { background: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .8rem; display: grid; gap: 4px; animation: pop .25s ease-out; }
+  @keyframes pop { from { transform: scale(.94); opacity: 0; } }
+  .card b { font-weight: 600; line-height: 1.3; }
+  .card .row { display: flex; justify-content: space-between; gap: 8px; color: var(--paper-dim); font-family: var(--mono); font-size: .68rem; }
+  .card .p { padding: 1px 6px; border-radius: 999px; border: 1px solid; font-size: .62rem; text-transform: uppercase; letter-spacing: .06em; }
+  .p-alta { color: var(--danger); } .p-media { color: var(--amber); } .p-baixa { color: var(--phosphor); }
+  .counter { font: 800 2.4rem var(--display); color: var(--paper); line-height: 1; margin-top: 10px; font-variant-numeric: tabular-nums; }
+  .counter small { font: 500 .8rem var(--mono); color: var(--paper-dim); }
+  .log { margin-top: 14px; font-size: .74rem; color: var(--paper-dim); max-height: 96px; overflow: auto; display: grid; gap: 3px; }
+  .log div::before { content: "→ "; color: var(--beam); }
+
+  /* ---------- THEMES ---------- */
+  .themes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 32px; }
+  .theme { background: linear-gradient(180deg, var(--ink-2), transparent); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 8px; text-decoration: none; color: inherit; transition: transform .2s, border-color .2s; }
+  .theme:hover { transform: translateY(-4px) rotate(-.4deg); border-color: var(--beam); }
+  .theme .n { font: 800 2rem var(--display); color: var(--beam); line-height: 1; }
+  .theme p { font-size: .88rem; color: var(--paper-dim); }
+  .theme .where { font: 500 .7rem var(--mono); color: var(--phosphor); }
+
+  /* ---------- SORT LAB ---------- */
+  .arrays { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+  .arr { background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .arr h3 { font-family: var(--mono); font-size: .8rem; font-weight: 600; color: var(--paper-dim); }
+  .arr.bad { border-color: var(--danger); box-shadow: 0 0 30px rgba(255,77,109,.18); }
+  .arr.bad h3 { color: var(--danger); }
+  .cells { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; min-height: 40px; }
+  .cell { font: 600 .8rem var(--mono); background: var(--ink); border: 1px solid var(--line); padding: 6px 9px; border-radius: 6px; transition: transform .35s; }
+  .cell.moved { border-color: var(--amber); color: var(--amber); }
+  .sortbtns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .verdict { margin-top: 14px; font-size: .9rem; min-height: 1.6em; }
+  .verdict.bad { color: var(--danger); } .verdict.ok { color: var(--phosphor); }
+
+  /* ---------- FOUR SCREENS ---------- */
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .tab { border: 1px solid var(--line); background: transparent; color: var(--paper); border-radius: 8px; padding: 8px 14px; font-family: var(--mono); font-size: .78rem; }
+  .tab[aria-selected="true"] { background: var(--ink-3); border-color: var(--amber); color: var(--amber); }
+  .panel { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .panel .why { font-size: .92rem; color: var(--paper-dim); display: grid; gap: 10px; }
+  .panel .why b { color: var(--paper); }
+  .decision { font: 600 .78rem var(--mono); padding: 8px 10px; border-radius: 8px; background: var(--ink-3); }
+  .decision.catch { border-left: 3px solid var(--danger); }
+  .decision.derive { border-left: 3px solid var(--phosphor); }
+
+  /* ---------- 404 ---------- */
+  .urlbar { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; background: var(--ink-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; margin-top: 24px; font-family: var(--mono); font-size: .8rem; }
+  .urlbar span:last-child { overflow-wrap: anywhere; min-width: 0; }
+  .urlbar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--phosphor); }
+  .urlbar .dot.bad { background: var(--danger); }
+  .u404 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+  .u404 fieldset { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0; }
+  .u404 legend { font: 500 .7rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--paper-dim); padding-inline: 6px; }
+  .u404 label { display: flex; gap: 8px; align-items: center; font-size: .9rem; padding: 4px 0; }
+  .resolve { margin-top: 16px; display: grid; gap: 8px; }
+  .resolve .line { display: grid; grid-template-columns: 60px 1fr; gap: 12px; align-items: baseline; font-family: var(--mono); font-size: .8rem; background: var(--ink-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; overflow-x: auto; }
+  .resolve .code { font-weight: 600; } .resolve .ok { color: var(--phosphor); } .resolve .bad { color: var(--danger); }
+  .explain { margin-top: 12px; font-size: .92rem; color: var(--paper-dim); }
+
+  /* ---------- QUIZ ---------- */
+  .quiz { margin-top: 24px; display: grid; gap: 14px; }
+  .qq { background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  .qq h3 { font-family: var(--body); font-weight: 600; font-size: 1rem; line-height: 1.4; }
+  .qq .num { font: 800 .8rem var(--display); color: var(--beam); margin-right: 8px; }
+  .opts { display: grid; gap: 8px; margin-top: 12px; }
+  .opt { text-align: left; border: 1px solid var(--line); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 10px 12px; font-size: .9rem; line-height: 1.4; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  .opt:hover { border-color: var(--violet); }
+  .opt .l { font: 600 .75rem var(--mono); color: var(--paper-dim); }
+  .opt.right { border-color: var(--phosphor); background: rgba(126,240,194,.08); }
+  .opt.wrong { border-color: var(--danger); background: rgba(255,77,109,.08); }
+  .opt[disabled] { cursor: default; }
+  .fb { margin-top: 10px; font-size: .88rem; color: var(--paper-dim); display: none; }
+  .fb.show { display: block; }
+  .score { position: sticky; bottom: 14px; margin-top: 20px; background: var(--ink); border: 1px solid var(--beam); border-radius: 999px; padding: 10px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--mono); font-size: .82rem; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+  .score b { font: 800 1.2rem var(--display); color: var(--beam); }
+
+  footer { padding-block: 40px 0; color: var(--paper-dim); font-size: .8rem; font-family: var(--mono); }
+
+  @media (max-width: 760px) {
+    .lab { grid-template-columns: 1fr; }
+    .beam { height: 90px; }
+    .beam svg { width: 80px; height: 90px; transform: rotate(90deg); }
+    .beam .fn { font-size: .62rem; }
+    section { padding-block: 48px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="floaters" aria-hidden="true">
+    <span style="left:6%;top:12%">estado.busca = 'py'</span>
+    <span style="left:70%;top:8%;animation-delay:-4s">derivarVisiveis(estado)</span>
+    <span style="left:40%;top:70%;animation-delay:-8s">renderizar(estado)</span>
+    <span style="left:82%;top:60%;animation-delay:-2s">[...visiveis].sort()</span>
+    <span style="left:15%;top:85%;animation-delay:-6s">visiveis.length === 0</span>
+  </div>
+  <div class="eyebrow">Q4 · Desenvolvimento Frontend 2026.2 · E4</div>
+  <h1 style="margin-top:14px">O estado é a <em>fonte</em>.<br>A tela é uma <span class="proj">projeção</span>.</h1>
+  <div class="hero-meta">
+    <span><b>5</b> questões objetivas</span>
+    <span><b>30</b> min · sem consulta</span>
+    <span>vale <b>1,0</b></span>
+    <span>sobre <b>o seu código</b></span>
+  </div>
+  <p class="lead" style="margin-top:22px">Tudo o que o Q4 pergunta cabe numa frase: cada evento altera um único objeto de estado, e uma única função projeta esse objeto na tela. Mexa nos controles abaixo e veja isso acontecer — é o seu <code>gerenciador-de-tarefas</code>, com os fios expostos.</p>
+
+  <div class="lab">
+    <div class="source" aria-label="Estado">
+      <h3>estado <small>js/estado.js · a única fonte</small></h3>
+      <div class="controls">
+        <label>busca <input id="busca" type="search" placeholder="digite parte de um título" autocomplete="off"></label>
+        <label>status <div class="chips" id="chips-status" role="group" aria-label="status"></div></label>
+        <label>prioridade <div class="chips" id="chips-prio" role="group" aria-label="prioridade"></div></label>
+        <label>ordenacao
+          <select id="ordenacao">
+            <option value="original">original</option>
+            <option value="prazo-asc">prazo-asc (mais próximo primeiro)</option>
+            <option value="prazo-desc">prazo-desc</option>
+          </select>
+        </label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="limpar" type="button">Limpar filtros</button><button class="btn ghost" id="simular-erro" type="button">Simular erro 404</button></div>
+      </div>
+      <pre class="state-json" id="state-json" aria-live="off"></pre>
+    </div>
+
+    <div class="beam" id="beam" aria-hidden="true">
+      <svg viewBox="0 0 90 200" preserveAspectRatio="none">
+        <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ff5d3a"/><stop offset="1" stop-color="#8b7bff"/></linearGradient></defs>
+        <polygon class="ray-fill" points="0,95 90,20 90,180 0,105"/>
+        <path class="ray" d="M0 100 L90 100"/>
+      </svg>
+      <span class="fn">renderizar(estado)</span>
+    </div>
+
+    <div class="screen" aria-label="Tela">
+      <h3>tela <small>js/tela.js · projeção</small></h3>
+      <div class="counter" id="counter">9 <small>de 9 tarefas</small></div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <div class="cards" id="cards"></div>
+      <div class="log" id="log" aria-label="ciclo"></div>
+    </div>
+  </div>
+</header>
+
+<section id="temas">
+  <div class="eyebrow">Os 5 temas anunciados no enunciado</div>
+  <h2 style="margin-top:10px">Cada pergunta é um “por quê”. Cada resposta tem um arquivo.</h2>
+  <div class="themes">
+    <a class="theme" href="#lab-estado"><span class="n">1</span><h3>Por que a lista filtrada não é uma segunda fonte de verdade</h3><p>Duas cópias podem discordar. Derivar a cada ciclo garante que a lista está sempre certa — ela nem é guardada.</p><span class="where">js/estado.js · derivarVisiveis()</span></a>
+    <a class="theme" href="#sort"><span class="n">2</span><h3>Por que <code>sort()</code> altera o array original</h3><p>Ordena no próprio array (in place) e não cria cópia. Por isso <code>[...visiveis].sort()</code>.</p><span class="where">js/estado.js · [...visiveis].sort()</span></a>
+    <a class="theme" href="#ciclo"><span class="n">3</span><h3>A sequência evento → estado → derivação → renderização</h3><p>O evento só muda dados. Uma única função desenha a partir do estado.</p><span class="where">js/main.js → js/tela.js</span></a>
+    <a class="theme" href="#vazio"><span class="n">4</span><h3>Por que zero resultados não é erro</h3><p>Erro é obtenção que falhou (catch). Zero resultados é a obtenção OK e os critérios não acharam nada.</p><span class="where">js/tela.js · visiveis.length === 0</span></a>
+    <a class="theme" href="#pages"><span class="n">5</span><h3>Por que local funciona e a URL publicada dá 404</h3><p>Caminho absoluto, maiúscula/minúscula, ou arquivo que não está no repositório.</p><span class="where">index.html · caminhos relativos</span></a>
+  </div>
+</section>
+
+<section id="lab-estado">
+  <div class="grid-2">
+    <div>
+      <div class="eyebrow">Tema 1</div>
+      <h2 style="margin-top:10px">Não existe <code>tarefasFiltradas</code>. De propósito.</h2>
+      <p class="lead" style="margin-top:14px">Se o estado guardasse <code>tarefas</code> e também <code>tarefasFiltradas</code>, existiriam duas fontes de verdade. Basta um filtro mudar e alguém esquecer de recalcular a segunda lista para a tela mostrar uma coisa e o estado dizer outra.</p>
+      <p class="lead" style="margin-top:10px">Quando a lista é <b style="color:var(--paper)">derivada</b> a cada ciclo por <code>derivarVisiveis(estado)</code>, ela é uma função dos critérios atuais: não tem como ficar desatualizada, porque ela nem é guardada. O teste 3 do enunciado (“Limpar filtros”) existe para pegar exatamente isso: se só a tela ou só os controles voltam, há duas fontes de verdade.</p>
+    </div>
+    <pre>export const estado = {
+  tarefas: [],             // como veio de carregarTarefas(). NUNCA reordenado
+  busca: '',
+  status: 'todos',
+  prioridade: 'todas',
+  ordenacao: 'original',
+  carregamento: 'inicial', // 'carregando' | 'sucesso' | 'erro'
+  erro: null
+};
+
+// Recebe o estado, devolve a lista visível. PURA: não toca o DOM,
+// não altera o estado. Chamada UMA vez por renderização.
+export function derivarVisiveis(estado) {
+  let visiveis = estado.tarefas.filter(t =>
+    bateBusca(t) &amp;&amp; bateStatus(t) &amp;&amp; batePrioridade(t));
+  if (estado.ordenacao !== 'original')
+    visiveis = [...visiveis].sort(porPrazo);
+  return visiveis;
+}</pre>
+  </div>
+</section>
+
+<section id="sort">
+  <div class="eyebrow">Tema 2 · laboratório</div>
+  <h2 style="margin-top:10px"><code>sort()</code> não devolve uma cópia. Ele mexe no seu array.</h2>
+  <p class="lead" style="margin-top:14px">Aperte os dois botões e olhe o array de cima. Um deles destrói a “ordem original” para sempre — e o teste 1 do enunciado (IDs antes e depois) pega na hora.</p>
+  <div class="arrays">
+    <div class="arr" id="arr-orig"><h3>estado.tarefas (ids na ordem do JSON)</h3><div class="cells" id="cells-orig"></div></div>
+    <div class="arr"><h3>visiveis (o que vai para a tela)</h3><div class="cells" id="cells-vis"></div></div>
+  </div>
+  <div class="sortbtns">
+    <button class="btn ghost" type="button" id="sort-bad"><code style="background:none;color:inherit">estado.tarefas.sort(porPrazo)</code></button>
+    <button class="btn" type="button" id="sort-good"><code style="background:none;color:inherit">[...estado.tarefas].sort(porPrazo)</code></button>
+    <button class="btn ghost" type="button" id="sort-reset">recarregar dados.json</button>
+  </div>
+  <div class="verdict" id="verdict"></div>
+  <p class="explain">Mutadores (alteram o original): <code>sort</code> <code>reverse</code> <code>push</code> <code>pop</code> <code>shift</code> <code>unshift</code> <code>splice</code>. Devolvem um array novo: <code>filter</code> <code>map</code> <code>slice</code> <code>concat</code> <code>[...spread]</code> <code>toSorted</code>. Prazo em ISO (AAAA-MM-DD) permite comparar strings: ordem alfabética = ordem cronológica.</p>
+</section>
+
+<section id="ciclo">
+  <div class="grid-2">
+    <div>
+      <div class="eyebrow">Tema 3</div>
+      <h2 style="margin-top:10px">Cada ouvinte faz duas coisas. Só duas.</h2>
+      <p class="lead" style="margin-top:14px">Escreve no estado e chama <code>atualizar()</code>. Nenhum ouvinte filtra lista, esconde cartão, lê outro controle ou toca o DOM. Por isso a ordem em que você mexe nos controles não importa (teste 2): o resultado depende só do valor atual do estado.</p>
+      <p class="lead" style="margin-top:10px">E por isso “Limpar filtros” é <code>type="button"</code>, não <code>reset</code>: reset limparia só os controles e o estado ficaria com os filtros antigos. O botão restaura o <b style="color:var(--paper)">estado</b>; <code>renderizar()</code> restaura os controles a partir dele.</p>
+    </div>
+    <pre>evento (input / change / click)
+  → ouvinte escreve no estado             (js/main.js)
+  → atualizar() = renderizar(estado)      (js/tela.js) — o ÚNICO ponto
+       1. visiveis = derivarVisiveis(estado)   (js/estado.js)
+       2. renderizarTarefas(visiveis)          (replaceChildren)
+       3. contagem "N de M" + mensagem #status
+       4. controles sincronizados a partir do estado
+
+// js/main.js
+campoBusca.addEventListener('input', (e) => {
+  estado.busca = e.target.value;   // 1. escreve no estado
+  atualizar();                     // 2. chama o mesmo ponto
+});
+botaoLimpar.addEventListener('click', () => {
+  Object.assign(estado, criterioInicial());
+  atualizar();
+});
+
+// Delegação: UM ouvinte no .quadro, instalado UMA vez.
+// Os cartões são substituídos a cada render; um ouvinte por
+// cartão morreria junto, e reinstalar acumularia cliques.
+quadro.addEventListener('click', (e) => {
+  const botao = e.target.closest('button[data-acao="detalhes"]');
+  if (!botao) return;
+  /* alterna aria-expanded e hidden */
+});</pre>
+  </div>
+</section>
+
+<section id="vazio">
+  <div class="eyebrow">Tema 4 · as quatro telas</div>
+  <h2 style="margin-top:10px">Zero resultados não passa nem perto de um <code>catch</code>.</h2>
+  <p class="lead" style="margin-top:14px">Clique em cada situação. Repare em <em>quem decide</em>: o <code>catch</code> de <code>iniciar()</code> ou a lista derivada.</p>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="panel">
+    <div>
+      <div class="status" id="status-demo" role="status" aria-live="polite"></div>
+      <div class="cards" id="cards-demo" style="min-height:70px"></div>
+    </div>
+    <div class="why" id="why-demo"></div>
+  </div>
+</section>
+
+<section id="pages">
+  <div class="eyebrow">Tema 5 · simulador</div>
+  <h2 style="margin-top:10px">Local abre. Publicado dá 404. Onde está a diferença?</h2>
+  <p class="lead" style="margin-top:14px">Escolha como o <code>index.html</code> referencia o arquivo e onde a página está servida. Veja para onde a URL resolve.</p>
+  <div class="u404">
+    <fieldset id="f-caminho"><legend>href / src no HTML</legend>
+      <label><input type="radio" name="caminho" value="rel" checked> <code>js/main.js</code> (relativo)</label>
+      <label><input type="radio" name="caminho" value="abs"> <code>/js/main.js</code> (absoluto)</label>
+      <label><input type="radio" name="caminho" value="case"> <code>js/Main.js</code> (maiúscula)</label>
+      <label><input type="radio" name="caminho" value="git"> <code>js/main.js</code>, mas o arquivo não foi commitado</label>
+    </fieldset>
+    <fieldset id="f-onde"><legend>onde a página está</legend>
+      <label><input type="radio" name="onde" value="local" checked> <code>http://localhost:8080/gerenciador-de-tarefas/</code> (Windows)</label>
+      <label><input type="radio" name="onde" value="pages"> <code>https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/</code> (Linux)</label>
+    </fieldset>
+  </div>
+  <div class="urlbar"><span class="dot" id="dot"></span><span id="url-final"></span></div>
+  <div class="resolve" id="resolve"></div>
+  <p class="explain" id="explain-404"></p>
+</section>
+
+<section id="quiz">
+  <div class="eyebrow">Simulado · 10 questões no formato do Q4</div>
+  <h2 style="margin-top:10px">Responda sem consultar. Depois consulte.</h2>
+  <div class="quiz" id="quiz"></div>
+  <div class="score"><span id="score-txt">0 respondidas</span><span><b id="score-n">0</b> / 10</span></div>
+</section>
+
+<footer>Andrey Bueno · repositório <a href="https://github.com/andreybueno-git/front-end">andreybueno-git/front-end</a> · página publicada <a href="https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/">gerenciador-de-tarefas</a></footer>
+</div>
+
+<script>
+// ===== dados (os 9 de dados.json) =====
+const DADOS = [
+  { id: 1, titulo: "Implementar layout responsivo com Flexbox e Grid", status: "a-fazer", prioridade: "alta", prazo: "2026-08-26" },
+  { id: 2, titulo: "Revisar funções e listas em Python", status: "a-fazer", prioridade: "media", prazo: "2026-08-29" },
+  { id: 3, titulo: "Ler capítulo sobre normalização de bancos de dados relacionais", status: "a-fazer", prioridade: "baixa", prazo: "2026-09-01" },
+  { id: 4, titulo: "Preparar apresentação do projeto integrador", status: "em-andamento", prioridade: "alta", prazo: "2026-08-28" },
+  { id: 5, titulo: "Modelar diagrama de classes do sistema", status: "em-andamento", prioridade: "media", prazo: "2026-09-02" },
+  { id: 9, titulo: "Consumir dados.json com fetch e tratar os quatro estados", status: "em-andamento", prioridade: "alta", prazo: "2026-09-08" },
+  { id: 6, titulo: "Corrigir relatório da aula de redes", status: "em-revisao", prioridade: "media", prazo: "2026-08-27" },
+  { id: 7, titulo: "Criar estrutura semântica da página", status: "concluidas", prioridade: "alta", prazo: "2026-08-19" },
+  { id: 8, titulo: "Resolver lista de lógica de programação", status: "concluidas", prioridade: "baixa", prazo: "2026-08-21" },
+];
+const ROTULO = { "a-fazer": "A fazer", "em-andamento": "Em andamento", "em-revisao": "Em revisão", "concluidas": "Concluída" };
+const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+
+// ===== ESTADO ÚNICO (igual ao seu js/estado.js) =====
+const criterioInicial = () => ({ busca: "", status: "todos", prioridade: "todas", ordenacao: "original" });
+const estado = { tarefas: DADOS.map(t => ({ ...t })), ...criterioInicial(), carregamento: "sucesso", erro: null };
+
+function derivarVisiveis(estado) {
+  const termo = norm(estado.busca);
+  let v = estado.tarefas.filter(t =>
+    (termo === "" || norm(t.titulo).includes(termo)) &&
+    (estado.status === "todos" || t.status === estado.status) &&
+    (estado.prioridade === "todas" || t.prioridade === estado.prioridade));
+  if (estado.ordenacao !== "original") {
+    const s = estado.ordenacao === "prazo-asc" ? 1 : -1;
+    v = [...v].sort((a, b) => a.prazo < b.prazo ? -s : a.prazo > b.prazo ? s : 0);
+  }
+  return v;
+}
+
+// ===== TELA (igual ao seu js/tela.js) =====
+const $ = id => document.getElementById(id);
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
+let ultimaChave = null;
+
+function cartao(t) {
+  const c = el("article", "card");
+  c.append(el("b", "", t.titulo));
+  const r = el("div", "row"); r.append(el("span", "", ROTULO[t.status]), el("span", "p p-" + t.prioridade, t.prioridade)); c.append(r);
+  const r2 = el("div", "row"); r2.append(el("span", "", "#" + t.id), el("span", "", t.prazo)); c.append(r2);
+  return c;
+}
+function desenharCartoes(container, lista) { container.replaceChildren(...lista.map(cartao)); }
+function mostrar(node, texto, kind) { node.textContent = texto; node.dataset.kind = kind; }
+
+function renderizar(estado) {
+  // sincroniza controles a partir do estado
+  if ($("busca").value !== estado.busca) $("busca").value = estado.busca;
+  $("ordenacao").value = estado.ordenacao;
+  document.querySelectorAll("#chips-status .chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === estado.status));
+  document.querySelectorAll("#chips-prio .chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === estado.prioridade));
+  desenharJSON(estado);
+
+  const total = estado.tarefas.length;
+  if (estado.carregamento === "erro") {
+    desenharCartoes($("cards"), []); $("counter").innerHTML = "— <small>erro</small>";
+    mostrar($("status"), `O servidor não conseguiu entregar as tarefas (status ${estado.erro.status}). Tente novamente mais tarde.`, "erro");
+    log("catch em iniciar() → carregamento = 'erro' → renderizar(estado)");
+    return;
+  }
+  if (total === 0) { desenharCartoes($("cards"), []); $("counter").innerHTML = "0 <small>tarefas</small>"; mostrar($("status"), "Nenhuma tarefa cadastrada ainda. Quando houver, elas aparecem aqui.", "vazio"); return; }
+
+  const visiveis = derivarVisiveis(estado);           // UMA vez por ciclo
+  desenharCartoes($("cards"), visiveis);
+  $("counter").innerHTML = `${visiveis.length} <small>de ${total} tarefas</small>`;
+  if (visiveis.length === 0) {
+    mostrar($("status"), `Nenhuma das ${total} tarefas corresponde à busca e aos filtros. Altere os critérios ou use “Limpar filtros”.`, "sem-resultado");
+    log(`derivarVisiveis → 0 de ${total} → mensagem de resultado vazio (não é erro)`);
+    return;
+  }
+  mostrar($("status"), `Mostrando ${visiveis.length} de ${total} tarefas.`, "sucesso");
+  log(`derivarVisiveis → ${visiveis.length} de ${total} → replaceChildren`);
+}
+function atualizar(chave) {
+  ultimaChave = chave;
+  const b = $("beam"); b.classList.remove("flash"); void b.offsetWidth; b.classList.add("flash"); setTimeout(() => b.classList.remove("flash"), 500);
+  renderizar(estado);
+}
+function log(msg) { const l = $("log"); l.prepend(el("div", "", msg)); while (l.children.length > 4) l.lastChild.remove(); }
+function desenharJSON(e) {
+  const fmt = (k, v) => `  <span class="k${k === ultimaChave ? " hot" : ""}">${k}</span>: ${typeof v === "string" ? `<span class="s">'${v.replace(/</g, "&lt;")}'</span>` : `<span class="n">${v}</span>`}`;
+  $("state-json").innerHTML = "{\n" + [
+    `  <span class="k">tarefas</span>: <span class="n">[${e.tarefas.map(t => t.id).join(", ")}]</span>`,
+    fmt("busca", e.busca), fmt("status", e.status), fmt("prioridade", e.prioridade), fmt("ordenacao", e.ordenacao),
+    fmt("carregamento", e.carregamento), `  <span class="k">erro</span>: <span class="n">${e.erro ? "HttpError(404)" : "null"}</span>`
+  ].join(",\n") + "\n}";
+}
+
+// ===== OUVINTES (igual ao seu js/main.js: escreve no estado + atualizar) =====
+function chips(container, valores, campo) {
+  valores.forEach(v => { const b = el("button", "chip", v); b.type = "button"; b.dataset.v = v;
+    b.addEventListener("click", () => { estado[campo] = v; estado.carregamento = "sucesso"; estado.erro = null; atualizar(campo); }); container.append(b); });
+}
+chips($("chips-status"), ["todos", "a-fazer", "em-andamento", "em-revisao", "concluidas"], "status");
+chips($("chips-prio"), ["todas", "baixa", "media", "alta"], "prioridade");
+$("busca").addEventListener("input", e => { estado.busca = e.target.value; estado.carregamento = "sucesso"; estado.erro = null; atualizar("busca"); });
+$("ordenacao").addEventListener("change", e => { estado.ordenacao = e.target.value; atualizar("ordenacao"); });
+$("limpar").addEventListener("click", () => { Object.assign(estado, criterioInicial()); estado.carregamento = "sucesso"; estado.erro = null; atualizar("busca"); });
+$("simular-erro").addEventListener("click", () => { estado.carregamento = "erro"; estado.erro = { name: "HttpError", status: 404 }; atualizar("carregamento"); });
+renderizar(estado);
+
+// ===== SORT LAB =====
+let labOrig = DADOS.map(t => t.id), labVis = [...labOrig];
+const porPrazoId = (a, b) => DADOS.find(t => t.id === a).prazo.localeCompare(DADOS.find(t => t.id === b).prazo);
+function cells(container, ids, ref) {
+  container.replaceChildren(...ids.map((id, i) => { const c = el("span", "cell" + (ref && ref[i] !== id ? " moved" : ""), "#" + id); return c; }));
+}
+function drawLab() { cells($("cells-orig"), labOrig, DADOS.map(t => t.id)); cells($("cells-vis"), labVis, null); }
+drawLab();
+$("sort-bad").addEventListener("click", () => {
+  labOrig.sort(porPrazoId); labVis = [...labOrig]; drawLab();
+  $("arr-orig").classList.add("bad");
+  const v = $("verdict"); v.className = "verdict bad"; v.textContent = "estado.tarefas foi reordenado in place. A opção “Ordem original” deixou de existir — os IDs mudaram de posição. Teste 1 do enunciado: reprovado.";
+});
+$("sort-good").addEventListener("click", () => {
+  labVis = [...labOrig].sort(porPrazoId); drawLab();
+  const v = $("verdict"); v.className = "verdict ok"; v.textContent = $("arr-orig").classList.contains("bad") ? "A cópia está ordenada, mas o original já tinha sido destruído antes. Recarregue e tente só este botão." : "A cópia foi ordenada; estado.tarefas continua [1, 2, 3, 4, 5, 9, 6, 7, 8]. Teste 1: aprovado.";
+});
+$("sort-reset").addEventListener("click", () => { labOrig = DADOS.map(t => t.id); labVis = [...labOrig]; $("arr-orig").classList.remove("bad"); $("verdict").textContent = ""; drawLab(); });
+
+// ===== QUATRO TELAS =====
+const TELAS = [
+  { k: "carregando", nome: "carregando", msg: "Carregando tarefas…", cards: [], why: ["<b>Quem decide:</b> <code>iniciar()</code>, antes do <code>await</code>. Se viesse depois, a tela ficaria em branco durante toda a espera pela rede.", "<span class='decision'>estado.carregamento = 'carregando' → atualizar()</span>"] },
+  { k: "erro", nome: "erro (404)", msg: "O servidor não conseguiu entregar as tarefas (status 404). Tente novamente mais tarde.", cards: [], why: ["<b>Quem decide:</b> o <code>catch</code> de <code>iniciar()</code>. A <b>obtenção</b> falhou: rede (NetworkError), servidor (HttpError 404/500) ou formato (SyntaxError).", "<span class='decision catch'>catch (erro) → carregamento = 'erro'</span>", "O quadro é zerado: contadores não podem contar uma história diferente da mensagem."] },
+  { k: "vazio", nome: "origem vazia", msg: "Nenhuma tarefa cadastrada ainda. Quando houver, elas aparecem aqui.", cards: [], why: ["<b>Quem decide:</b> <code>renderizar()</code>, no caminho de sucesso. O servidor respondeu, o JSON é válido, só não há tarefas. Tratar como falha seria mentir.", "<span class='decision derive'>sucesso && estado.tarefas.length === 0</span>"] },
+  { k: "sem-resultado", nome: "resultado vazio", msg: "Nenhuma das 9 tarefas corresponde à busca e aos filtros. Altere os critérios ou use “Limpar filtros”.", cards: [], why: ["<b>Quem decide:</b> a <b>lista derivada</b>. A obtenção funcionou; os <b>critérios</b> é que não encontraram nada. Nunca chega perto de um catch.", "<span class='decision derive'>sucesso && visiveis.length === 0</span>", "Esta é a pergunta 4 do Q4: zero resultados não é erro."] },
+  { k: "sucesso", nome: "sucesso", msg: "Mostrando 2 de 9 tarefas (com filtros ativos).", cards: DADOS.filter(t => t.prioridade === "alta" && t.status === "a-fazer" || t.id === 4), why: ["<b>Quem decide:</b> a lista derivada tem itens. Contagem “N de M”: N vem de <code>visiveis.length</code>, M de <code>estado.tarefas.length</code>.", "<span class='decision derive'>renderizarTarefas(visiveis)</span>"] },
+];
+TELAS.forEach((t, i) => { const b = el("button", "tab", t.nome); b.type = "button"; b.setAttribute("role", "tab"); b.addEventListener("click", () => mostrarTela(i)); $("tabs").append(b); });
+function mostrarTela(i) {
+  document.querySelectorAll("#tabs .tab").forEach((b, j) => b.setAttribute("aria-selected", i === j));
+  const t = TELAS[i]; mostrar($("status-demo"), t.msg, t.k); desenharCartoes($("cards-demo"), t.cards);
+  $("why-demo").innerHTML = t.why.map(w => `<div>${w}</div>`).join("");
+}
+mostrarTela(3);
+
+// ===== 404 =====
+function sim404() {
+  const caminho = document.querySelector("input[name=caminho]:checked").value;
+  const onde = document.querySelector("input[name=onde]:checked").value;
+  const base = onde === "local" ? "http://localhost:8080/gerenciador-de-tarefas/" : "https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/";
+  const origem = onde === "local" ? "http://localhost:8080" : "https://andreybueno-git.github.io";
+  let url, ok, exp;
+  if (caminho === "rel") { url = base + "js/main.js"; ok = true; exp = "Caminho relativo resolve a partir da pasta da página — funciona nos dois lugares. É o que o seu index.html usa."; }
+  else if (caminho === "abs") { url = origem + "/js/main.js"; ok = onde === "local"; exp = onde === "local" ? "Funciona só porque a raiz do servidor local é a pasta do projeto. No Pages a raiz do domínio é outra." : "A raiz do domínio é usuario.github.io/ e o projeto vive em /front-end/ — /js/main.js aponta para um lugar que não existe. 404."; }
+  else if (caminho === "case") { url = base + "js/Main.js"; ok = onde === "local"; exp = onde === "local" ? "Windows/macOS ignoram maiúsculas e minúsculas em nomes de arquivo, então Main.js encontra main.js. O erro fica escondido." : "O servidor do Pages roda em Linux, que diferencia maiúsculas: Main.js ≠ main.js. 404."; }
+  else { url = base + "js/main.js"; ok = onde === "local"; exp = onde === "local" ? "Funciona porque o arquivo está no disco — mas não está no Git (não commitado, ou no .gitignore)." : "No Pages só existe o que está no repositório. O arquivo nunca subiu. 404."; }
+  $("url-final").textContent = url; $("dot").className = "dot" + (ok ? "" : " bad");
+  $("resolve").innerHTML = `<div class="line"><span class="code ${ok ? "ok" : "bad"}">${ok ? "200" : "404"}</span><span>${url}</span></div>`;
+  $("explain-404").textContent = exp;
+}
+document.querySelectorAll("#f-caminho input, #f-onde input").forEach(i => i.addEventListener("change", sim404));
+sim404();
+
+// ===== QUIZ =====
+const Q = [
+  ["Por que o objeto de estado da E4 não guarda uma lista tarefasFiltradas além de tarefas?", ["Porque JavaScript não permite dois arrays no mesmo objeto.", "Porque seria uma segunda fonte de verdade que pode ficar desatualizada; derivar a cada ciclo garante consistência.", "Porque a lista filtrada é guardada no localStorage.", "Porque o fetch já devolve os dados filtrados."], 1, "A lista visível é uma função dos critérios atuais. Guardá-la obriga alguém a mantê-la em sincronia; derivá-la em derivarVisiveis() elimina o problema."],
+  ["O que acontece se derivarVisiveis() fizer estado.tarefas.sort(...) diretamente?", ["Nada: sort() devolve um array novo e o original fica igual.", "Dá erro porque estado.tarefas é const.", "A ordem original de estado.tarefas é perdida, pois sort() ordena o próprio array (in place).", "Só os cartões visíveis são reordenados."], 2, "sort() é mutador. Por isso o código ordena uma cópia: [...visiveis].sort(...). O teste 1 (IDs antes e depois) detecta exatamente esse erro."],
+  ["Qual sequência descreve corretamente o ciclo de atualização?", ["renderização → evento → estado → derivação", "evento → derivação → estado → renderização", "evento → estado → derivação → renderização", "estado → evento → renderização → derivação"], 2, "O evento altera o estado; renderizar(estado) deriva a lista uma vez e desenha cartões, contagem, mensagem e controles."],
+  ["O usuário digita 'zzz' e nenhum cartão aparece. Em qual situação o código está?", ["No catch de iniciar(), com carregamento === 'erro'.", "No caminho de sucesso: visiveis.length === 0, decidido pela lista derivada, com mensagem própria.", "Na origem vazia (estado.tarefas.length === 0).", "Em carregamento, aguardando novo fetch."], 1, "Zero resultados não é falha de obtenção. A obtenção funcionou; os critérios é que não encontraram nada."],
+  ["Local funciona, mas no GitHub Pages o console mostra 404 em /js/main.js. Causa mais provável?", ["O Pages não serve JavaScript.", "O caminho é absoluto: '/js/main.js' aponta para a raiz do domínio; no Pages o projeto vive em '/front-end/'. Deveria ser 'js/main.js'.", "Falta type='module'.", "O arquivo precisa estar em maiúsculas."], 1, "Local, a raiz do servidor é a pasta do projeto. No Pages, a raiz é usuario.github.io/. Caminho relativo resolve em ambos."],
+  ["O arquivo chama-se styles.css, mas o HTML referencia Styles.css. Local abre, publicado dá 404. Por quê?", ["O Pages exige extensão .CSS.", "Windows/macOS ignoram maiúsculas em nomes de arquivo; o servidor do Pages (Linux) diferencia.", "O navegador cacheou a versão antiga.", "O arquivo precisa estar na raiz do repositório."], 1, "Sistemas de arquivos case-insensitive escondem o erro; Linux é case-sensitive."],
+  ["Por que o ouvinte do botão 'Detalhes' fica no .quadro, e não em cada cartão?", ["Porque botões não aceitam addEventListener.", "Porque os cartões são substituídos a cada render: um ouvinte por cartão morreria com ele, e reinstalar a cada render faria o clique disparar várias vezes.", "Porque o .quadro é o único elemento com id.", "Só por desempenho; funcionalmente daria no mesmo."], 1, "Delegação: um ouvinte no ancestral, instalado uma vez, sobrevive à troca dos filhos. É o teste 5 do enunciado."],
+  ["Por que 'Limpar filtros' é type='button' com Object.assign(estado, criterioInicial()) em vez de type='reset'?", ["reset não funciona com rádios.", "reset limparia apenas os controles, deixando o estado com os filtros antigos — duas fontes de verdade. O botão restaura o estado; renderizar() sincroniza os controles.", "type='button' é obrigatório dentro de form.", "reset recarregaria a página."], 1, "Existe uma fonte só. Os controles são projeção do estado, então quem deve ser restaurado é o estado."],
+  ["Por que a região #status com role='status' e aria-live='polite' já existe no HTML, vazia?", ["Porque createElement não aceita atributos ARIA.", "Porque o leitor de tela só anuncia mudanças em regiões que já estavam na árvore de acessibilidade quando a página montou.", "Porque o CSS precisa dela para o layout.", "Porque aria-live só funciona em div."], 1, "Criada na hora, o leitor não estaria 'observando' e nada seria anunciado. Pelo mesmo motivo o CSS não usa display:none nela quando vazia."],
+  ["Qual afirmação sobre carregarTarefas() (js/api.js) está correta?", ["Recebe os filtros e devolve a lista já filtrada.", "Lê o campo de busca para economizar requisições.", "Apenas obtém os dados (fetch, response.ok, json) e não lê controles nem toca o DOM; filtrar é papel da derivação.", "Chama renderizarTarefas() ao terminar."], 2, "Responsabilidade única: obter. As regras de filtro ficam em derivarVisiveis(); a tela em tela.js."],
+];
+let respondidas = 0, acertos = 0;
+Q.forEach(([enun, opts, gab, expl], i) => {
+  const box = el("div", "qq"); const h = el("h3"); h.innerHTML = `<span class="num">${String(i + 1).padStart(2, "0")}</span>${enun}`; box.append(h);
+  const o = el("div", "opts"); const fb = el("div", "fb");
+  opts.forEach((txt, j) => {
+    const b = el("button", "opt"); b.type = "button"; b.innerHTML = `<span class="l">${"ABCD"[j]}</span><span>${txt}</span>`;
+    b.addEventListener("click", () => {
+      o.querySelectorAll(".opt").forEach((x, k) => { x.disabled = true; if (k === gab) x.classList.add("right"); });
+      if (j !== gab) b.classList.add("wrong"); else acertos++;
+      respondidas++; fb.textContent = (j === gab ? "Certo. " : "Não. A resposta é " + "ABCD"[gab] + ". ") + expl; fb.classList.add("show");
+      $("score-n").textContent = acertos; $("score-txt").textContent = respondidas === 10 ? (acertos >= 8 ? "Pronto para o Q4." : "Releia os temas que errou e refaça.") : `${respondidas} de 10 respondidas`;
+    });
+    o.append(b);
+  });
+  box.append(o, fb); $("quiz").append(box);
+});
+</script>
+
+</body>
+</html>

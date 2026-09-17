@@ -11,6 +11,13 @@ Repositório único da disciplina. A E1 é o site pessoal na raiz. A partir da E
 
 A etapa atual (E4) tem **documento único** com o estado da etapa, as decisões do Q4, o roteiro de testes e o **versionamento**: [`gerenciador-de-tarefas/README.md`](gerenciador-de-tarefas/README.md). As versões ficam em *Tags* (`e2-v1.0.0`, `e3-vX.Y.Z`, `e4-vX.Y.Z`).
 
+## Material de estudo
+
+Páginas interativas de revisão para o Q4 (E4), em `estudo-q4/`:
+
+- https://andreybueno-git.github.io/front-end/estudo-q4/ — as cinco lições, com experimentos e perguntas
+- https://andreybueno-git.github.io/front-end/estudo-q4/projecao.html — o estado ao vivo, laboratório do `sort()` e simulado
+
 ## Rodar localmente
 
 O gerenciador carrega `dados.json` pela rede, então precisa de um servidor HTTP (abrir por `file://` não funciona):

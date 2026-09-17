@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinco Lições do Q4</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Fira+Code:wght@400;600&display=swap">
+  <style>
+  :root {
+    --paper: #fbf7ef; --paper-2: #f3ecdd; --card: #ffffff;
+    --ink: #143240; --ink-soft: #4d6470; --line: #e3dccb;
+    --gold: #e8a13a; --gold-soft: #fbead0; --mint: #2fa37b; --mint-soft: #ddf3ea; --rose: #d9534f; --rose-soft: #fbe3e2;
+    --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+    --mono: "Fira Code", "SFMono-Regular", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; padding-inline: clamp(16px, 5vw, 64px); padding-block: 0 80px;
+    background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6;
+    background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 28px 28px;
+  }
+  h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+  p { margin: 0; max-width: 62ch; }
+  code { font-family: var(--mono); font-size: .86em; background: var(--paper-2); padding: .1em .35em; border-radius: 4px; }
+  pre { font-family: var(--mono); font-size: .82rem; line-height: 1.6; background: var(--ink); color: #eef3f5; padding: 16px 18px; border-radius: 12px; overflow-x: auto; margin: 0; }
+  pre .c { color: #8fb3c4; } pre .k { color: var(--gold); } pre .s { color: #9be6c6; }
+  button { font: inherit; cursor: pointer; }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .wrap { max-width: 1100px; margin-inline: auto; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding-block: clamp(40px, 8vw, 96px) 40px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: end; }
+  .kicker { font-family: var(--mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); display: flex; gap: 14px; flex-wrap: wrap; }
+  .kicker b { color: var(--ink); }
+  .hero h1 { font-size: clamp(2.6rem, 7.5vw, 6rem); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-top: 18px; font-variation-settings: "opsz" 144; }
+  .hero h1 .n { color: var(--gold); font-style: italic; font-weight: 500; }
+  .hero h1 mark { background: linear-gradient(transparent 55%, var(--gold-soft) 55%); color: inherit; }
+  .hero .sub { margin-top: 22px; font-size: 1.15rem; color: var(--ink-soft); }
+  .hero .sub b { color: var(--ink); }
+  .sticker { justify-self: end; background: var(--card); border: 1.5px solid var(--ink); border-radius: 18px; padding: 22px 24px; box-shadow: 8px 8px 0 var(--gold); transform: rotate(2deg); max-width: 340px; }
+  .sticker h3 { font-size: 1.05rem; font-weight: 700; }
+  .sticker ol { margin: 10px 0 0; padding-left: 20px; font-size: .95rem; display: grid; gap: 4px; }
+  .sticker li::marker { font-family: var(--mono); font-weight: 600; color: var(--gold); }
+  .sticker .foot { margin-top: 12px; font-size: .8rem; color: var(--ink-soft); font-family: var(--mono); }
+
+  /* ---------- PROGRESS ---------- */
+  .progress { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--paper) 88%, white); backdrop-filter: blur(8px); border-block: 1.5px solid var(--ink); margin-inline: calc(-1 * clamp(16px, 5vw, 64px)); padding-inline: clamp(16px, 5vw, 64px); }
+  .progress ul { list-style: none; margin: 0 auto; padding: 0; max-width: 1100px; display: flex; gap: 0; overflow-x: auto; }
+  .progress a { display: flex; align-items: center; gap: 8px; padding: 12px 16px 12px 0; margin-right: 16px; text-decoration: none; color: var(--ink-soft); font-size: .88rem; white-space: nowrap; border-bottom: 3px solid transparent; }
+  .progress a .d { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; font: 600 .68rem var(--mono); color: var(--ink); }
+  .progress a.done .d { background: var(--mint); border-color: var(--mint); color: white; }
+  .progress a.done { color: var(--ink); }
+
+  /* ---------- LESSON ---------- */
+  .lesson { padding-block: 72px; border-bottom: 1.5px dashed var(--line); display: grid; grid-template-columns: 64px 1fr; gap: 20px; }
+  .lesson .num { font-family: var(--display); font-size: 3.4rem; font-weight: 900; color: var(--gold); line-height: 1; font-variation-settings: "opsz" 144; }
+  .lesson h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; }
+  .lesson .q { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 26px; align-items: start; }
+  .plain { display: grid; gap: 12px; }
+  .plain p b { color: var(--ink); }
+  .analogia { background: var(--gold-soft); border-left: 4px solid var(--gold); padding: 14px 16px; border-radius: 0 12px 12px 0; font-size: .98rem; }
+  .analogia b { font-family: var(--display); font-weight: 700; }
+  .resumo { margin-top: 22px; background: var(--ink); color: var(--paper); padding: 16px 20px; border-radius: 14px; font-family: var(--display); font-size: 1.15rem; font-weight: 500; font-style: italic; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; }
+  .resumo .tag { font: 600 .68rem var(--mono); letter-spacing: .1em; text-transform: uppercase; font-style: normal; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 4px 8px; }
+  .demo { background: var(--card); border: 1.5px solid var(--ink); border-radius: 16px; padding: 18px; display: grid; gap: 12px; box-shadow: 6px 6px 0 var(--line); }
+  .demo h3 { font-size: 1rem; font-weight: 700; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .demo h3 small { font: 500 .7rem var(--mono); color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
+  .btn { border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 999px; padding: 8px 16px; font-weight: 700; font-size: .9rem; transition: transform .1s; }
+  .btn:active { transform: translateY(1px); }
+  .btn.o { background: transparent; color: var(--ink); }
+  .btn.o:hover { background: var(--paper-2); }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pill { font: 600 .72rem var(--mono); padding: 3px 9px; border-radius: 999px; border: 1px solid; }
+  .ok { color: var(--mint); border-color: var(--mint); background: var(--mint-soft); }
+  .bad { color: var(--rose); border-color: var(--rose); background: var(--rose-soft); }
+  .note { font-size: .9rem; color: var(--ink-soft); min-height: 1.5em; }
+
+  /* lesson 1: two lists */
+  .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .twin .box { border: 1px solid var(--line); border-radius: 10px; padding: 10px; font-size: .82rem; }
+  .twin .box h4 { margin: 0 0 6px; font: 600 .7rem var(--mono); color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
+  .twin .box.desync { border-color: var(--rose); background: var(--rose-soft); }
+  .mini { display: grid; gap: 4px; }
+  .mini span { background: var(--paper-2); padding: 3px 8px; border-radius: 6px; }
+  .mini span.hide { opacity: .25; text-decoration: line-through; }
+
+  /* lesson 2: cells */
+  .cells { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cell { font: 600 .82rem var(--mono); border: 1px solid var(--line); padding: 5px 9px; border-radius: 6px; background: var(--paper); }
+  .cell.moved { border-color: var(--rose); color: var(--rose); background: var(--rose-soft); }
+  .arr-label { font: 600 .7rem var(--mono); color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* lesson 3: steps */
+  .steps { display: grid; gap: 8px; counter-reset: s; }
+  .step { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); font-size: .9rem; transition: background .25s, border-color .25s; }
+  .step::before { counter-increment: s; content: counter(s); font: 700 .8rem var(--mono); width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; }
+  .step b { display: block; }
+  .step code { font-size: .78rem; }
+  .step.on { background: var(--gold-soft); border-color: var(--gold); }
+  .step.on::before { background: var(--gold); border-color: var(--gold); color: white; }
+  .screenlet { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .85rem; display: grid; gap: 6px; }
+  .screenlet .st { font-size: .8rem; color: var(--mint); border: 1px dashed var(--mint); border-radius: 6px; padding: 5px 8px; }
+  .screenlet .cards { display: flex; flex-wrap: wrap; gap: 6px; }
+  .screenlet .cards span { font-size: .78rem; background: var(--paper-2); padding: 4px 8px; border-radius: 6px; animation: pop .25s; }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } }
+
+  /* lesson 4: four cards */
+  .four { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+  .four button { border: 1.5px solid var(--line); background: var(--paper); border-radius: 10px; padding: 10px; text-align: left; display: grid; gap: 4px; font-size: .85rem; }
+  .four button b { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
+  .four button[aria-pressed="true"] { border-color: var(--ink); background: var(--card); box-shadow: 4px 4px 0 var(--line); }
+  .four .catch b { color: var(--rose); } .four .derive b { color: var(--mint); }
+  .who { border-radius: 10px; padding: 12px 14px; font-size: .9rem; display: grid; gap: 6px; }
+  .who.catch { background: var(--rose-soft); } .who.derive { background: var(--mint-soft); } .who.neutral { background: var(--paper-2); }
+  .who .msg { font-family: var(--mono); font-size: .8rem; }
+
+  /* lesson 5: url */
+  .u fieldset { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 0; }
+  .u legend { font: 600 .68rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); padding-inline: 4px; }
+  .u label { display: flex; gap: 8px; align-items: center; font-size: .9rem; padding: 3px 0; }
+  .url { font-family: var(--mono); font-size: .8rem; background: var(--paper-2); padding: 10px 12px; border-radius: 8px; overflow-wrap: anywhere; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; }
+
+  /* ---------- CHECK ---------- */
+  .check { padding-block: 72px 0; }
+  .check h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -.02em; }
+  .qs { display: grid; gap: 14px; margin-top: 26px; }
+  .qq { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 18px; }
+  .qq h3 { font-family: var(--body); font-weight: 700; font-size: 1rem; }
+  .qq h3 .l { font-family: var(--mono); color: var(--gold); margin-right: 8px; }
+  .opts { display: grid; gap: 8px; margin-top: 12px; }
+  .opt { text-align: left; border: 1.5px solid var(--line); background: var(--paper); border-radius: 10px; padding: 10px 12px; font-size: .92rem; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  .opt:hover { border-color: var(--ink); }
+  .opt .k { font: 600 .75rem var(--mono); color: var(--ink-soft); }
+  .opt.right { border-color: var(--mint); background: var(--mint-soft); }
+  .opt.wrong { border-color: var(--rose); background: var(--rose-soft); }
+  .opt[disabled] { cursor: default; }
+  .fb { margin-top: 10px; font-size: .9rem; color: var(--ink-soft); display: none; } .fb.show { display: block; }
+  .result { margin-top: 22px; background: var(--ink); color: var(--paper); border-radius: 16px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .result b { font-family: var(--display); font-size: 2.2rem; font-weight: 900; color: var(--gold); }
+  footer { margin-top: 48px; font-size: .82rem; color: var(--ink-soft); font-family: var(--mono); }
+  footer a { color: var(--ink); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; }
+    .sticker { justify-self: start; transform: rotate(-1deg); }
+    .lesson { grid-template-columns: 1fr; gap: 6px; }
+    .lesson .num { font-size: 2.4rem; }
+    .twin { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div>
+    <div class="kicker"><span>Desenvolvimento Frontend 2026.2</span><span><b>E4</b> · gerenciador de tarefas</span><span>questionário <b>Q4</b></span></div>
+    <h1><span class="n">Cinco</span> coisas para <mark>entender</mark> antes do Q4.</h1>
+    <p class="sub">O questionário tem 5 perguntas, e o professor já disse quais são os 5 assuntos. Cada lição abaixo explica um deles em <b>português simples</b>, mostra <b>onde está no seu código</b> e deixa você <b>mexer</b> para ver acontecendo. No fim, cinco perguntas para conferir.</p>
+  </div>
+  <aside class="sticker" aria-label="Os cinco assuntos">
+    <h3>Os 5 assuntos do Q4</h3>
+    <ol>
+      <li>Lista filtrada não é uma segunda fonte de verdade</li>
+      <li><code>sort()</code> altera o array original</li>
+      <li>Evento → estado → derivação → renderização</li>
+      <li>Zero resultados não é erro</li>
+      <li>Local funciona, publicado dá 404</li>
+    </ol>
+    <div class="foot">5 questões · 30 min · sem consulta · vale 1,0</div>
+  </aside>
+</header>
+
+<nav class="progress" aria-label="Lições">
+  <ul>
+    <li><a href="#l1" data-l="1"><span class="d">1</span>Uma fonte só</a></li>
+    <li><a href="#l2" data-l="2"><span class="d">2</span>sort() mexe no original</a></li>
+    <li><a href="#l3" data-l="3"><span class="d">3</span>O ciclo</a></li>
+    <li><a href="#l4" data-l="4"><span class="d">4</span>Vazio ≠ erro</a></li>
+    <li><a href="#l5" data-l="5"><span class="d">5</span>O 404 do Pages</a></li>
+    <li><a href="#check" data-l="6"><span class="d">✓</span>Conferir</a></li>
+  </ul>
+</nav>
+
+<!-- ================= LIÇÃO 1 ================= -->
+<article class="lesson" id="l1">
+  <div class="num">1</div>
+  <div>
+    <div class="q">Pergunta provável · “por que a lista filtrada não deve ser armazenada como segunda fonte de verdade?”</div>
+    <h2>Guarde os critérios. Calcule a lista.</h2>
+    <div class="cols">
+      <div class="plain">
+        <p>Seu estado guarda as <b>9 tarefas originais</b> e os <b>critérios</b> (busca, status, prioridade, ordenação). Ele <b>não guarda</b> uma lista <code>tarefasFiltradas</code>.</p>
+        <p>Se guardasse, existiriam duas listas para manter combinando. Uma hora o filtro muda, alguém esquece de recalcular a segunda, e a tela mostra uma coisa enquanto o estado diz outra.</p>
+        <p>Por isso a lista visível é <b>calculada na hora</b> por <code>derivarVisiveis(estado)</code> toda vez que a tela desenha — e jogada fora em seguida. Uma coisa que não é guardada não tem como ficar desatualizada.</p>
+        <div class="analogia"><b>Analogia.</b> Cardápio e pedido. O cardápio (todas as tarefas) e o que o cliente pediu (os critérios) são a fonte. O prato na mesa (a lista visível) é feito na hora a partir dos dois. Você não guarda pratos prontos na geladeira “para o caso de o pedido não mudar”.</div>
+      </div>
+      <div class="demo">
+        <h3>Experimento <small>duas fontes de verdade</small></h3>
+        <div class="row">
+          <button class="btn" type="button" id="l1-filtrar">filtrar: prioridade = alta</button>
+          <button class="btn o" type="button" id="l1-mudar">mudar filtro: prioridade = baixa</button>
+          <button class="btn o" type="button" id="l1-reset">recomeçar</button>
+        </div>
+        <div class="twin">
+          <div class="box" id="l1-a"><h4>A · guardando tarefasFiltradas</h4><div class="mini" id="l1-a-list"></div></div>
+          <div class="box" id="l1-b"><h4>B · derivando a cada render</h4><div class="mini" id="l1-b-list"></div></div>
+        </div>
+        <div class="note" id="l1-note">Clique em “filtrar”, depois em “mudar filtro” e compare as duas caixas.</div>
+      </div>
+    </div>
+    <div class="resumo"><span class="tag">resposta</span><span>Porque duas cópias podem discordar. Derivando a cada ciclo, a lista está sempre certa por construção — ela nem é guardada.</span></div>
+  </div>
+</article>
+
+<!-- ================= LIÇÃO 2 ================= -->
+<article class="lesson" id="l2">
+  <div class="num">2</div>
+  <div>
+    <div class="q">Pergunta provável · “por que sort() pode alterar o array original?”</div>
+    <h2><code>sort()</code> não devolve uma cópia. Ele reordena o que já existe.</h2>
+    <div class="cols">
+      <div class="plain">
+        <p>Muita gente acha que <code>sort()</code> funciona como <code>filter()</code>: você chama, recebe um array novo e o antigo fica igual. <b>Não é assim.</b> <code>sort()</code> reordena o <b>próprio</b> array (“in place”) e devolve ele mesmo.</p>
+        <p>Se o seu código fizesse <code>estado.tarefas.sort()</code>, a ordem em que as tarefas vieram do JSON seria perdida para sempre. A opção “Ordem original” do select deixaria de existir — não há mais original para voltar.</p>
+        <p>Por isso o código ordena uma <b>cópia</b>: <code>[...visiveis].sort()</code>. O <code>[...]</code> (spread) cria um array novo; o <code>sort()</code> mexe só nele.</p>
+        <div class="analogia"><b>Analogia.</b> É a diferença entre pedir a alguém “me passa uma cópia da lista em ordem alfabética” e “reescreve a lista em ordem alfabética”. Na segunda, a ordem antiga acabou.</div>
+        <pre><span class="c">// mexem no original (mutadores):</span>
+sort  reverse  push  pop  shift  unshift  splice
+<span class="c">// devolvem um array novo:</span>
+filter  map  slice  concat  [...spread]  toSorted</pre>
+      </div>
+      <div class="demo">
+        <h3>Experimento <small>ordenar por prazo</small></h3>
+        <div class="arr-label">estado.tarefas (ids na ordem do JSON)</div>
+        <div class="cells" id="l2-orig"></div>
+        <div class="arr-label">visiveis (o que vai para a tela)</div>
+        <div class="cells" id="l2-vis"></div>
+        <div class="row">
+          <button class="btn o" type="button" id="l2-bad"><code style="background:none">estado.tarefas.sort()</code></button>
+          <button class="btn" type="button" id="l2-good"><code style="background:none;color:inherit">[...estado.tarefas].sort()</code></button>
+          <button class="btn o" type="button" id="l2-reset">recarregar JSON</button>
+        </div>
+        <div class="note" id="l2-note">Aperte um botão e olhe a linha de cima.</div>
+      </div>
+    </div>
+    <div class="resumo"><span class="tag">resposta</span><span>Porque sort() ordena no próprio array e não cria cópia. Ordenando uma cópia ([...visiveis].sort()), a ordem original sobrevive.</span></div>
+  </div>
+</article>
+
+<!-- ================= LIÇÃO 3 ================= -->
+<article class="lesson" id="l3">
+  <div class="num">3</div>
+  <div>
+    <div class="q">Pergunta provável · “qual é a sequência evento → estado → derivação → renderização?”</div>
+    <h2>O evento não desenha nada. Ele só muda dados.</h2>
+    <div class="cols">
+      <div class="plain">
+        <p>Quando você digita na busca, o ouvinte faz <b>exatamente duas coisas</b>: escreve no estado (<code>estado.busca = 'py'</code>) e chama <code>atualizar()</code>. Ele não filtra, não esconde cartão, não lê outro controle.</p>
+        <p><code>atualizar()</code> chama <code>renderizar(estado)</code> — o <b>único</b> lugar que desenha. Lá dentro, em ordem: deriva a lista uma vez, desenha os cartões, escreve “N de M” e a mensagem, e sincroniza os controles com o estado.</p>
+        <p>Como tudo sai do mesmo objeto, a tela e os controles nunca discordam. E a ordem em que você mexe nos filtros não importa: o que conta é o valor <b>atual</b> do estado, não o histórico de cliques.</p>
+        <div class="analogia"><b>Analogia.</b> Um placar de estádio. O juiz (evento) não pinta o placar: ele anota o gol na súmula (estado). O painel (tela) é redesenhado a partir da súmula. Se dois painéis mostram números diferentes, o problema não é o painel — alguém escreveu fora da súmula.</div>
+        <p>Detalhe que cai junto: “Limpar filtros” é <code>type="button"</code>, não <code>reset</code>. <code>reset</code> limparia só os campos e o estado ficaria com os filtros antigos. O botão restaura o <b>estado</b>; a renderização traz os campos junto.</p>
+      </div>
+      <div class="demo">
+        <h3>Experimento <small>passo a passo</small></h3>
+        <div class="row">
+          <button class="btn" type="button" id="l3-play">digitar “py” na busca</button>
+          <button class="btn o" type="button" id="l3-limpar">clicar “Limpar filtros”</button>
+        </div>
+        <div class="steps" id="l3-steps">
+          <div class="step"><span><b>Evento</b> <code>input</code> no campo de busca <span class="pill" style="border-color:var(--line);color:var(--ink-soft)">js/main.js</span></span></div>
+          <div class="step"><span><b>Estado</b> <code id="l3-code1">estado.busca = 'py'</code></span></div>
+          <div class="step"><span><b>Derivação</b> <code>visiveis = derivarVisiveis(estado)</code> — pura, sem DOM <span class="pill" style="border-color:var(--line);color:var(--ink-soft)">js/estado.js</span></span></div>
+          <div class="step"><span><b>Renderização</b> <code>renderizarTarefas(visiveis)</code> + “N de M” + mensagem + controles <span class="pill" style="border-color:var(--line);color:var(--ink-soft)">js/tela.js</span></span></div>
+        </div>
+        <div class="screenlet">
+          <div class="st" id="l3-st">Mostrando 9 de 9 tarefas.</div>
+          <div class="cards" id="l3-cards"></div>
+        </div>
+      </div>
+    </div>
+    <div class="resumo"><span class="tag">resposta</span><span>Evento → altera o estado → derivarVisiveis(estado) → renderizar(estado). Cada ouvinte só escreve no estado e chama o mesmo ponto de renderização.</span></div>
+  </div>
+</article>
+
+<!-- ================= LIÇÃO 4 ================= -->
+<article class="lesson" id="l4">
+  <div class="num">4</div>
+  <div>
+    <div class="q">Pergunta provável · “por que zero resultados não é erro?”</div>
+    <h2>Erro é quando a busca dos dados falhou. Zero resultados é a busca tendo funcionado.</h2>
+    <div class="cols">
+      <div class="plain">
+        <p><b>Erro</b> é a rede cair, o servidor responder 404/500 ou o JSON vir quebrado. A <b>obtenção</b> falhou. Isso cai no <code>catch</code> de <code>iniciar()</code>, em <code>main.js</code>, e vira <code>estado.carregamento = 'erro'</code>.</p>
+        <p><b>Zero resultados</b> é diferente: os dados chegaram certinhos, as 9 tarefas estão no estado, só que a busca “zzz” não bate com nenhuma. Quem decide isso é a <b>lista derivada</b>: <code>visiveis.length === 0</code>, dentro de <code>renderizar()</code>, no caminho de sucesso. Nunca passa perto de um <code>catch</code>.</p>
+        <p>E tem uma terceira: <b>origem vazia</b> — o JSON veio válido, mas com zero tarefas. Também não é erro. Três situações, três mensagens diferentes na tela.</p>
+        <div class="analogia"><b>Analogia.</b> Você liga para a pizzaria. “Não atende” é erro. “Atendeu, mas não tem a pizza que você quer” não é erro — é zero resultados. Tratar os dois igual seria mentir para o cliente.</div>
+      </div>
+      <div class="demo">
+        <h3>Experimento <small>quem decide?</small></h3>
+        <div class="four" id="l4-four"></div>
+        <div class="who neutral" id="l4-who">Clique numa situação.</div>
+      </div>
+    </div>
+    <div class="resumo"><span class="tag">resposta</span><span>Erro é falha de obtenção (catch). Zero resultados é decidido pela lista derivada (visiveis.length === 0) no caminho de sucesso — os dados vieram, os critérios não acharam nada.</span></div>
+  </div>
+</article>
+
+<!-- ================= LIÇÃO 5 ================= -->
+<article class="lesson" id="l5">
+  <div class="num">5</div>
+  <div>
+    <div class="q">Pergunta provável · “por que a versão local funciona e a URL publicada retorna 404?”</div>
+    <h2>Três motivos. Todos escondidos pelo seu computador.</h2>
+    <div class="cols">
+      <div class="plain">
+        <p><b>a) Caminho absoluto.</b> <code>/js/main.js</code> funciona no localhost porque a raiz do servidor é a pasta do projeto. No Pages, a raiz do domínio é <code>andreybueno-git.github.io/</code> e o projeto vive em <code>/front-end/</code> — a barra inicial aponta para um lugar que não existe. Por isso o seu HTML usa caminhos <b>relativos</b>: <code>js/main.js</code>, <code>dados.json</code>, <code>styles.css</code>.</p>
+        <p><b>b) Maiúscula e minúscula.</b> Windows e macOS não diferenciam: <code>Styles.css</code> abre <code>styles.css</code>. O servidor do Pages roda Linux, que diferencia. Local abre, publicado dá 404.</p>
+        <p><b>c) Arquivo fora do Git.</b> Está no seu disco, então funciona local. Mas não foi commitado (ou está no <code>.gitignore</code>), e o Pages só publica o que está no repositório.</p>
+        <div class="analogia"><b>Como verificar.</b> Janela anônima → DevTools → Network → recarregar → tudo <b>200</b>. Console vazio. Se algo dá 404, olhe o caminho na coluna “Name” e compare letra por letra com o arquivo no GitHub.</div>
+      </div>
+      <div class="demo u">
+        <h3>Experimento <small>para onde a URL resolve?</small></h3>
+        <fieldset id="l5-c"><legend>como o HTML referencia</legend>
+          <label><input type="radio" name="l5c" value="rel" checked> <code>js/main.js</code> — relativo</label>
+          <label><input type="radio" name="l5c" value="abs"> <code>/js/main.js</code> — absoluto</label>
+          <label><input type="radio" name="l5c" value="case"> <code>js/Main.js</code> — maiúscula</label>
+          <label><input type="radio" name="l5c" value="git"> <code>js/main.js</code> — mas não commitado</label>
+        </fieldset>
+        <fieldset id="l5-o"><legend>onde a página está</legend>
+          <label><input type="radio" name="l5o" value="local" checked> localhost (Windows)</label>
+          <label><input type="radio" name="l5o" value="pages"> GitHub Pages (Linux)</label>
+        </fieldset>
+        <div class="url"><span class="pill ok" id="l5-code">200</span><span id="l5-url"></span></div>
+        <div class="note" id="l5-note"></div>
+      </div>
+    </div>
+    <div class="resumo"><span class="tag">resposta</span><span>Caminho absoluto (raiz do domínio ≠ pasta do projeto), maiúscula/minúscula (Linux diferencia) ou arquivo que não está no repositório.</span></div>
+  </div>
+</article>
+
+<!-- ================= CHECK ================= -->
+<section class="check" id="check">
+  <div class="q">Conferir · uma pergunta por lição</div>
+  <h2>Se acertar as cinco, você está pronto.</h2>
+  <div class="qs" id="qs"></div>
+  <div class="result"><span id="res-txt">Responda as cinco.</span><span><b id="res-n">0</b> / 5</span></div>
+</section>
+
+<footer>Andrey Bueno · <a href="https://github.com/andreybueno-git/front-end">repositório</a> · <a href="https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/">página publicada</a></footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+const DADOS = [
+  { id: 1, t: "Layout responsivo com Flexbox e Grid", p: "alta", prazo: "2026-08-26" },
+  { id: 2, t: "Revisar funções e listas em Python", p: "media", prazo: "2026-08-29" },
+  { id: 3, t: "Ler capítulo sobre normalização", p: "baixa", prazo: "2026-09-01" },
+  { id: 4, t: "Apresentação do projeto integrador", p: "alta", prazo: "2026-08-28" },
+  { id: 5, t: "Modelar diagrama de classes", p: "media", prazo: "2026-09-02" },
+  { id: 9, t: "Consumir dados.json com fetch", p: "alta", prazo: "2026-09-08" },
+  { id: 6, t: "Corrigir relatório de redes", p: "media", prazo: "2026-08-27" },
+  { id: 7, t: "Criar estrutura semântica", p: "alta", prazo: "2026-08-19" },
+  { id: 8, t: "Lista de lógica de programação", p: "baixa", prazo: "2026-08-21" },
+];
+
+// progress ticks
+const done = new Set();
+function marcar(n) { done.add(n); document.querySelectorAll(`.progress a[data-l="${n}"]`).forEach(a => a.classList.add("done")); }
+
+// ===== L1 =====
+let l1 = { filtro: null, guardada: null };
+function l1draw() {
+  const lista = (cont, filtro) => { cont.replaceChildren(...DADOS.map(d => { const s = el("span", (filtro && d.p !== filtro) ? "hide" : "", `#${d.id} · ${d.p}`); return s; })); };
+  lista($("l1-a-list"), l1.guardada); lista($("l1-b-list"), l1.filtro);
+  const desync = l1.guardada !== l1.filtro; $("l1-a").classList.toggle("desync", desync);
+}
+$("l1-filtrar").addEventListener("click", () => { l1.filtro = "alta"; l1.guardada = "alta"; l1draw(); $("l1-note").textContent = "As duas caixas batem: A guardou a lista filtrada, B derivou. Até aqui, igual."; marcar(1); });
+$("l1-mudar").addEventListener("click", () => { l1.filtro = "baixa"; l1draw(); $("l1-note").textContent = l1.guardada ? "O critério mudou para 'baixa'. B (derivada) acompanhou sozinha. A ficou com a lista antiga: alguém esqueceu de recalcular. Duas fontes de verdade, e elas discordam." : "Filtre primeiro."; marcar(1); });
+$("l1-reset").addEventListener("click", () => { l1 = { filtro: null, guardada: null }; l1draw(); $("l1-note").textContent = "Clique em “filtrar”, depois em “mudar filtro” e compare as duas caixas."; });
+l1draw();
+
+// ===== L2 =====
+const idsJson = DADOS.map(d => d.id); let orig = [...idsJson], vis = [...idsJson];
+const porPrazo = (a, b) => DADOS.find(d => d.id === a).prazo.localeCompare(DADOS.find(d => d.id === b).prazo);
+function cells(c, ids, ref) { c.replaceChildren(...ids.map((id, i) => el("span", "cell" + (ref && ref[i] !== id ? " moved" : ""), "#" + id))); }
+function l2draw() { cells($("l2-orig"), orig, idsJson); cells($("l2-vis"), vis, null); }
+$("l2-bad").addEventListener("click", () => { orig.sort(porPrazo); vis = [...orig]; l2draw(); $("l2-note").innerHTML = '<span class="pill bad">reprovado no teste 1</span> estado.tarefas foi reordenado no lugar. A “ordem original” acabou.'; marcar(2); });
+$("l2-good").addEventListener("click", () => { vis = [...orig].sort(porPrazo); l2draw(); $("l2-note").innerHTML = '<span class="pill ok">aprovado no teste 1</span> a cópia foi ordenada; estado.tarefas continua na ordem do JSON.'; marcar(2); });
+$("l2-reset").addEventListener("click", () => { orig = [...idsJson]; vis = [...idsJson]; l2draw(); $("l2-note").textContent = "Aperte um botão e olhe a linha de cima."; });
+l2draw();
+
+// ===== L3 =====
+const steps = [...document.querySelectorAll("#l3-steps .step")];
+function l3cards(lista) { $("l3-cards").replaceChildren(...lista.map(d => el("span", "", `#${d.id} ${d.t}`))); }
+function playCycle(busca, code) {
+  $("l3-code1").textContent = code;
+  steps.forEach(s => s.classList.remove("on"));
+  steps.forEach((s, i) => setTimeout(() => { s.classList.add("on"); if (i === 3) { const v = DADOS.filter(d => d.t.toLowerCase().includes(busca)); l3cards(v); $("l3-st").textContent = v.length === 9 ? "Mostrando 9 de 9 tarefas." : `Mostrando ${v.length} de 9 tarefas (com filtros ativos).`; } }, 450 * i));
+  marcar(3);
+}
+$("l3-play").addEventListener("click", () => playCycle("py", "estado.busca = 'py'"));
+$("l3-limpar").addEventListener("click", () => playCycle("", "Object.assign(estado, criterioInicial())"));
+l3cards(DADOS);
+
+// ===== L4 =====
+const SIT = [
+  { k: "catch", n: "Erro 404", d: "servidor respondeu 404", who: "Quem decide: o catch de iniciar(). A obtenção falhou.", msg: "O servidor não conseguiu entregar as tarefas (status 404)." },
+  { k: "catch", n: "Sem internet", d: "fetch rejeitou (NetworkError)", who: "Quem decide: o catch de iniciar(). A obtenção falhou.", msg: "Não foi possível conectar. Verifique sua internet." },
+  { k: "derive", n: "Origem vazia", d: "JSON válido com 0 tarefas", who: "Quem decide: renderizar(), no caminho de sucesso — estado.tarefas.length === 0. Não é erro.", msg: "Nenhuma tarefa cadastrada ainda." },
+  { k: "derive", n: "Resultado vazio", d: "busca 'zzz' não bateu", who: "Quem decide: a lista derivada — visiveis.length === 0. Os dados vieram; os critérios não acharam nada. Não é erro.", msg: "Nenhuma das 9 tarefas corresponde à busca. Altere os critérios ou use “Limpar filtros”." },
+];
+SIT.forEach((s, i) => { const b = el("button", s.k); b.type = "button"; b.setAttribute("aria-pressed", "false"); b.append(el("b", "", s.n), el("span", "", s.d));
+  b.addEventListener("click", () => { document.querySelectorAll("#l4-four button").forEach(x => x.setAttribute("aria-pressed", "false")); b.setAttribute("aria-pressed", "true");
+    const w = $("l4-who"); w.className = "who " + s.k; w.innerHTML = `<div>${s.who}</div><div class="msg">→ “${s.msg}”</div>`; marcar(4); });
+  $("l4-four").append(b); });
+
+// ===== L5 =====
+function l5() {
+  const c = document.querySelector("input[name=l5c]:checked").value, o = document.querySelector("input[name=l5o]:checked").value;
+  const base = o === "local" ? "http://localhost:8080/gerenciador-de-tarefas/" : "https://andreybueno-git.github.io/front-end/gerenciador-de-tarefas/";
+  const raiz = o === "local" ? "http://localhost:8080" : "https://andreybueno-git.github.io";
+  let url, ok, n;
+  if (c === "rel") { url = base + "js/main.js"; ok = true; n = "Relativo resolve a partir da pasta da página: funciona nos dois. É o que o seu index.html usa."; }
+  else if (c === "abs") { url = raiz + "/js/main.js"; ok = o === "local"; n = ok ? "Funciona só porque a raiz do servidor local é a pasta do projeto." : "A raiz do domínio não é a pasta do projeto — o projeto está em /front-end/. 404."; }
+  else if (c === "case") { url = base + "js/Main.js"; ok = o === "local"; n = ok ? "Windows ignora maiúsculas: Main.js encontra main.js. O erro fica escondido." : "Linux diferencia: Main.js ≠ main.js. 404."; }
+  else { url = base + "js/main.js"; ok = o === "local"; n = ok ? "Funciona porque o arquivo está no seu disco — mas não está no Git." : "O Pages só publica o que está no repositório. O arquivo nunca subiu. 404."; }
+  $("l5-url").textContent = url; $("l5-code").textContent = ok ? "200" : "404"; $("l5-code").className = "pill " + (ok ? "ok" : "bad"); $("l5-note").textContent = n;
+  if (!ok || c !== "rel") marcar(5);
+}
+document.querySelectorAll("#l5-c input, #l5-o input").forEach(i => i.addEventListener("change", l5)); l5();
+
+// ===== CHECK =====
+const Q = [
+  ["Por que o estado não guarda tarefasFiltradas?", ["Porque JavaScript não permite dois arrays no mesmo objeto.", "Porque seria uma segunda fonte de verdade que pode ficar desatualizada; derivar a cada ciclo garante consistência.", "Porque a lista filtrada fica no localStorage."], 1, "Lição 1: guarde os critérios, calcule a lista."],
+  ["O que acontece com estado.tarefas.sort(porPrazo)?", ["Nada: sort() devolve um array novo.", "A ordem original é perdida, porque sort() reordena o próprio array.", "Só a tela é reordenada."], 1, "Lição 2: sort() mexe no original; por isso [...visiveis].sort()."],
+  ["O que um ouvinte faz na E4?", ["Filtra a lista e esconde os cartões que não batem.", "Escreve no estado e chama atualizar(); quem desenha é renderizar(estado).", "Lê os cartões do DOM para saber o que existe."], 1, "Lição 3: evento → estado → derivação → renderização."],
+  ["A busca 'zzz' não achou nada. Onde isso é decidido?", ["No catch de iniciar().", "Na lista derivada: visiveis.length === 0, no caminho de sucesso.", "No fetch, que rejeita."], 1, "Lição 4: erro é falha de obtenção; zero resultados não é erro."],
+  ["Local abre, Pages dá 404 em /js/main.js. Causa mais provável?", ["O Pages não serve JavaScript.", "Caminho absoluto: a raiz do domínio não é a pasta do projeto. Use js/main.js.", "Falta type='module'."], 1, "Lição 5: relativo, minúsculas, commitado."],
+];
+let resp = 0, acertos = 0;
+Q.forEach(([e, opts, g, fbk], i) => {
+  const box = el("div", "qq"); const h = el("h3"); h.innerHTML = `<span class="l">${i + 1}</span>${e}`; const o = el("div", "opts"); const fb = el("div", "fb");
+  opts.forEach((t, j) => { const b = el("button", "opt"); b.type = "button"; b.innerHTML = `<span class="k">${"ABC"[j]}</span><span>${t}</span>`;
+    b.addEventListener("click", () => { o.querySelectorAll(".opt").forEach((x, k) => { x.disabled = true; if (k === g) x.classList.add("right"); }); if (j === g) acertos++; else b.classList.add("wrong");
+      resp++; fb.textContent = (j === g ? "Certo. " : `Não — é ${"ABC"[g]}. `) + fbk; fb.classList.add("show"); $("res-n").textContent = acertos;
+      $("res-txt").textContent = resp < 5 ? `${resp} de 5 respondidas` : acertos === 5 ? "Pronto para o Q4." : "Volte na lição das que errou e refaça."; if (resp === 5) marcar(6); });
+    o.append(b); });
+  box.append(h, o, fb); $("qs").append(box);
+});
+</script>
+
+</body>
+</html>
