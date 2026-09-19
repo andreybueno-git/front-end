@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerenciador de receitas: arraste ingredientes, descubra receitas e veja os macros.">
+    <title>Cozinha Retrô | Gerenciador de receitas</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#cozinha">Pular para a cozinha</a>
+
+    <header class="hero">
+      <span class="badge">Gerenciador de receitas</span>
+      <h1>Cozinha Retrô <span>arraste, misture, descubra</span></h1>
+      <p>Monte sua <b>despensa</b> no mercado, pegue um ingrediente e solte na <b>panela</b>. Quando a combinação bater com uma receita, ela aparece cozinhando — com gramagem, calorias e macros. Cozinhou? O estoque baixa e avisa quando algo estiver acabando.</p>
+    </header>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <main id="app" hidden>
+      <!-- ================= COZINHA ================= -->
+      <section class="cozinha" id="cozinha" aria-labelledby="t-cozinha">
+        <h2 id="t-cozinha" class="somente-leitor">Cozinha</h2>
+
+        <div class="panel" aria-labelledby="t-prat">
+          <div class="panel__cab"><h3 id="t-prat"><span aria-hidden="true">🧺</span> Minha despensa</h3><span class="count" id="cont-prat"></span></div>
+          <form class="tools">
+            <label class="somente-leitor" for="busca">Buscar ingrediente</label>
+            <input id="busca" name="busca" type="search" placeholder="buscar na despensa e no mercado…" autocomplete="off">
+            <div id="chips" role="group" aria-label="Filtrar por tipo"></div>
+          </form>
+          <div class="alertas" id="alertas" role="status" aria-live="polite" hidden></div>
+          <div class="shelf-scene"><div class="shelf" id="shelf" role="group" aria-label="Ingredientes que tenho em casa" aria-describedby="dica-shelf"></div></div>
+          <p class="hint" id="dica-shelf">Aqui fica só <b>o que você tem em casa</b>. O selo <b>🏠</b> mostra a quantidade — clique nele para ajustar. Arraste para a panela (no celular: toque coloca, toque longo mostra a ficha). Teclado: Enter coloca ou tira, <kbd>i</kbd> abre a ficha, <kbd>Esc</kbd> fecha.</p>
+
+          <details class="cadastro mercado" id="mercado">
+            <summary><span aria-hidden="true">🛒</span> Mercado — o que você tem em casa? <span class="count" id="cont-mercado"></span></summary>
+            <div class="mercado__corpo">
+              <p class="hint">Clique num alimento e diga a quantidade: ele vai para a sua despensa. Não achou? Cadastre um produto seu no fim da lista.</p>
+              <div class="shelf shelf--mercado" id="catalogo" role="group" aria-label="Mercado: ingredientes para escolher"></div>
+            </div>
+            <details class="cadastro cadastro--produto">
+              <summary><span aria-hidden="true">➕</span> Cadastrar um produto que não está no mercado</summary>
+            <form id="form-produto" class="cadastro__form" autocomplete="off">
+              <div class="campos">
+                <label class="campo campo--curto"><span>Ícone</span><input id="prod-emoji" name="emoji" list="emojis" placeholder="🥫" maxlength="4"></label>
+                <datalist id="emojis"><option value="🥫"><option value="🍗"><option value="🥩"><option value="🐟"><option value="🍚"><option value="🍝"><option value="🥔"><option value="🥕"><option value="🌽"><option value="🥦"><option value="🫘"><option value="🧂"><option value="🫒"><option value="🥜"><option value="🍇"><option value="🍊"><option value="🥭"><option value="🧃"><option value="☕"><option value="🍪"></datalist>
+                <label class="campo campo--largo"><span>Nome do produto</span><input id="prod-nome" name="nome" type="text" placeholder="ex.: frango, arroz, iogurte" maxlength="30" required></label>
+                <label class="campo"><span>Tipo</span><select id="prod-tipo" name="tipo"><option value="carne">carne</option><option value="frango">frango</option><option value="peixe">peixe e frutos do mar</option><option value="ovo">ovo</option><option value="laticinio">laticínio</option><option value="leguminosa">leguminosa</option><option value="vegetal">vegetal</option><option value="fruta">fruta</option><option value="cereal">cereal</option><option value="massa">massa e farinha</option><option value="oleaginosa">castanhas</option><option value="doce">doce</option><option value="tempero">tempero e óleo</option><option value="bebida">bebida</option></select></label>
+              </div>
+              <fieldset class="grupo">
+                <legend>Medidas e estoque</legend>
+                <div class="campos">
+                  <label class="campo"><span>Unidade</span><select name="unidade"><option value="g">gramas (g)</option><option value="ml">mililitros (ml)</option><option value="un">unidades (un)</option></select></label>
+                  <label class="campo"><span>Porção (por receita)</span><input name="porcaoQtd" type="number" min="0" step="1" placeholder="100"></label>
+                  <label class="campo"><span>Gramas por unidade</span><input name="gramasUn" type="number" min="0" step="1" placeholder="só p/ unidades"></label>
+                  <label class="campo"><span>Quanto tenho em casa</span><input name="qtd" type="number" min="0" step="1" placeholder="500"></label>
+                </div>
+              </fieldset>
+              <fieldset class="grupo">
+                <legend>Nutrição por porção <small>(opcional)</small></legend>
+                <div class="campos">
+                  <label class="campo campo--num"><span>kcal</span><input name="kcal" type="number" min="0" step="1" placeholder="0"></label>
+                  <label class="campo campo--num"><span>Proteína (g)</span><input name="p" type="number" min="0" step="0.1" placeholder="0"></label>
+                  <label class="campo campo--num"><span>Carboidrato (g)</span><input name="c" type="number" min="0" step="0.1" placeholder="0"></label>
+                  <label class="campo campo--num"><span>Gordura (g)</span><input name="g" type="number" min="0" step="0.1" placeholder="0"></label>
+                  <label class="check"><input name="gluten" type="checkbox"> tem glúten</label>
+                  <label class="check"><input name="lactose" type="checkbox"> tem lactose</label>
+                </div>
+              </fieldset>
+              <div class="salvar__linha">
+                <button class="btn green" type="submit">➕ Adicionar à despensa</button>
+                <p class="hint">“Porção” é quanto uma receita usa de cada vez; “quanto tenho” é o estoque — ele baixa a cada 🔥 Cozinhar e avisa quando estiver acabando.</p>
+              </div>
+            </form>
+            </details>
+          </details>
+        </div>
+
+        <div class="panel" role="group" aria-labelledby="t-panela">
+          <div class="panel__cab"><h3 id="t-panela"><span aria-hidden="true">🍲</span> Panela</h3><span class="count" id="cont-pan">vazia</span></div>
+          <div class="pot-scene">
+            <div class="pot" id="pot">
+              <span class="tampa" aria-hidden="true"></span>
+              <span class="alca esq" aria-hidden="true"></span><span class="alca dir" aria-hidden="true"></span>
+              <span class="colher" aria-hidden="true"></span>
+              <div class="vapor" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="caldo vazio" id="caldo"><span class="bolha" style="left:20%"></span><span class="bolha" style="left:55%;animation-delay:-1s"></span><span class="bolha" style="left:78%;animation-delay:-.5s"></span></div>
+              <div class="itens" id="pot-itens" role="group" aria-label="Ingredientes na panela"></div>
+            </div>
+          </div>
+          <div class="burner" aria-hidden="true"></div>
+          <div class="pot-actions">
+            <button class="btn red" id="cozinhar" type="button">🔥 Cozinhar</button>
+            <button class="btn ghostb" id="limpar" type="button">🧽 Esvaziar</button>
+          </div>
+          <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+
+          <div class="nutri" aria-live="polite" aria-atomic="true">
+            <div class="nutri__cab"><h4 id="nutri-titulo">Informação nutricional da panela</h4><span class="kcal-big"><span id="n-kcal">0</span> <small>kcal</small></span></div>
+            <div class="macros">
+              <span class="donut" id="donut" style="--p:0%;--c:0%" role="img" aria-label="Proporção de macros"></span>
+              <div class="bars">
+                <div class="bar p"><b>Proteína</b><span class="trilho"><span class="fill" id="b-p"></span></span><span class="val" id="v-p">0 g</span></div>
+                <div class="bar c"><b>Carboidrato</b><span class="trilho"><span class="fill" id="b-c"></span></span><span class="val" id="v-c">0 g</span></div>
+                <div class="bar f"><b>Gordura</b><span class="trilho"><span class="fill" id="b-f"></span></span><span class="val" id="v-f">0 g</span></div>
+              </div>
+            </div>
+            <p class="note">Quando a panela fecha uma receita, os valores usam a gramagem dela (ex.: 2 ovos). Barras em % das calorias (4 kcal/g proteína e carboidrato, 9 kcal/g gordura).</p>
+          </div>
+
+          <form class="salvar" id="form-receita" aria-labelledby="t-salvar">
+            <h4 id="t-salvar">Gostou da mistura? Salve como receita</h4>
+            <div class="salvar__linha">
+              <label class="somente-leitor" for="emoji-receita">Ícone</label>
+              <select id="emoji-receita" aria-label="Ícone da receita"><option>🍲</option><option>🥗</option><option>🍝</option><option>🥪</option><option>🍰</option><option>🥤</option><option>🍛</option><option>🌮</option></select>
+              <label class="somente-leitor" for="nome-receita">Nome da receita</label>
+              <input id="nome-receita" type="text" placeholder="nome da receita" maxlength="40" autocomplete="off">
+              <select id="sabor-receita" aria-label="Sabor"><option value="salgado">salgado</option><option value="doce">doce</option></select>
+              <button class="btn green" id="salvar-receita" type="submit" disabled>📖 Salvar</button>
+            </div>
+            <p class="hint">Usa o que está na panela agora (mínimo 2 ingredientes). Fica no livro e na busca deste navegador.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ================= LIVRO ================= -->
+      <section class="livro" aria-labelledby="t-livro" id="livro">
+        <div class="panel">
+          <div class="panel__cab"><h3 id="t-livro"><span aria-hidden="true">📖</span> Livro de receitas</h3><span class="count" id="cont-livro"></span></div>
+          <form class="tools">
+            <label class="somente-leitor" for="busca-receita">Buscar receita</label>
+            <input id="busca-receita" type="search" placeholder="buscar receita ou ingrediente…" autocomplete="off">
+            <div role="group" aria-label="Filtrar receitas">
+              <button class="chip" type="button" data-rf="todas">todas</button>
+              <button class="chip" type="button" data-rf="doce">doce</button>
+              <button class="chip" type="button" data-rf="salgado">salgado</button>
+              <button class="chip" type="button" data-rf="sem-gluten">sem glúten</button>
+              <button class="chip" type="button" data-rf="sem-lactose">sem lactose</button>
+              <button class="chip" type="button" data-rf="minha">minhas</button>
+              <button class="chip" type="button" data-rf="em-casa">🏠 com o que tenho em casa</button>
+              <button class="chip" type="button" data-rf="da-para-fazer">dá pra fazer agora</button>
+            </div>
+            <button class="btn ghostb" id="limpar-filtros" type="button">Limpar filtros</button>
+          </form>
+          <div class="book" id="book"></div>
+          <div class="ficha" id="ficha" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape-pagina"><p>Andrey Bueno <span aria-hidden="true">·</span> Desenvolvimento Frontend 2026.2 <span aria-hidden="true">·</span> HTML, CSS e JavaScript puros, sem dependências externas</p></footer>
+
+    <div class="pop" id="pop" role="dialog" aria-labelledby="pop-titulo" tabindex="-1"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+    <a class="dock" id="dock" href="#pot" hidden><span aria-hidden="true">🍲</span> <b id="dock-count">0</b> na panela · ver</a>
+    <div class="floor" aria-hidden="true"></div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
