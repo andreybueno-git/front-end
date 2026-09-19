@@ -1747,6 +1747,142 @@
       "unidade": "g",
       "porcaoQtd": 50,
       "gramas": 50
+    },
+    {
+      "id": "curry",
+      "nome": "Curry em pó",
+      "emoji": "🍛",
+      "tipo": "tempero",
+      "porcao": "1 colher (6 g)",
+      "kcal": 20,
+      "p": 0.8,
+      "c": 3.4,
+      "g": 0.9,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Mistura indiana de especiarias: cúrcuma, coentro, cominho e pimenta.",
+      "unidade": "g",
+      "porcaoQtd": 6,
+      "gramas": 6
+    },
+    {
+      "id": "paprica",
+      "nome": "Páprica",
+      "emoji": "🌶️",
+      "tipo": "tempero",
+      "porcao": "1 colher (5 g)",
+      "kcal": 15,
+      "p": 0.7,
+      "c": 1.9,
+      "g": 0.7,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Pimentão seco moído. A defumada dá cara de churrasco espanhol.",
+      "unidade": "g",
+      "porcaoQtd": 5,
+      "gramas": 5
+    },
+    {
+      "id": "curcuma",
+      "nome": "Cúrcuma",
+      "emoji": "🟡",
+      "tipo": "tempero",
+      "porcao": "1 colher (5 g)",
+      "kcal": 15,
+      "p": 0.5,
+      "c": 3.1,
+      "g": 0.2,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Raiz amarela do curry. Colore arroz, leite e caldos.",
+      "unidade": "g",
+      "porcaoQtd": 5,
+      "gramas": 5
+    },
+    {
+      "id": "gergelim",
+      "nome": "Gergelim",
+      "emoji": "🫘",
+      "tipo": "oleaginosa",
+      "porcao": "1 colher (10 g)",
+      "kcal": 57,
+      "p": 1.8,
+      "c": 2.3,
+      "g": 5.0,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Semente tostada do Oriente. Fecha pratos japoneses e árabes.",
+      "unidade": "g",
+      "porcaoQtd": 10,
+      "gramas": 10
+    },
+    {
+      "id": "macarrao-arroz",
+      "nome": "Macarrão de arroz",
+      "emoji": "🍜",
+      "tipo": "massa",
+      "porcao": "1 porção (80 g)",
+      "kcal": 291,
+      "p": 5.3,
+      "c": 64.0,
+      "g": 0.5,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Base do pad thai e das sopas asiáticas. Hidrata em água quente.",
+      "unidade": "g",
+      "porcaoQtd": 80,
+      "gramas": 80
+    },
+    {
+      "id": "tortilha",
+      "nome": "Tortilha de milho",
+      "emoji": "🫓",
+      "tipo": "massa",
+      "porcao": "2 unidades",
+      "kcal": 120,
+      "p": 3.0,
+      "c": 24.0,
+      "g": 1.6,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Disco de milho mexicano. Aqueça na frigideira seca antes de rechear.",
+      "unidade": "un",
+      "porcaoQtd": 2,
+      "gramas": 30
+    },
+    {
+      "id": "cuscuz",
+      "nome": "Cuscuz marroquino",
+      "emoji": "🌾",
+      "tipo": "cereal",
+      "porcao": "1 porção (60 g)",
+      "kcal": 224,
+      "p": 7.6,
+      "c": 46.0,
+      "g": 0.4,
+      "gluten": true,
+      "lactose": false,
+      "dica": "Sêmola miúda: hidrata em 5 minutos com água quente.",
+      "unidade": "g",
+      "porcaoQtd": 60,
+      "gramas": 60
+    },
+    {
+      "id": "alga-nori",
+      "nome": "Alga nori",
+      "emoji": "🍙",
+      "tipo": "vegetal",
+      "porcao": "2 folhas (6 g)",
+      "kcal": 20,
+      "p": 3.5,
+      "c": 1.0,
+      "g": 0.2,
+      "gluten": false,
+      "lactose": false,
+      "dica": "Folha de alga tostada: enrola sushi e tempera arroz e sopas.",
+      "unidade": "g",
+      "porcaoQtd": 6,
+      "gramas": 6
     }
   ],
   "receitas": [
@@ -8612,6 +8748,3891 @@
         "Ferva água e desligue o fogo.",
         "Adicione as folhas de hortelã e algumas fatias de limão.",
         "Abafe por 5 minutos, coe, adoce com mel e sirva."
+      ]
+    },
+    {
+      "id": "mx-tacos-de-carne",
+      "nome": "Tacos de carne moída",
+      "emoji": "🌮",
+      "sabor": "salgado",
+      "tempo": "20 min",
+      "pais": "México",
+      "bandeira": "🇲🇽",
+      "sobre": "Tacos mexicanos com carne moída temperada, cebola, tomate, coentro e limão fresco.",
+      "ings": [
+        "tortilha",
+        "carne",
+        "cebola",
+        "tomate",
+        "coentro",
+        "limao"
+      ],
+      "qtd": {
+        "carne": 2,
+        "tortilha": 4
+      },
+      "passos": [
+        "Refogue a carne moída com cebola e tempere bem.",
+        "Pique tomate e coentro frescos para o recheio.",
+        "Monte os tacos nas tortilhas quentes com limão."
+      ],
+      "preparo": [
+        {
+          "txt": "Pique 1 cebola em cubos pequenos e pique o tomate também em cubos pequenos.",
+          "min": 5
+        },
+        {
+          "txt": "Em fogo médio, aqueça um fio de azeite e refogue metade da cebola até ficar transparente.",
+          "min": 3
+        },
+        {
+          "txt": "Junte 300g de carne moída, tempere com sal e pimenta e refogue até dourar bem, sem líquido.",
+          "min": 8
+        },
+        {
+          "txt": "Pique bastante coentro fresco e misture com a cebola crua reservada e o tomate picado.",
+          "min": 3
+        },
+        {
+          "txt": "Aqueça as tortilhas de milho em uma frigideira seca e quente, 30 segundos de cada lado.",
+          "min": 2
+        },
+        {
+          "txt": "Recheie cada tortilha com a carne, a mistura de tomate e coentro, e um fio de limão."
+        },
+        {
+          "txt": "Sirva os tacos na hora, com limão extra ao lado para temperar a gosto."
+        }
+      ]
+    },
+    {
+      "id": "mx-quesadilla-queijo",
+      "nome": "Quesadilla de queijo",
+      "emoji": "🧀",
+      "sabor": "salgado",
+      "tempo": "15 min",
+      "pais": "México",
+      "bandeira": "🇲🇽",
+      "sobre": "Quesadilla mexicana simples, com queijo derretido e cebola dourada na tortilha.",
+      "ings": [
+        "tortilha",
+        "queijo",
+        "manteiga",
+        "cebola",
+        "pimenta"
+      ],
+      "qtd": {
+        "queijo": 2
+      },
+      "passos": [
+        "Refogue a cebola na manteiga até dourar.",
+        "Recheie a tortilha com queijo, cebola e pimenta.",
+        "Frite dos dois lados até o queijo derreter."
+      ],
+      "preparo": [
+        {
+          "txt": "Rale o queijo grosseiramente e pique a cebola bem fininha.",
+          "min": 5
+        },
+        {
+          "txt": "Em fogo baixo, refogue a cebola na manteiga até ficar bem macia e dourada.",
+          "min": 5
+        },
+        {
+          "txt": "Espalhe o queijo ralado e uma pitada de pimenta sobre metade de cada tortilha."
+        },
+        {
+          "txt": "Dobre a tortilha ao meio e leve à frigideira quente untada com manteiga."
+        },
+        {
+          "txt": "Frite em fogo médio até dourar de um lado, cerca de 2 minutos, e vire com cuidado.",
+          "min": 2
+        },
+        {
+          "txt": "Frite do outro lado até o queijo derreter por completo, mais 2 minutos.",
+          "min": 2
+        },
+        {
+          "txt": "Corte em triângulos e sirva bem quente."
+        }
+      ]
+    },
+    {
+      "id": "mx-elote-mexicano",
+      "nome": "Elote mexicano",
+      "emoji": "🌽",
+      "sabor": "salgado",
+      "tempo": "15 min",
+      "pais": "México",
+      "bandeira": "🇲🇽",
+      "sobre": "Milho cozido coberto com requeijão cremoso, queijo ralado, limão e pimenta.",
+      "ings": [
+        "milho",
+        "requeijao",
+        "queijo",
+        "limao",
+        "pimenta",
+        "coentro"
+      ],
+      "passos": [
+        "Cozinhe o milho até ficar macio.",
+        "Cubra com requeijão, queijo ralado e pimenta.",
+        "Finalize com coentro picado e bastante limão."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe as espigas de milho em água fervente por 10 minutos até ficarem macias.",
+          "min": 10
+        },
+        {
+          "txt": "Escorra bem o milho e espete um palito em cada espiga para segurar.",
+          "min": 2
+        },
+        {
+          "txt": "Rale o queijo e pique bastante coentro fresco enquanto o milho esfria um pouco.",
+          "min": 3
+        },
+        {
+          "txt": "Espalhe uma camada de requeijão cremoso em toda a espiga de milho ainda quente."
+        },
+        {
+          "txt": "Polvilhe o queijo ralado, uma pitada de pimenta e o coentro picado por cima."
+        },
+        {
+          "txt": "Finalize espremendo bastante limão fresco sobre o milho e sirva na hora."
+        }
+      ]
+    },
+    {
+      "id": "mx-guacamole-tortilha",
+      "nome": "Guacamole com chips de tortilha",
+      "emoji": "🥑",
+      "sabor": "salgado",
+      "tempo": "15 min",
+      "pais": "México",
+      "bandeira": "🇲🇽",
+      "sobre": "Guacamole cremoso de abacate amassado, com limão, coentro e tortilha tostada.",
+      "ings": [
+        "abacate",
+        "tomate",
+        "cebola",
+        "limao",
+        "coentro",
+        "pimenta"
+      ],
+      "qtd": {
+        "abacate": 2
+      },
+      "passos": [
+        "Amasse o abacate com garfo até virar creme.",
+        "Misture cebola, tomate, coentro e pimenta picados.",
+        "Tempere com limão e sirva com tortilhas tostadas."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 abacates ao meio, retire o caroço e amasse a polpa com um garfo.",
+          "min": 4
+        },
+        {
+          "txt": "Pique a cebola, o tomate e o coentro bem fininhos.",
+          "min": 5
+        },
+        {
+          "txt": "Misture o abacate amassado com a cebola, o tomate e o coentro picados.",
+          "min": 2
+        },
+        {
+          "txt": "Tempere com pimenta picada e bastante limão espremido na hora, ajustando o sal.",
+          "min": 1
+        },
+        {
+          "txt": "Misture tudo bem até formar um creme uniforme, mas ainda com pedacinhos.",
+          "min": 1
+        },
+        {
+          "txt": "Sirva imediatamente com tortilhas de milho tostadas para mergulhar."
+        }
+      ]
+    },
+    {
+      "id": "mx-churros-canela",
+      "nome": "Churros com canela e açúcar",
+      "emoji": "🍩",
+      "sabor": "doce",
+      "tempo": "20 min",
+      "pais": "México",
+      "bandeira": "🇲🇽",
+      "sobre": "Churros fritos, crocantes por fora e macios por dentro, polvilhados com canela e açúcar.",
+      "ings": [
+        "farinha",
+        "manteiga",
+        "ovo",
+        "acucar",
+        "canela"
+      ],
+      "qtd": {
+        "ovo": 2
+      },
+      "passos": [
+        "Prepare a massa de churros com farinha e manteiga.",
+        "Modele tiras e frite até dourar por igual.",
+        "Passe na canela com açúcar e sirva ainda quentes."
+      ],
+      "preparo": [
+        {
+          "txt": "Ferva 250ml de água com 2 colheres de sopa de manteiga em fogo médio até derreter.",
+          "min": 3
+        },
+        {
+          "txt": "Desligue o fogo e junte 1 xícara de farinha de uma vez, mexendo até formar massa lisa.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe a massa amornar e misture 2 ovos, um de cada vez, até ficar homogênea e brilhante.",
+          "min": 5
+        },
+        {
+          "txt": "Coloque a massa em um saco de confeitar com bico grande e modele tiras no óleo quente.",
+          "min": 3
+        },
+        {
+          "txt": "Frite em fogo médio até dourar por igual, virando com cuidado, cerca de 4 minutos.",
+          "min": 4
+        },
+        {
+          "txt": "Escorra em papel toalha e passe ainda quentes na mistura de açúcar e canela.",
+          "min": 1
+        },
+        {
+          "txt": "Sirva os churros mornos, crocantes por fora e macios por dentro."
+        }
+      ]
+    },
+    {
+      "id": "pe-ceviche-peixe",
+      "nome": "Ceviche peruano de peixe",
+      "emoji": "🐟",
+      "sabor": "salgado",
+      "tempo": "40 min",
+      "pais": "Peru",
+      "bandeira": "🇵🇪",
+      "sobre": "Peixe bem fresco marinado no limão gelado, que o deixa 'cozido' pela acidez.",
+      "ings": [
+        "peixe",
+        "limao",
+        "cebola",
+        "coentro",
+        "pimenta",
+        "milho"
+      ],
+      "qtd": {
+        "limao": 4
+      },
+      "passos": [
+        "Corte o peixe fresco em cubos e tempere com sal.",
+        "Cubra com limão gelado e deixe marinando na geladeira.",
+        "Misture cebola, pimenta e coentro e sirva com milho."
+      ],
+      "preparo": [
+        {
+          "txt": "Escolha peixe branco bem fresco e gelado e corte em cubos pequenos e uniformes.",
+          "min": 5
+        },
+        {
+          "txt": "Fatie a cebola bem fina e pique a pimenta e o coentro fresco.",
+          "min": 5
+        },
+        {
+          "txt": "Cozinhe o milho em água fervente até ficar macio, cerca de 12 minutos, e reserve.",
+          "min": 12
+        },
+        {
+          "txt": "Tempere o peixe com sal e cubra totalmente com limão espremido na hora, bem gelado.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe marinando na geladeira por 15 minutos, até o peixe ficar opaco e firme.",
+          "min": 15
+        },
+        {
+          "txt": "Misture a cebola, a pimenta e o coentro picados ao peixe já marinado.",
+          "min": 1
+        },
+        {
+          "txt": "Sirva bem gelado, acompanhado do milho cozido reservado."
+        }
+      ]
+    },
+    {
+      "id": "pe-lomo-saltado",
+      "nome": "Lomo saltado",
+      "emoji": "🥩",
+      "sabor": "salgado",
+      "tempo": "20 min",
+      "pais": "Peru",
+      "bandeira": "🇵🇪",
+      "sobre": "Prato peruano que mistura tiras de carne, cebola e tomate salteados com shoyu.",
+      "ings": [
+        "bife",
+        "cebola",
+        "tomate",
+        "batata",
+        "shoyu"
+      ],
+      "qtd": {
+        "bife": 2
+      },
+      "passos": [
+        "Frite a batata em palitos até dourar.",
+        "Doure o bife em fogo alto com cebola e tomate.",
+        "Regue com shoyu, junte a batata e sirva quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte a batata em palitos e frite em óleo quente até dourar; escorra e reserve.",
+          "min": 8
+        },
+        {
+          "txt": "Corte o bife em tiras finas e tempere com sal e pimenta.",
+          "min": 3
+        },
+        {
+          "txt": "Em fogo alto, doure as tiras de bife em uma frigideira ou wok por 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Junte a cebola em tiras e o tomate em gomos e salteie por mais 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Regue com shoyu e misture bem, deixando reduzir levemente por 2 minutos.",
+          "min": 2
+        },
+        {
+          "txt": "Junte a batata frita reservada, misture rápido e desligue o fogo.",
+          "min": 1
+        },
+        {
+          "txt": "Sirva imediatamente, bem quente."
+        }
+      ]
+    },
+    {
+      "id": "pe-picarones-abobora",
+      "nome": "Picarones de abóbora",
+      "emoji": "🍯",
+      "sabor": "doce",
+      "tempo": "30 min",
+      "pais": "Peru",
+      "bandeira": "🇵🇪",
+      "sobre": "Rosquinhas fritas peruanas de abóbora e batata-doce, servidas com calda de mel.",
+      "ings": [
+        "abobora",
+        "batata-doce",
+        "farinha",
+        "ovo",
+        "canela",
+        "mel"
+      ],
+      "passos": [
+        "Cozinhe e amasse a abóbora com a batata-doce.",
+        "Misture com farinha, ovo e canela até virar massa.",
+        "Frite as rosquinhas e regue com bastante mel."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe a abóbora e a batata-doce em cubos até ficarem bem macias, cerca de 15 minutos.",
+          "min": 15
+        },
+        {
+          "txt": "Escorra bem e amasse a abóbora e a batata-doce até virar um purê liso.",
+          "min": 3
+        },
+        {
+          "txt": "Misture o purê com a farinha, 1 ovo e uma pitada de canela até formar massa mole.",
+          "min": 5
+        },
+        {
+          "txt": "Modele rosquinhas com as mãos molhadas e frite em óleo quente até dourar dos dois lados.",
+          "min": 6
+        },
+        {
+          "txt": "Escorra em papel toalha assim que ficarem douradas e crocantes por fora.",
+          "min": 1
+        },
+        {
+          "txt": "Regue as rosquinhas ainda quentes com bastante mel e sirva na hora."
+        }
+      ]
+    },
+    {
+      "id": "ar-empanada-carne",
+      "nome": "Empanada argentina de carne",
+      "emoji": "🥟",
+      "sabor": "salgado",
+      "tempo": "55 min",
+      "pais": "Argentina",
+      "bandeira": "🇦🇷",
+      "sobre": "Massa dourada recheada com carne moída, cebola e ovo cozido, clássica da Argentina.",
+      "ings": [
+        "farinha",
+        "manteiga",
+        "carne",
+        "cebola",
+        "ovo",
+        "pimenta"
+      ],
+      "qtd": {
+        "carne": 2
+      },
+      "passos": [
+        "Prepare a massa e deixe descansar na geladeira.",
+        "Refogue a carne com cebola, sal e pimenta.",
+        "Recheie os discos de massa e asse até dourar."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture a farinha com a manteiga gelada até formar farofa e junte água fria até virar massa.",
+          "min": 8
+        },
+        {
+          "txt": "Embrulhe a massa em plástico e deixe descansar na geladeira por 15 minutos.",
+          "min": 15
+        },
+        {
+          "txt": "Em fogo médio, refogue a cebola picada até ficar transparente, cerca de 4 minutos.",
+          "min": 4
+        },
+        {
+          "txt": "Junte a carne moída, tempere com sal e pimenta e refogue até dourar e secar o líquido.",
+          "min": 6
+        },
+        {
+          "txt": "Abra a massa, corte círculos e recheie cada um com carne e um pouco de ovo cozido picado.",
+          "min": 5
+        },
+        {
+          "txt": "Feche as bordas apertando com um garfo, formando um desenho de trança.",
+          "min": 3
+        },
+        {
+          "txt": "Asse em forno médio preaquecido até as bordas dourarem, cerca de 15 minutos.",
+          "min": 15
+        }
+      ]
+    },
+    {
+      "id": "ar-alfajor-doce-de-leite",
+      "nome": "Alfajor de doce de leite",
+      "emoji": "🍪",
+      "sabor": "doce",
+      "tempo": "35 min",
+      "pais": "Argentina",
+      "bandeira": "🇦🇷",
+      "sobre": "Biscoitinhos amanteigados recheados com doce de leite e cobertos com coco ralado.",
+      "ings": [
+        "farinha",
+        "manteiga",
+        "acucar",
+        "doce-de-leite",
+        "coco"
+      ],
+      "qtd": {
+        "doce-de-leite": 3
+      },
+      "passos": [
+        "Bata manteiga com açúcar e junte a farinha.",
+        "Corte discos e asse até dourar levemente.",
+        "Recheie com doce de leite e passe no coco."
+      ],
+      "preparo": [
+        {
+          "txt": "Bata a manteiga com o açúcar até formar um creme claro e fofo, cerca de 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Junte a farinha aos poucos e misture até formar uma massa macia, sem grudar nas mãos.",
+          "min": 4
+        },
+        {
+          "txt": "Abra a massa com um rolo e corte discos pequenos com um cortador ou um copo.",
+          "min": 5
+        },
+        {
+          "txt": "Asse os discos em forno médio preaquecido até dourarem levemente nas bordas, 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Deixe os biscoitos esfriarem completamente antes de recheá-los.",
+          "min": 10
+        },
+        {
+          "txt": "Recheie um biscoito com uma colher generosa de doce de leite e cubra com outro biscoito.",
+          "min": 3
+        },
+        {
+          "txt": "Passe as bordas do alfajor no coco ralado e sirva."
+        }
+      ]
+    },
+    {
+      "id": "co-arepa-queijo",
+      "nome": "Arepa de queijo",
+      "emoji": "🫓",
+      "sabor": "salgado",
+      "tempo": "30 min",
+      "pais": "Colômbia",
+      "bandeira": "🇨🇴",
+      "sobre": "Bolinho colombiano de fubá grelhado, recheado com queijo derretido por dentro.",
+      "ings": [
+        "fuba",
+        "queijo",
+        "manteiga",
+        "leite"
+      ],
+      "qtd": {
+        "queijo": 2
+      },
+      "passos": [
+        "Misture o fubá com leite até formar a massa.",
+        "Recheie com queijo ralado e feche bem as bordas.",
+        "Grelhe na manteiga até dourar dos dois lados."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture o fubá com o leite morno até formar uma massa lisa e macia, sem grudar nas mãos.",
+          "min": 5
+        },
+        {
+          "txt": "Deixe a massa descansar por 5 minutos para hidratar bem o fubá.",
+          "min": 5
+        },
+        {
+          "txt": "Rale o queijo e separe uma porção para o recheio.",
+          "min": 2
+        },
+        {
+          "txt": "Modele bolinhas de massa, achate em discos e recheie o centro com o queijo ralado.",
+          "min": 5
+        },
+        {
+          "txt": "Feche bem as bordas para o queijo não vazar e achate levemente formando a arepa.",
+          "min": 3
+        },
+        {
+          "txt": "Em fogo médio, grelhe a arepa com manteiga até dourar dos dois lados, 4 minutos cada.",
+          "min": 8
+        },
+        {
+          "txt": "Sirva quente, quando o queijo de dentro estiver bem derretido."
+        }
+      ]
+    },
+    {
+      "id": "co-ajiaco-frango",
+      "nome": "Ajiaco de frango",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "tempo": "50 min",
+      "pais": "Colômbia",
+      "bandeira": "🇨🇴",
+      "sobre": "Sopa colombiana cremosa de frango desfiado, batata e milho, perfumada com coentro.",
+      "ings": [
+        "frango",
+        "batata",
+        "milho",
+        "cebola",
+        "alho",
+        "coentro"
+      ],
+      "passos": [
+        "Cozinhe o frango com cebola e alho até macio.",
+        "Junte batata e milho e cozinhe até ficarem macios.",
+        "Desfie o frango e finalize com coentro picado."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte o frango em pedaços, tempere com sal, e pique a cebola e o alho.",
+          "min": 5
+        },
+        {
+          "txt": "Em uma panela funda, refogue a cebola e o alho até ficarem dourados e perfumados.",
+          "min": 4
+        },
+        {
+          "txt": "Junte o frango e água até cobrir, e cozinhe em fogo médio por 20 minutos.",
+          "min": 20
+        },
+        {
+          "txt": "Descasque e corte a batata em pedaços e junte à panela, cozinhando até ficar macia, 12 minutos.",
+          "min": 12
+        },
+        {
+          "txt": "Adicione o milho em rodelas e cozinhe por mais 6 minutos.",
+          "min": 6
+        },
+        {
+          "txt": "Desfie o frango dentro da panela e ajuste o sal, deixando engrossar um pouco.",
+          "min": 5
+        },
+        {
+          "txt": "Finalize com bastante coentro picado por cima e sirva bem quente."
+        }
+      ]
+    },
+    {
+      "id": "jp-oyakodon",
+      "nome": "Oyakodon de frango e ovo",
+      "emoji": "🍚",
+      "sabor": "salgado",
+      "tempo": "20 min",
+      "pais": "Japão",
+      "bandeira": "🇯🇵",
+      "sobre": "Receita caseira sem dashi nem mirin: o molho agridoce vem de shoyu com açúcar.",
+      "ings": [
+        "frango",
+        "cebola",
+        "ovo",
+        "shoyu",
+        "acucar",
+        "arroz"
+      ],
+      "qtd": {
+        "frango": 1.5,
+        "ovo": 2,
+        "arroz": 2
+      },
+      "passos": [
+        "Corte o frango e a cebola em pedaços pequenos.",
+        "Ferva shoyu, açúcar e água e cozinhe o frango e a cebola nesse molho.",
+        "Cubra com o ovo batido, tampe e sirva sobre arroz quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 300 g de peito de frango em cubos pequenos e tempere com uma pitada de sal.",
+          "min": 4
+        },
+        {
+          "txt": "Fatie 1 cebola em meia-lua bem fina para cozinhar junto com o frango.",
+          "min": 3
+        },
+        {
+          "txt": "Numa frigideira funda, misture 3 colheres de sopa de shoyu, 1 colher de sopa de açúcar e 100 ml de água e leve ao fogo médio até ferver.",
+          "min": 3
+        },
+        {
+          "txt": "Junte a cebola e o frango ao molho fervente e cozinhe em fogo médio até o frango ficar branco por dentro.",
+          "min": 6
+        },
+        {
+          "txt": "Bata 2 ovos levemente e despeje por cima do frango sem mexer, tampe e cozinhe em fogo baixo até o ovo ficar cremoso e quase firme.",
+          "min": 3
+        },
+        {
+          "txt": "Desligue o fogo e deixe descansar 1 minuto com a tampa para o ovo terminar de cozinhar no vapor.",
+          "min": 1
+        },
+        {
+          "txt": "Sirva o frango com ovo por cima de uma tigela de arroz branco bem quente."
+        }
+      ]
+    },
+    {
+      "id": "jp-gyoza-de-frango",
+      "nome": "Gyoza de frango",
+      "emoji": "🥟",
+      "sabor": "salgado",
+      "tempo": "45 min",
+      "pais": "Japão",
+      "bandeira": "🇯🇵",
+      "sobre": "Massa feita à mão, recheio de frango com repolho e gengibre, dourada e depois cozida no vapor.",
+      "ings": [
+        "farinha",
+        "frango",
+        "repolho",
+        "cebola",
+        "gengibre",
+        "shoyu"
+      ],
+      "qtd": {
+        "frango": 1,
+        "farinha": 2
+      },
+      "passos": [
+        "Faça a massa com farinha e água e deixe descansar.",
+        "Prepare o recheio de frango, repolho e gengibre e monte os gyozas.",
+        "Frite a base, cozinhe no vapor com um pouco de água e sirva crocante."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture 2 xícaras de farinha de trigo com água aos poucos até formar uma massa lisa e sove por 5 minutos.",
+          "min": 8
+        },
+        {
+          "txt": "Cubra a massa com um pano e deixe descansar 10 minutos em temperatura ambiente enquanto prepara o recheio.",
+          "min": 10
+        },
+        {
+          "txt": "Pique bem fino o repolho, a cebola e o frango cru e misture com gengibre ralado e 2 colheres de sopa de shoyu.",
+          "min": 8
+        },
+        {
+          "txt": "Abra a massa bem fina, corte discos de cerca de 8 cm, recheie o centro e feche apertando as bordas em meia-lua.",
+          "min": 10
+        },
+        {
+          "txt": "Aqueça um fio de óleo numa frigideira em fogo médio e frite a base dos gyozas até dourar, cerca de 2 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Junte um pouco de água na frigideira, tampe e cozinhe no vapor até o recheio cozinhar por completo, depois sirva quente e crocante.",
+          "min": 6
+        }
+      ]
+    },
+    {
+      "id": "jp-sunomono-de-pepino",
+      "nome": "Sunomono de pepino",
+      "emoji": "🥒",
+      "sabor": "salgado",
+      "tempo": "35 min",
+      "pais": "Japão",
+      "bandeira": "🇯🇵",
+      "sobre": "Salada leve e refrescante, tempero agridoce de vinagre com um toque de shoyu e gergelim.",
+      "ings": [
+        "pepino",
+        "vinagre",
+        "acucar",
+        "shoyu",
+        "gergelim"
+      ],
+      "qtd": {
+        "pepino": 2
+      },
+      "passos": [
+        "Fatie o pepino bem fino, salgue e deixe descansar.",
+        "Esprema o pepino e misture com vinagre, açúcar e shoyu.",
+        "Leve à geladeira por 15 minutos e finalize com gergelim."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 pepinos em fatias bem finas e tempere com uma pitada de sal.",
+          "min": 5
+        },
+        {
+          "txt": "Deixe descansar 10 minutos até soltar água, depois esprema bem as fatias com as mãos.",
+          "min": 10
+        },
+        {
+          "txt": "Numa tigela, misture 3 colheres de sopa de vinagre, 1 colher de sopa de açúcar e 1 colher de chá de shoyu até dissolver.",
+          "min": 3
+        },
+        {
+          "txt": "Junte o pepino espremido ao molho de vinagre e misture bem para envolver todas as fatias.",
+          "min": 2
+        },
+        {
+          "txt": "Leve à geladeira por pelo menos 15 minutos para gelar e pegar gosto.",
+          "min": 15
+        },
+        {
+          "txt": "Salpique gergelim por cima na hora de servir bem gelado."
+        }
+      ]
+    },
+    {
+      "id": "jp-salmao-teriyaki-simples",
+      "nome": "Salmão teriyaki simples",
+      "emoji": "🐟",
+      "sabor": "salgado",
+      "tempo": "18 min",
+      "pais": "Japão",
+      "bandeira": "🇯🇵",
+      "sobre": "Sem mirin nem saquê: o molho brilhante vem de shoyu reduzido com açúcar e gengibre.",
+      "ings": [
+        "salmao",
+        "shoyu",
+        "acucar",
+        "gengibre",
+        "gergelim"
+      ],
+      "qtd": {
+        "salmao": 2
+      },
+      "passos": [
+        "Tempere o salmão com uma pitada de sal.",
+        "Sele o salmão na frigideira dos dois lados até dourar.",
+        "Adicione shoyu, açúcar e gengibre e deixe o molho reduzir com gergelim."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 2 filés de salmão com uma pitada de sal dos dois lados.",
+          "min": 3
+        },
+        {
+          "txt": "Numa tigela pequena, misture 3 colheres de sopa de shoyu, 1 colher de sopa de açúcar e 1 colher de chá de gengibre ralado.",
+          "min": 3
+        },
+        {
+          "txt": "Aqueça uma frigideira antiaderente em fogo médio e sele o salmão com a pele para baixo até dourar, cerca de 4 minutos.",
+          "min": 4
+        },
+        {
+          "txt": "Vire o salmão e cozinhe do outro lado até ficar quase pronto por dentro, cerca de 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Despeje o molho de shoyu na frigideira e deixe reduzir, regando o peixe, até ficar brilhante e encorpado.",
+          "min": 4
+        },
+        {
+          "txt": "Desligue o fogo, salpique gergelim por cima e sirva em seguida.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "jp-onigiri-de-atum",
+      "nome": "Onigiri de atum",
+      "emoji": "🍙",
+      "sabor": "salgado",
+      "tempo": "35 min",
+      "pais": "Japão",
+      "bandeira": "🇯🇵",
+      "sobre": "Bolinho de arroz recheado com atum temperado, moldado à mão e envolto em alga nori.",
+      "ings": [
+        "arroz",
+        "atum",
+        "shoyu",
+        "alga-nori",
+        "gergelim"
+      ],
+      "qtd": {
+        "arroz": 2
+      },
+      "passos": [
+        "Cozinhe o arroz até ficar bem macio.",
+        "Misture o atum escorrido com shoyu.",
+        "Molde o arroz recheado em triângulo e finalize com gergelim e nori."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe 2 xícaras de arroz até ficar bem macio e ligeiramente grudento.",
+          "min": 20
+        },
+        {
+          "txt": "Escorra 1 lata de atum e misture com 1 colher de sopa de shoyu.",
+          "min": 3
+        },
+        {
+          "txt": "Com as mãos molhadas, pegue uma porção de arroz ainda morno e achate na palma da mão.",
+          "min": 3
+        },
+        {
+          "txt": "Coloque uma colher do atum temperado no centro e feche o arroz ao redor do recheio.",
+          "min": 3
+        },
+        {
+          "txt": "Molde o arroz em formato de triângulo, apertando bem para não desmontar.",
+          "min": 4
+        },
+        {
+          "txt": "Salpique gergelim por fora e envolva a base com uma tira de alga nori.",
+          "min": 2
+        }
+      ]
+    },
+    {
+      "id": "cn-arroz-frito-com-ovo",
+      "nome": "Arroz frito chinês",
+      "emoji": "🍳",
+      "sabor": "salgado",
+      "tempo": "45 min",
+      "pais": "China",
+      "bandeira": "🇨🇳",
+      "sobre": "Arroz do dia anterior salteado em fogo alto com ovo e legumes, no estilo caseiro chinês.",
+      "ings": [
+        "arroz",
+        "ovo",
+        "cenoura",
+        "ervilha",
+        "cebola",
+        "shoyu"
+      ],
+      "qtd": {
+        "arroz": 2,
+        "ovo": 2
+      },
+      "passos": [
+        "Cozinhe o arroz e deixe esfriar bem, de um dia para o outro se der.",
+        "Frite o ovo batido, depois refogue cenoura, cebola e ervilha.",
+        "Junte o arroz frio com shoyu e frite tudo em fogo alto até soltinho."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe 2 xícaras de arroz e deixe esfriar completamente, de preferência de um dia para o outro.",
+          "min": 25
+        },
+        {
+          "txt": "Corte a cenoura e a cebola em cubos pequenos.",
+          "min": 5
+        },
+        {
+          "txt": "Bata 2 ovos até ficar homogêneo e reserve para fritar em seguida.",
+          "min": 1
+        },
+        {
+          "txt": "Aqueça um fio de óleo numa frigideira grande em fogo alto e frite o ovo batido mexendo até formar pedaços soltos.",
+          "min": 3
+        },
+        {
+          "txt": "Junte a cenoura, a cebola e a ervilha e refogue até a cebola ficar transparente.",
+          "min": 5
+        },
+        {
+          "txt": "Adicione o arroz frio e 2 colheres de sopa de shoyu, mexendo sempre em fogo alto até o arroz ficar soltinho e levemente tostado.",
+          "min": 6
+        },
+        {
+          "txt": "Sirva o arroz frito bem quente, direto da frigideira."
+        }
+      ]
+    },
+    {
+      "id": "cn-frango-agridoce",
+      "nome": "Frango agridoce",
+      "emoji": "🍗",
+      "sabor": "salgado",
+      "tempo": "26 min",
+      "pais": "China",
+      "bandeira": "🇨🇳",
+      "sobre": "Molho agridoce simples de vinagre, açúcar e shoyu, sem precisar de molhos prontos.",
+      "ings": [
+        "frango",
+        "pimentao",
+        "cebola",
+        "vinagre",
+        "acucar",
+        "shoyu"
+      ],
+      "qtd": {
+        "frango": 2
+      },
+      "passos": [
+        "Corte o frango, o pimentão e a cebola.",
+        "Doure o frango e refogue os legumes na mesma frigideira.",
+        "Misture vinagre, açúcar e shoyu, volte o frango e deixe o molho engrossar."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 500 g de peito de frango em cubos e tempere com uma pitada de sal.",
+          "min": 3
+        },
+        {
+          "txt": "Corte o pimentão e a cebola em cubos médios.",
+          "min": 4
+        },
+        {
+          "txt": "Aqueça um fio de óleo numa frigideira em fogo médio-alto e doure o frango por todos os lados.",
+          "min": 8
+        },
+        {
+          "txt": "Retire o frango e, na mesma frigideira, refogue o pimentão e a cebola até murcharem um pouco.",
+          "min": 4
+        },
+        {
+          "txt": "Misture 3 colheres de sopa de vinagre, 2 colheres de sopa de açúcar e 2 colheres de sopa de shoyu numa tigela.",
+          "min": 2
+        },
+        {
+          "txt": "Volte o frango para a frigideira, adicione o molho e cozinhe mexendo até engrossar e ficar brilhante.",
+          "min": 5
+        },
+        {
+          "txt": "Sirva quente com o molho por cima."
+        }
+      ]
+    },
+    {
+      "id": "cn-sopa-de-milho-com-ovo",
+      "nome": "Sopa de milho com ovo",
+      "emoji": "🥣",
+      "sabor": "salgado",
+      "tempo": "23 min",
+      "pais": "China",
+      "bandeira": "🇨🇳",
+      "sobre": "Sopa cremosa de milho com fios de ovo cozido, inspirada na sopa chinesa de milho com frango.",
+      "ings": [
+        "milho",
+        "ovo",
+        "frango",
+        "gengibre",
+        "cheiro-verde"
+      ],
+      "qtd": {
+        "milho": 2
+      },
+      "passos": [
+        "Cozinhe o frango desfiado com água e gengibre.",
+        "Bata parte do milho até virar creme e volte para a panela com o resto.",
+        "Ferva, adicione o ovo batido em fio e finalize com cheiro-verde."
+      ],
+      "preparo": [
+        {
+          "txt": "Numa panela, cozinhe 300 g de frango desfiado com 1 litro de água e gengibre ralado em fogo médio.",
+          "min": 10
+        },
+        {
+          "txt": "Bata metade do milho com um pouco do caldo no liquidificador até virar um creme.",
+          "min": 3
+        },
+        {
+          "txt": "Volte o creme de milho para a panela junto com o milho inteiro restante e misture bem.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe ferver em fogo médio, mexendo de vez em quando.",
+          "min": 5
+        },
+        {
+          "txt": "Bata 1 ovo levemente e despeje fio a fio na sopa fervendo, mexendo sempre, até formar fios cozidos.",
+          "min": 3
+        },
+        {
+          "txt": "Finalize com cheiro-verde picado por cima e sirva bem quente."
+        }
+      ]
+    },
+    {
+      "id": "cn-cogumelos-ao-shoyu-e-gengibre",
+      "nome": "Cogumelos ao shoyu e gengibre",
+      "emoji": "🍄",
+      "sabor": "salgado",
+      "tempo": "23 min",
+      "pais": "China",
+      "bandeira": "🇨🇳",
+      "sobre": "Refogado simples de cogumelos com alho e gengibre, finalizado com shoyu até ficar brilhante.",
+      "ings": [
+        "cogumelo",
+        "shoyu",
+        "gengibre",
+        "alho",
+        "cebola"
+      ],
+      "qtd": {
+        "cogumelo": 2
+      },
+      "passos": [
+        "Corte os cogumelos e pique alho, cebola e gengibre.",
+        "Refogue o alho e o gengibre, depois junte a cebola até murchar.",
+        "Adicione os cogumelos e o shoyu e cozinhe até reduzir e brilhar."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 300 g de cogumelos em fatias e pique o alho, a cebola e o gengibre.",
+          "min": 6
+        },
+        {
+          "txt": "Aqueça um fio de óleo numa frigideira em fogo médio e refogue o alho e o gengibre até soltar cheiro.",
+          "min": 2
+        },
+        {
+          "txt": "Junte a cebola e refogue até ficar transparente.",
+          "min": 4
+        },
+        {
+          "txt": "Adicione os cogumelos e refogue em fogo médio-alto até soltarem água e murcharem.",
+          "min": 6
+        },
+        {
+          "txt": "Tempere com 2 colheres de sopa de shoyu e cozinhe mexendo até o líquido reduzir e os cogumelos ficarem brilhantes.",
+          "min": 5
+        },
+        {
+          "txt": "Sirva quente como acompanhamento."
+        }
+      ]
+    },
+    {
+      "id": "kr-bibimbap-simples",
+      "nome": "Bibimbap simples",
+      "emoji": "🍚",
+      "sabor": "salgado",
+      "tempo": "37 min",
+      "pais": "Coreia do Sul",
+      "bandeira": "🇰🇷",
+      "sobre": "Sem gochujang: o molho leva shoyu, gergelim e pimenta para dar o toque picante do prato.",
+      "ings": [
+        "arroz",
+        "ovo",
+        "cenoura",
+        "espinafre",
+        "shoyu",
+        "gergelim"
+      ],
+      "qtd": {
+        "arroz": 2,
+        "ovo": 2
+      },
+      "passos": [
+        "Cozinhe o arroz e refogue a cenoura e o espinafre separados.",
+        "Frite os ovos e misture shoyu, pimenta e gergelim para o molho.",
+        "Monte tudo na tigela com o ovo por cima e misture na hora de comer."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe 2 xícaras de arroz e reserve quente.",
+          "min": 20
+        },
+        {
+          "txt": "Corte a cenoura em tiras finas e refogue em fogo médio com um fio de óleo até ficar macia.",
+          "min": 4
+        },
+        {
+          "txt": "Refogue o espinafre rapidamente até murchar, tempere com uma pitada de sal e reserve.",
+          "min": 3
+        },
+        {
+          "txt": "Frite 2 ovos num fio de óleo até a clara firmar e a gema continuar mole, estilo frito.",
+          "min": 4
+        },
+        {
+          "txt": "Misture 2 colheres de sopa de shoyu com uma pitada de pimenta e 1 colher de chá de gergelim para o molho.",
+          "min": 2
+        },
+        {
+          "txt": "Monte o arroz numa tigela e arrume a cenoura e o espinafre por cima, lado a lado.",
+          "min": 3
+        },
+        {
+          "txt": "Coloque o ovo frito no centro, regue com o molho e misture tudo na hora de comer.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "kr-sopa-de-tofu-e-cogumelo",
+      "nome": "Sopa de tofu e cogumelo",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "tempo": "27 min",
+      "pais": "Coreia do Sul",
+      "bandeira": "🇰🇷",
+      "sobre": "Sopa quentinha inspirada no sundubu-jjigae, com pimenta no lugar do gochujang tradicional.",
+      "ings": [
+        "tofu",
+        "cogumelo",
+        "cebola",
+        "shoyu",
+        "pimenta",
+        "gengibre"
+      ],
+      "qtd": {
+        "tofu": 1.5,
+        "cogumelo": 1.5
+      },
+      "passos": [
+        "Corte o tofu em cubos e os cogumelos em fatias.",
+        "Refogue cebola e cogumelos, junte água e gengibre e ferva.",
+        "Tempere com shoyu e pimenta, junte o tofu e cozinhe mais 5 minutos."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte o tofu em cubos e os cogumelos em fatias.",
+          "min": 5
+        },
+        {
+          "txt": "Pique a cebola e refogue com um fio de óleo em fogo médio até ficar transparente.",
+          "min": 4
+        },
+        {
+          "txt": "Junte os cogumelos e refogue até murcharem um pouco.",
+          "min": 3
+        },
+        {
+          "txt": "Adicione 700 ml de água e 1 colher de chá de gengibre ralado e deixe ferver em fogo médio.",
+          "min": 8
+        },
+        {
+          "txt": "Tempere com 2 colheres de sopa de shoyu e uma pitada de pimenta a gosto.",
+          "min": 2
+        },
+        {
+          "txt": "Junte o tofu com cuidado para não desmanchar e cozinhe por mais 5 minutos.",
+          "min": 5
+        },
+        {
+          "txt": "Sirva a sopa bem quente, assim que o tofu estiver macio."
+        }
+      ]
+    },
+    {
+      "id": "kr-hotteok",
+      "nome": "Hotteok simplificado",
+      "emoji": "🥞",
+      "sabor": "doce",
+      "tempo": "50 min",
+      "pais": "Coreia do Sul",
+      "bandeira": "🇰🇷",
+      "sobre": "Panqueca coreana recheada de açúcar e canela com amendoim picado, dourada na frigideira.",
+      "ings": [
+        "farinha",
+        "acucar",
+        "canela",
+        "amendoim"
+      ],
+      "qtd": {
+        "farinha": 2,
+        "acucar": 1
+      },
+      "passos": [
+        "Faça a massa com farinha e água e deixe descansar até crescer.",
+        "Recheie com açúcar, canela e amendoim picado e feche em discos.",
+        "Frite os discos até dourar dos dois lados e o recheio derreter."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture 2 xícaras de farinha de trigo com água morna aos poucos até formar uma massa macia e lisa.",
+          "min": 8
+        },
+        {
+          "txt": "Cubra a massa e deixe descansar por 20 minutos em local morno até crescer um pouco.",
+          "min": 20
+        },
+        {
+          "txt": "Pique o amendoim e misture com 3 colheres de sopa de açúcar e 1 colher de chá de canela para o recheio.",
+          "min": 4
+        },
+        {
+          "txt": "Divida a massa em porções, abra cada uma na palma da mão e coloque uma colher do recheio no centro.",
+          "min": 6
+        },
+        {
+          "txt": "Feche bem a massa ao redor do recheio para não vazar e achate levemente formando um disco.",
+          "min": 5
+        },
+        {
+          "txt": "Aqueça um fio de óleo numa frigideira em fogo médio e frite o disco até dourar de um lado, cerca de 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Vire com cuidado e achate um pouco mais, fritando o outro lado até dourar e o recheio derreter por dentro.",
+          "min": 4
+        }
+      ]
+    },
+    {
+      "id": "in-dal-lentilha",
+      "nome": "Dal indiano de lentilha com cúrcuma",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "tempo": "33 min",
+      "pais": "Índia",
+      "bandeira": "🇮🇳",
+      "sobre": "Prato do dia a dia indiano: lentilha cozida até virar creme, temperada com cúrcuma e gengibre.",
+      "ings": [
+        "lentilha",
+        "cebola",
+        "alho",
+        "gengibre",
+        "curcuma",
+        "coentro"
+      ],
+      "qtd": {
+        "lentilha": 1
+      },
+      "passos": [
+        "Refogue cebola, alho e gengibre até dourar e junte a cúrcuma.",
+        "Cozinhe a lentilha na água até desmanchar e formar um creme.",
+        "Ajuste o sal, finalize com coentro e sirva quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Lave 1 xícara de lentilha em água corrente até a água sair clara e escorra bem.",
+          "min": 3
+        },
+        {
+          "txt": "Pique a cebola, o alho e o gengibre bem miúdos e refogue em fogo médio com um fio de óleo por 5 minutos, até a cebola ficar transparente.",
+          "min": 5
+        },
+        {
+          "txt": "Junte 1 colher de chá de cúrcuma e mexa por 1 minuto até soltar o aroma, sem deixar queimar.",
+          "min": 1
+        },
+        {
+          "txt": "Acrescente a lentilha lavada e 3 xícaras de água, tampe e cozinhe em fogo médio por 20 minutos, até desmanchar.",
+          "min": 20
+        },
+        {
+          "txt": "Amasse um pouco a lentilha com a colher para engrossar o caldo e ajuste o sal a gosto.",
+          "min": 3
+        },
+        {
+          "txt": "Desligue o fogo, finalize com coentro picado por cima e sirva quente com arroz.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "in-curry-grao-de-bico",
+      "nome": "Curry indiano de grão-de-bico",
+      "emoji": "🍛",
+      "sabor": "salgado",
+      "tempo": "25 min",
+      "pais": "Índia",
+      "bandeira": "🇮🇳",
+      "sobre": "Versão caseira do chana masala, com curry em pó no lugar do garam masala tradicional.",
+      "ings": [
+        "grao-de-bico",
+        "cebola",
+        "tomate",
+        "alho",
+        "gengibre",
+        "curry"
+      ],
+      "qtd": {
+        "grao-de-bico": 2
+      },
+      "passos": [
+        "Refogue cebola, alho, gengibre e tomate com curry em pó.",
+        "Junte o grão-de-bico e cozinhe até o molho engrossar.",
+        "Amasse um pouco, ajuste o sal e sirva quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Escorra e enxágue 2 xícaras de grão-de-bico cozido em água corrente.",
+          "min": 2
+        },
+        {
+          "txt": "Pique a cebola, o alho e o gengibre e refogue em fogo médio com um fio de óleo por 5 minutos, até dourar.",
+          "min": 5
+        },
+        {
+          "txt": "Junte o tomate picado e 1 colher de sopa de curry em pó, mexendo por 3 minutos até formar um molho grosso.",
+          "min": 3
+        },
+        {
+          "txt": "Acrescente o grão-de-bico e meia xícara de água, tampe e cozinhe em fogo baixo por 12 minutos.",
+          "min": 12
+        },
+        {
+          "txt": "Amasse algumas colheres do grão-de-bico contra a panela para engrossar o molho.",
+          "min": 2
+        },
+        {
+          "txt": "Ajuste o sal, desligue o fogo e sirva quente com arroz ou pão.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "in-frango-curry-coco",
+      "nome": "Curry de frango com leite de coco",
+      "emoji": "🍗",
+      "sabor": "salgado",
+      "tempo": "32 min",
+      "pais": "Índia",
+      "bandeira": "🇮🇳",
+      "sobre": "Frango cozido lentamente no leite de coco com curry, prato popular em várias regiões da Índia.",
+      "ings": [
+        "frango",
+        "leite-coco",
+        "curry",
+        "cebola",
+        "alho",
+        "gengibre"
+      ],
+      "qtd": {
+        "frango": 2,
+        "leite-coco": 1
+      },
+      "passos": [
+        "Doure o frango temperado com cebola, alho e gengibre.",
+        "Junte o curry em pó e o leite de coco e misture bem.",
+        "Cozinhe em fogo baixo até o frango ficar macio e sirva."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 peitos de frango em cubos médios e tempere com sal.",
+          "min": 5
+        },
+        {
+          "txt": "Pique a cebola, o alho e o gengibre e refogue em fogo médio com um fio de óleo por 4 minutos, até dourar.",
+          "min": 4
+        },
+        {
+          "txt": "Junte o frango e doure por 6 minutos, mexendo até a carne ficar esbranquiçada por fora.",
+          "min": 6
+        },
+        {
+          "txt": "Acrescente 1 colher de sopa de curry em pó e misture por 1 minuto até soltar o aroma.",
+          "min": 1
+        },
+        {
+          "txt": "Adicione o leite de coco, tampe e cozinhe em fogo baixo por 15 minutos, até o frango cozinhar por dentro.",
+          "min": 15
+        },
+        {
+          "txt": "Ajuste o sal e sirva quente com arroz.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "in-camarao-curry-coco",
+      "nome": "Curry de camarão com leite de coco",
+      "emoji": "🍤",
+      "sabor": "salgado",
+      "tempo": "23 min",
+      "pais": "Índia",
+      "bandeira": "🇮🇳",
+      "sobre": "Camarão rápido no molho de leite de coco e curry, com toque cítrico de limão.",
+      "ings": [
+        "camarao",
+        "leite-coco",
+        "curry",
+        "cebola",
+        "alho",
+        "limao"
+      ],
+      "qtd": {
+        "camarao": 2
+      },
+      "passos": [
+        "Tempere o camarão com limão e deixe descansar.",
+        "Refogue cebola e alho, junte o curry e o leite de coco.",
+        "Cozinhe o camarão no molho até ficar rosado e sirva."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 400 g de camarão limpo com suco de limão e deixe descansar por 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Pique a cebola e o alho e refogue em fogo médio com um fio de óleo por 4 minutos, até dourar.",
+          "min": 4
+        },
+        {
+          "txt": "Junte 1 colher de sopa de curry em pó e mexa por 1 minuto até soltar o aroma.",
+          "min": 1
+        },
+        {
+          "txt": "Adicione o leite de coco e deixe ferver em fogo médio por 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Coloque o camarão e cozinhe por 4 minutos, até ficar rosado e curvado em formato de C.",
+          "min": 4
+        },
+        {
+          "txt": "Desligue o fogo, ajuste o sal e sirva na hora com arroz.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "in-kheer-arroz-canela",
+      "nome": "Kheer indiano de arroz com canela",
+      "emoji": "🍮",
+      "sabor": "doce",
+      "tempo": "42 min",
+      "pais": "Índia",
+      "bandeira": "🇮🇳",
+      "sobre": "Pudim de arroz doce cozido lentamente no leite, perfumado com canela, sobremesa clássica indiana.",
+      "ings": [
+        "arroz",
+        "leite",
+        "acucar",
+        "canela",
+        "castanha"
+      ],
+      "qtd": {
+        "arroz": 1,
+        "leite": 4
+      },
+      "passos": [
+        "Ferva o leite e junte o arroz lavado.",
+        "Cozinhe em fogo baixo mexendo até engrossar e adoçar com açúcar e canela.",
+        "Deixe amornar e finalize com castanhas picadas."
+      ],
+      "preparo": [
+        {
+          "txt": "Lave meia xícara de arroz em água corrente e escorra bem.",
+          "min": 2
+        },
+        {
+          "txt": "Numa panela, ferva 4 xícaras de leite em fogo médio, mexendo para não grudar.",
+          "min": 5
+        },
+        {
+          "txt": "Junte o arroz lavado e cozinhe em fogo baixo por 25 minutos, mexendo de vez em quando, até engrossar.",
+          "min": 25
+        },
+        {
+          "txt": "Adicione 3 colheres de sopa de açúcar e uma pitada de canela e misture bem.",
+          "min": 2
+        },
+        {
+          "txt": "Cozinhe por mais 5 minutos, até ficar cremoso e o arroz bem macio.",
+          "min": 5
+        },
+        {
+          "txt": "Desligue o fogo, deixe amornar e finalize com castanhas picadas por cima.",
+          "min": 3
+        }
+      ]
+    },
+    {
+      "id": "th-pad-thai-vegetariano",
+      "nome": "Pad thai vegetariano de ovo e amendoim",
+      "emoji": "🍜",
+      "sabor": "salgado",
+      "tempo": "24 min",
+      "pais": "Tailândia",
+      "bandeira": "🇹🇭",
+      "sobre": "Versão caseira do pad thai, sem molho de peixe nem tamarindo, adoçada só com o shoyu e o limão.",
+      "ings": [
+        "macarrao-arroz",
+        "ovo",
+        "amendoim",
+        "cenoura",
+        "limao",
+        "shoyu"
+      ],
+      "qtd": {
+        "ovo": 2
+      },
+      "passos": [
+        "Hidrate o macarrão de arroz em água morna até ficar flexível.",
+        "Frite o ovo, junte o macarrão, a cenoura e o shoyu.",
+        "Misture o amendoim, finalize com limão e sirva."
+      ],
+      "preparo": [
+        {
+          "txt": "Deixe 200 g de macarrão de arroz de molho em água morna por 10 minutos, até ficar flexível.",
+          "min": 10
+        },
+        {
+          "txt": "Corte a cenoura em tiras finas e reserve.",
+          "min": 3
+        },
+        {
+          "txt": "Bata 2 ovos numa tigela com uma pitada de sal.",
+          "min": 2
+        },
+        {
+          "txt": "Numa frigideira grande, aqueça um fio de óleo em fogo alto e frite os ovos até talharem em pedaços.",
+          "min": 3
+        },
+        {
+          "txt": "Junte o macarrão escorrido, a cenoura e 2 colheres de sopa de shoyu e refogue por 4 minutos, mexendo sempre.",
+          "min": 4
+        },
+        {
+          "txt": "Adicione o amendoim picado e misture por 1 minuto.",
+          "min": 1
+        },
+        {
+          "txt": "Desligue o fogo, esprema limão por cima e sirva na hora.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "th-curry-amarelo-frango",
+      "nome": "Curry amarelo de frango tailandês",
+      "emoji": "🍛",
+      "sabor": "salgado",
+      "tempo": "31 min",
+      "pais": "Tailândia",
+      "bandeira": "🇹🇭",
+      "sobre": "Versão caseira do curry amarelo tailandês, sem pasta de curry, com curry em pó e cúrcuma.",
+      "ings": [
+        "frango",
+        "leite-coco",
+        "curry",
+        "curcuma",
+        "cebola",
+        "gengibre"
+      ],
+      "qtd": {
+        "frango": 2
+      },
+      "passos": [
+        "Doure o frango com cebola e gengibre refogados.",
+        "Tempere com curry em pó e cúrcuma e junte o leite de coco.",
+        "Cozinhe em fogo baixo até apurar e sirva quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 peitos de frango em cubos e tempere com sal.",
+          "min": 5
+        },
+        {
+          "txt": "Pique a cebola e o gengibre e refogue em fogo médio com um fio de óleo por 4 minutos, até dourar.",
+          "min": 4
+        },
+        {
+          "txt": "Junte 1 colher de sopa de curry em pó e 1 colher de chá de cúrcuma, mexendo por 1 minuto.",
+          "min": 1
+        },
+        {
+          "txt": "Adicione o frango e doure por 5 minutos, até ficar esbranquiçado por fora.",
+          "min": 5
+        },
+        {
+          "txt": "Despeje o leite de coco, tampe e cozinhe em fogo baixo por 15 minutos, até o frango ficar macio.",
+          "min": 15
+        },
+        {
+          "txt": "Ajuste o sal e sirva quente com arroz.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "th-sopa-frango-coco-gengibre",
+      "nome": "Sopa thai de frango com coco e gengibre",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "tempo": "27 min",
+      "pais": "Tailândia",
+      "bandeira": "🇹🇭",
+      "sobre": "Sopa cremosa inspirada no tom kha gai, sem capim-limão, com gengibre para dar o aroma picante.",
+      "ings": [
+        "frango",
+        "leite-coco",
+        "gengibre",
+        "cebola",
+        "limao",
+        "coentro"
+      ],
+      "qtd": {
+        "frango": 1
+      },
+      "passos": [
+        "Refogue cebola e gengibre e junte o leite de coco com água.",
+        "Cozinhe o frango na sopa até ficar macio.",
+        "Tempere com limão, finalize com coentro e sirva quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 300 g de peito de frango em tiras finas.",
+          "min": 5
+        },
+        {
+          "txt": "Fatie a cebola e o gengibre em rodelas finas.",
+          "min": 3
+        },
+        {
+          "txt": "Numa panela, refogue a cebola e o gengibre em fogo médio com um fio de óleo por 3 minutos, até soltar aroma.",
+          "min": 3
+        },
+        {
+          "txt": "Junte o leite de coco e 2 xícaras de água e deixe ferver em fogo médio.",
+          "min": 5
+        },
+        {
+          "txt": "Adicione o frango e cozinhe por 8 minutos, até ficar branco por dentro e macio.",
+          "min": 8
+        },
+        {
+          "txt": "Tempere com suco de limão e ajuste o sal.",
+          "min": 2
+        },
+        {
+          "txt": "Desligue o fogo, finalize com coentro picado e sirva quente.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "th-salada-pepino-amendoim",
+      "nome": "Salada tailandesa de pepino com amendoim",
+      "emoji": "🥗",
+      "sabor": "salgado",
+      "tempo": "16 min",
+      "pais": "Tailândia",
+      "bandeira": "🇹🇭",
+      "sobre": "Salada fresca e picante, equilíbrio de ácido, doce e apimentado típico da culinária tailandesa.",
+      "ings": [
+        "pepino",
+        "amendoim",
+        "pimenta",
+        "coentro",
+        "limao",
+        "acucar"
+      ],
+      "qtd": {
+        "pepino": 2
+      },
+      "passos": [
+        "Corte o pepino em fatias e prepare o molho de limão com açúcar.",
+        "Torre o amendoim e pique junto com a pimenta e o coentro.",
+        "Misture tudo e sirva a salada fria."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 pepinos em fatias finas e coloque numa tigela.",
+          "min": 5
+        },
+        {
+          "txt": "Pique bem a pimenta e o coentro e reserve.",
+          "min": 3
+        },
+        {
+          "txt": "Numa tigela pequena, misture o suco de limão com 1 colher de chá de açúcar até dissolver.",
+          "min": 2
+        },
+        {
+          "txt": "Torre o amendoim numa frigideira seca em fogo médio por 3 minutos, até dourar, e pique grosseiramente.",
+          "min": 3
+        },
+        {
+          "txt": "Regue o pepino com o molho de limão e açúcar e misture bem.",
+          "min": 2
+        },
+        {
+          "txt": "Finalize com a pimenta, o coentro e o amendoim torrado por cima e sirva fria.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "vn-pho-frango-gengibre",
+      "nome": "Pho de frango com gengibre",
+      "emoji": "🍜",
+      "sabor": "salgado",
+      "tempo": "43 min",
+      "pais": "Vietnã",
+      "bandeira": "🇻🇳",
+      "sobre": "Versão caseira do pho vietnamita, sem capim-limão, com gengibre dando o aroma ao caldo.",
+      "ings": [
+        "macarrao-arroz",
+        "frango",
+        "gengibre",
+        "cebola",
+        "coentro",
+        "limao"
+      ],
+      "qtd": {
+        "frango": 1
+      },
+      "passos": [
+        "Cozinhe o frango num caldo com cebola e gengibre por 20 minutos.",
+        "Hidrate o macarrão de arroz e desfie o frango cozido.",
+        "Monte com o caldo quente, coentro picado e limão."
+      ],
+      "preparo": [
+        {
+          "txt": "Deixe 200 g de macarrão de arroz de molho em água morna por 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Corte o frango em tiras e a cebola em rodelas finas.",
+          "min": 4
+        },
+        {
+          "txt": "Numa panela, refogue a cebola e o gengibre fatiado em fogo médio por 3 minutos, até soltar aroma.",
+          "min": 3
+        },
+        {
+          "txt": "Adicione 1,5 litro de água e o frango, tampe e cozinhe em fogo médio por 20 minutos, até ficar macio.",
+          "min": 20
+        },
+        {
+          "txt": "Escorra o macarrão e distribua nos potes de servir.",
+          "min": 2
+        },
+        {
+          "txt": "Retire o frango, desfie e devolva ao caldo quente.",
+          "min": 3
+        },
+        {
+          "txt": "Sirva o caldo com o frango sobre o macarrão, com coentro picado e limão por cima.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "vn-salada-macarrao-tofu",
+      "nome": "Salada vietnamita de macarrão com tofu",
+      "emoji": "🥗",
+      "sabor": "salgado",
+      "tempo": "27 min",
+      "pais": "Vietnã",
+      "bandeira": "🇻🇳",
+      "sobre": "Salada fresca de macarrão de arroz com tofu dourado, inspirada nos pratos frios vietnamitas.",
+      "ings": [
+        "macarrao-arroz",
+        "tofu",
+        "cenoura",
+        "pepino",
+        "hortela",
+        "shoyu"
+      ],
+      "qtd": {
+        "tofu": 1
+      },
+      "passos": [
+        "Hidrate o macarrão de arroz e doure o tofu em cubos.",
+        "Corte cenoura e pepino em tiras finas.",
+        "Monte a salada com hortelã e regue com shoyu antes de servir."
+      ],
+      "preparo": [
+        {
+          "txt": "Deixe 200 g de macarrão de arroz de molho em água morna por 10 minutos, até ficar macio.",
+          "min": 10
+        },
+        {
+          "txt": "Corte o tofu em cubos e a cenoura e o pepino em tiras finas.",
+          "min": 5
+        },
+        {
+          "txt": "Numa frigideira, doure o tofu em fogo médio com um fio de óleo por 6 minutos, até dourar dos lados.",
+          "min": 6
+        },
+        {
+          "txt": "Escorra o macarrão e distribua nos pratos de servir.",
+          "min": 2
+        },
+        {
+          "txt": "Arrume por cima a cenoura, o pepino, o tofu dourado e as folhas de hortelã.",
+          "min": 3
+        },
+        {
+          "txt": "Regue com 2 colheres de sopa de shoyu por porção e sirva em temperatura ambiente.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "id-gado-gado-amendoim",
+      "nome": "Gado-gado com molho de amendoim",
+      "emoji": "🥗",
+      "sabor": "salgado",
+      "tempo": "31 min",
+      "pais": "Indonésia",
+      "bandeira": "🇮🇩",
+      "sobre": "Salada indonésia de legumes cozidos e crus com molho cremoso de amendoim.",
+      "ings": [
+        "ovo",
+        "batata",
+        "repolho",
+        "cenoura",
+        "pepino",
+        "pasta-amendoim"
+      ],
+      "qtd": {
+        "ovo": 2,
+        "batata": 2
+      },
+      "passos": [
+        "Cozinhe ovo, batata e repolho separadamente.",
+        "Prepare o molho misturando pasta de amendoim com água morna.",
+        "Monte os legumes no prato e regue com o molho de amendoim."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe 2 ovos em água fervente por 8 minutos, até ficarem cozidos, e depois descasque.",
+          "min": 8
+        },
+        {
+          "txt": "Cozinhe 2 batatas em cubos em água fervente por 12 minutos, até ficarem macias ao espetar com garfo.",
+          "min": 12
+        },
+        {
+          "txt": "Cozinhe o repolho fatiado em água fervente por 2 minutos, até murchar levemente, e escorra.",
+          "min": 2
+        },
+        {
+          "txt": "Corte o pepino em fatias e a cenoura em tiras finas, cruas.",
+          "min": 3
+        },
+        {
+          "txt": "Numa tigela, misture 3 colheres de sopa de pasta de amendoim com água morna até virar um molho cremoso.",
+          "min": 3
+        },
+        {
+          "txt": "Arrume no prato o repolho, a cenoura, o pepino, a batata e o ovo cortado ao meio.",
+          "min": 2
+        },
+        {
+          "txt": "Regue tudo com o molho de amendoim e sirva em seguida.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "pt-peixe-bras",
+      "nome": "Peixe à Brás",
+      "emoji": "🐟",
+      "sabor": "salgado",
+      "tempo": "32 min",
+      "pais": "Portugal",
+      "bandeira": "🇵🇹",
+      "sobre": "Versão caseira do clássico português, com peixe em vez de bacalhau salgado, batata palha e ovos.",
+      "ings": [
+        "peixe",
+        "batata",
+        "ovo",
+        "cebola",
+        "azeitona",
+        "azeite"
+      ],
+      "qtd": {
+        "ovo": 4,
+        "peixe": 2
+      },
+      "passos": [
+        "Corte o peixe em lascas e a batata em palitos finos.",
+        "Frite a batata até dourar e refogue o peixe com cebola.",
+        "Junte os ovos batidos, misture rápido e finalize com azeitonas."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 2 filés de peixe com sal e desfie em lascas grossas.",
+          "min": 5
+        },
+        {
+          "txt": "Corte 2 batatas em palitos finos e frite em azeite quente até dourar, uns 8 minutos.",
+          "min": 8
+        },
+        {
+          "txt": "Escorra a batata frita em papel toalha e reserve.",
+          "min": 2
+        },
+        {
+          "txt": "Refogue 1 cebola fatiada em azeite em fogo médio até ficar transparente.",
+          "min": 5
+        },
+        {
+          "txt": "Junte o peixe desfiado e refogue até ficar bem soltinho, mexendo sempre.",
+          "min": 6
+        },
+        {
+          "txt": "Bata 4 ovos e despeje sobre o peixe, mexendo em fogo baixo até cremoso, sem secar demais.",
+          "min": 4
+        },
+        {
+          "txt": "Misture a batata frita, desligue o fogo e finalize com azeitonas por cima.",
+          "min": 2
+        },
+        {
+          "txt": "Sirva quente na hora, antes que o ovo continue cozinhando."
+        }
+      ]
+    },
+    {
+      "id": "pt-bifana",
+      "nome": "Bifana no pão",
+      "emoji": "🥪",
+      "sabor": "salgado",
+      "tempo": "27 min",
+      "pais": "Portugal",
+      "bandeira": "🇵🇹",
+      "sobre": "Bife fininho marinado no alho, frito e servido dentro de pão, lanche típico das lanchonetes portuguesas.",
+      "ings": [
+        "bife",
+        "pao",
+        "alho",
+        "azeite",
+        "pimenta",
+        "cebola"
+      ],
+      "qtd": {
+        "bife": 2
+      },
+      "passos": [
+        "Tempere o bife fatiado fino com alho e pimenta.",
+        "Frite o bife em azeite até dourar dos dois lados.",
+        "Recheie o pão quente com o bife e a cebola refogada."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 2 bifes finos com 2 dentes de alho amassados, sal e pimenta e deixe descansar 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Fatie 1 cebola em rodelas finas e refogue em azeite em fogo médio até dourar levemente.",
+          "min": 7
+        },
+        {
+          "txt": "Retire a cebola e reserve, deixando o azeite na frigideira.",
+          "min": 1
+        },
+        {
+          "txt": "Frite os bifes no mesmo azeite em fogo alto, 2 minutos de cada lado, até dourar bem.",
+          "min": 4
+        },
+        {
+          "txt": "Corte o pão ao meio e aqueça levemente na chapa ou no forno.",
+          "min": 3
+        },
+        {
+          "txt": "Recheie o pão com o bife, regue com o molho da frigideira e cubra com a cebola.",
+          "min": 2
+        }
+      ]
+    },
+    {
+      "id": "pt-pao-de-lo",
+      "nome": "Pão de ló",
+      "emoji": "🍰",
+      "sabor": "doce",
+      "tempo": "70 min",
+      "pais": "Portugal",
+      "bandeira": "🇵🇹",
+      "sobre": "Bolo português tradicional, fofo e bem úmido, feito só com ovos, açúcar e farinha, sem fermento.",
+      "ings": [
+        "ovo",
+        "acucar",
+        "farinha",
+        "manteiga"
+      ],
+      "qtd": {
+        "ovo": 6,
+        "acucar": 2
+      },
+      "passos": [
+        "Bata os ovos com açúcar até dobrar de volume e clarear.",
+        "Incorpore a farinha aos poucos, misturando devagar.",
+        "Asse até dourar por fora e ficar molhadinho por dentro."
+      ],
+      "preparo": [
+        {
+          "txt": "Unte uma forma redonda com manteiga e forre o fundo com papel manteiga.",
+          "min": 3
+        },
+        {
+          "txt": "Bata 6 ovos com 2 xícaras de açúcar na batedeira em velocidade alta por 12 minutos, até triplicar de volume.",
+          "min": 12
+        },
+        {
+          "txt": "Peneire 1 xícara de farinha aos poucos sobre a mistura, incorporando com movimentos leves de baixo para cima.",
+          "min": 5
+        },
+        {
+          "txt": "Despeje a massa na forma untada, enchendo até dois terços da altura.",
+          "min": 2
+        },
+        {
+          "txt": "Leve ao forno preaquecido a 180 graus por 35 minutos, sem abrir a porta.",
+          "min": 35
+        },
+        {
+          "txt": "Espete um palito no centro: se sair só um pouco úmido, o bolo está no ponto certo.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe esfriar 10 minutos antes de desenformar com cuidado.",
+          "min": 10
+        }
+      ]
+    },
+    {
+      "id": "es-tortilla-batata",
+      "nome": "Tortilla espanhola",
+      "emoji": "🍳",
+      "sabor": "salgado",
+      "tempo": "50 min",
+      "pais": "Espanha",
+      "bandeira": "🇪🇸",
+      "sobre": "Omelete grosso de batata e cebola, cozido bem devagar, o prato caseiro mais tradicional da Espanha.",
+      "ings": [
+        "batata",
+        "ovo",
+        "cebola",
+        "azeite"
+      ],
+      "qtd": {
+        "ovo": 5,
+        "batata": 4
+      },
+      "passos": [
+        "Corte a batata e a cebola em fatias finas.",
+        "Cozinhe tudo em azeite abundante até a batata amolecer.",
+        "Misture com ovos batidos e doure dos dois lados na frigideira."
+      ],
+      "preparo": [
+        {
+          "txt": "Descasque 4 batatas e corte em fatias bem finas.",
+          "min": 5
+        },
+        {
+          "txt": "Corte 1 cebola grande em fatias finas.",
+          "min": 3
+        },
+        {
+          "txt": "Cozinhe a batata e a cebola em bastante azeite, em fogo baixo, por 20 minutos, até ficarem macias sem dourar.",
+          "min": 20
+        },
+        {
+          "txt": "Escorra o excesso de azeite e deixe a batata amornar por 5 minutos.",
+          "min": 5
+        },
+        {
+          "txt": "Bata 5 ovos numa tigela grande e misture com a batata e a cebola.",
+          "min": 3
+        },
+        {
+          "txt": "Despeje tudo numa frigideira untada e cozinhe em fogo médio por 6 minutos, até firmar embaixo.",
+          "min": 6
+        },
+        {
+          "txt": "Vire a tortilha com ajuda de um prato e cozinhe mais 4 minutos do outro lado, até dourar.",
+          "min": 4
+        },
+        {
+          "txt": "Deixe descansar 5 minutos antes de cortar em fatias.",
+          "min": 5
+        }
+      ]
+    },
+    {
+      "id": "es-gazpacho",
+      "nome": "Gazpacho andaluz",
+      "emoji": "🥣",
+      "sabor": "salgado",
+      "tempo": "75 min",
+      "pais": "Espanha",
+      "bandeira": "🇪🇸",
+      "sobre": "Sopa fria de tomate e legumes crus, batida até virar creme, refrescante e típica do verão espanhol.",
+      "ings": [
+        "tomate",
+        "pimentao",
+        "cebola",
+        "alho",
+        "azeite",
+        "vinagre"
+      ],
+      "qtd": {
+        "tomate": 5
+      },
+      "passos": [
+        "Bata tomate, pimentão, cebola e alho no liquidificador.",
+        "Tempere com azeite, vinagre e sal até equilibrar o sabor.",
+        "Leve à geladeira até ficar bem gelado antes de servir."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 5 tomates, 1 pimentão e meia cebola em pedaços grandes.",
+          "min": 6
+        },
+        {
+          "txt": "Bata os legumes no liquidificador com 1 dente de alho até virar um creme liso.",
+          "min": 4
+        },
+        {
+          "txt": "Junte 3 colheres de sopa de azeite e 1 colher de sopa de vinagre, batendo mais um pouco.",
+          "min": 2
+        },
+        {
+          "txt": "Passe por uma peneira fina para retirar cascas e sementes, se preferir textura bem lisa.",
+          "min": 3
+        },
+        {
+          "txt": "Ajuste o sal e leve à geladeira por pelo menos 1 hora, até esfriar bem.",
+          "min": 60
+        },
+        {
+          "txt": "Sirva bem gelado, regado com um fio de azeite por cima."
+        }
+      ]
+    },
+    {
+      "id": "es-churros",
+      "nome": "Churros madrilenhos",
+      "emoji": "🍩",
+      "sabor": "doce",
+      "tempo": "30 min",
+      "pais": "Espanha",
+      "bandeira": "🇪🇸",
+      "sobre": "Massa frita e crocante, polvilhada com açúcar e canela, o doce de rua mais famoso da Espanha.",
+      "ings": [
+        "farinha",
+        "acucar",
+        "canela",
+        "azeite"
+      ],
+      "qtd": {
+        "farinha": 2,
+        "acucar": 1
+      },
+      "passos": [
+        "Ferva água com uma pitada de sal e misture a farinha até formar massa lisa.",
+        "Modele os churros e frite em azeite quente até dourar.",
+        "Escorra bem e passe na mistura de açúcar com canela ainda quentes."
+      ],
+      "preparo": [
+        {
+          "txt": "Ferva 1 xícara de água com uma pitada de sal em fogo médio.",
+          "min": 3
+        },
+        {
+          "txt": "Desligue o fogo e misture 2 xícaras de farinha de uma vez, mexendo até formar massa lisa e sem grumos.",
+          "min": 5
+        },
+        {
+          "txt": "Deixe a massa amornar por 10 minutos, até dar para manusear sem queimar as mãos.",
+          "min": 10
+        },
+        {
+          "txt": "Coloque a massa num saco de confeitar com bico estrelado e modele tiras de 10 centímetros.",
+          "min": 5
+        },
+        {
+          "txt": "Frite os churros em azeite quente, em fogo médio, até dourarem por igual, uns 4 minutos.",
+          "min": 4
+        },
+        {
+          "txt": "Escorra em papel toalha e passe ainda quentes numa mistura de açúcar com canela.",
+          "min": 2
+        }
+      ]
+    },
+    {
+      "id": "us-torta-maca",
+      "nome": "Torta de maçã americana",
+      "emoji": "🥧",
+      "sabor": "doce",
+      "tempo": "95 min",
+      "pais": "Estados Unidos",
+      "bandeira": "🇺🇸",
+      "sobre": "Torta clássica americana de maçã com canela, coberta por uma massa dourada e crocante.",
+      "ings": [
+        "maca",
+        "farinha",
+        "canela",
+        "acucar",
+        "manteiga",
+        "ovo"
+      ],
+      "qtd": {
+        "maca": 5,
+        "farinha": 2
+      },
+      "passos": [
+        "Prepare a massa com farinha e manteiga gelada e leve à geladeira.",
+        "Refogue as maçãs fatiadas com açúcar e canela até amolecerem.",
+        "Recheie a massa, cubra e asse até dourar por cima."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture 2 xícaras de farinha com manteiga gelada em cubos até formar uma farofa grossa.",
+          "min": 5
+        },
+        {
+          "txt": "Junte água gelada aos poucos até a massa unir, forme uma bola e leve à geladeira por 20 minutos.",
+          "min": 20
+        },
+        {
+          "txt": "Descasque e fatie 5 maçãs e refogue em fogo médio com açúcar e canela por 8 minutos, até amolecerem.",
+          "min": 8
+        },
+        {
+          "txt": "Abra metade da massa e forre o fundo de uma forma redonda.",
+          "min": 4
+        },
+        {
+          "txt": "Espalhe o recheio de maçã por cima da massa.",
+          "min": 2
+        },
+        {
+          "txt": "Abra o restante da massa, cubra a torta e faça furinhos para sair vapor.",
+          "min": 4
+        },
+        {
+          "txt": "Pincele com ovo batido e leve ao forno a 190 graus por 35 minutos, até dourar por cima.",
+          "min": 35
+        },
+        {
+          "txt": "Deixe esfriar 15 minutos antes de cortar, para o recheio firmar.",
+          "min": 15
+        }
+      ]
+    },
+    {
+      "id": "us-sanduiche-bbq",
+      "nome": "Sanduíche de carne barbecue",
+      "emoji": "🍖",
+      "sabor": "salgado",
+      "tempo": "90 min",
+      "pais": "Estados Unidos",
+      "bandeira": "🇺🇸",
+      "sobre": "Carne cozida bem devagar até desfiar fácil, misturada num molho agridoce, herança do sul dos EUA.",
+      "ings": [
+        "carne-de-panela",
+        "pao",
+        "molho-tomate",
+        "paprica",
+        "cebola"
+      ],
+      "qtd": {
+        "carne-de-panela": 3
+      },
+      "passos": [
+        "Cozinhe a carne bem devagar até ficar macia e fácil de desfiar.",
+        "Desfie a carne e misture com o molho de tomate e páprica.",
+        "Recheie o pão com a carne desfiada e a cebola."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 3 carnes de panela com sal e páprica e leve à panela com um fio de azeite.",
+          "min": 5
+        },
+        {
+          "txt": "Cubra com água e cozinhe em fogo baixo, com tampa, por 1 hora, até a carne ficar bem macia.",
+          "min": 60
+        },
+        {
+          "txt": "Retire a carne e desfie com dois garfos ainda morna.",
+          "min": 5
+        },
+        {
+          "txt": "Refogue 1 cebola fatiada até dourar levemente.",
+          "min": 6
+        },
+        {
+          "txt": "Misture a carne desfiada com o molho de tomate, a cebola e mais páprica, em fogo baixo por 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Abra o pão, recheie com a carne no molho e sirva quente.",
+          "min": 2
+        }
+      ]
+    },
+    {
+      "id": "us-asinha-picante",
+      "nome": "Asinha de frango picante",
+      "emoji": "🍗",
+      "sabor": "salgado",
+      "tempo": "32 min",
+      "pais": "Estados Unidos",
+      "bandeira": "🇺🇸",
+      "sobre": "Frango frito e banhado num molho picante e amanteigado, clássico dos bares e lanchonetes americanas.",
+      "ings": [
+        "frango",
+        "manteiga",
+        "pimenta",
+        "vinagre",
+        "paprica"
+      ],
+      "qtd": {
+        "frango": 6
+      },
+      "passos": [
+        "Tempere o frango com sal e páprica e frite até dourar bem.",
+        "Derreta manteiga e misture com pimenta e vinagre.",
+        "Banhe o frango frito no molho picante e sirva na hora."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 6 pedaços de frango com sal e páprica e deixe descansar 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Frite o frango em azeite quente, em fogo médio, por 12 minutos, virando até dourar por igual.",
+          "min": 12
+        },
+        {
+          "txt": "Escorra o frango em papel toalha e reserve.",
+          "min": 2
+        },
+        {
+          "txt": "Derreta a manteiga numa panela pequena em fogo baixo.",
+          "min": 3
+        },
+        {
+          "txt": "Misture a manteiga derretida com pimenta picada e um fio de vinagre até formar um molho homogêneo.",
+          "min": 3
+        },
+        {
+          "txt": "Regue o frango frito com o molho picante, misturando bem para cobrir tudo.",
+          "min": 2
+        },
+        {
+          "txt": "Sirva imediatamente, ainda quente e crocante."
+        }
+      ]
+    },
+    {
+      "id": "de-currywurst",
+      "nome": "Currywurst alemã",
+      "emoji": "🌭",
+      "sabor": "salgado",
+      "tempo": "20 min",
+      "pais": "Alemanha",
+      "bandeira": "🇩🇪",
+      "sobre": "Salsicha grelhada fatiada e coberta com molho de tomate temperado com curry, prato de rua de Berlim.",
+      "ings": [
+        "salsicha",
+        "molho-tomate",
+        "curry",
+        "paprica"
+      ],
+      "qtd": {
+        "salsicha": 4
+      },
+      "passos": [
+        "Grelhe as salsichas até dourarem por fora.",
+        "Misture o molho de tomate com curry e páprica em fogo baixo.",
+        "Corte a salsicha em rodelas e cubra com o molho de curry."
+      ],
+      "preparo": [
+        {
+          "txt": "Grelhe 4 salsichas numa frigideira quente, sem óleo, por 8 minutos, virando até dourar por igual.",
+          "min": 8
+        },
+        {
+          "txt": "Retire as salsichas e corte em rodelas grossas.",
+          "min": 2
+        },
+        {
+          "txt": "Na mesma frigideira, aqueça o molho de tomate em fogo baixo por 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Misture 1 colher de chá de curry e 1 colher de chá de páprica ao molho, mexendo bem.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe o molho ferver em fogo baixo por 5 minutos, até engrossar levemente.",
+          "min": 5
+        },
+        {
+          "txt": "Cubra as rodelas de salsicha com o molho quente e polvilhe mais páprica por cima.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "de-salada-batata-alema",
+      "nome": "Salada de batata alemã",
+      "emoji": "🥔",
+      "sabor": "salgado",
+      "tempo": "45 min",
+      "pais": "Alemanha",
+      "bandeira": "🇩🇪",
+      "sobre": "Salada de batata servida morna, temperada com vinagre e bacon, sem maionese, ao estilo alemão.",
+      "ings": [
+        "batata",
+        "cebola",
+        "bacon",
+        "vinagre",
+        "azeite"
+      ],
+      "qtd": {
+        "batata": 5
+      },
+      "passos": [
+        "Cozinhe as batatas inteiras até ficarem macias e corte em rodelas.",
+        "Frite o bacon até crocante e refogue a cebola na gordura dele.",
+        "Misture tudo ainda morno com vinagre e azeite."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe 5 batatas com casca em água fervente por 25 minutos, até ficarem macias ao espetar com garfo.",
+          "min": 25
+        },
+        {
+          "txt": "Escorra, deixe amornar 5 minutos e corte em rodelas grossas.",
+          "min": 5
+        },
+        {
+          "txt": "Frite o bacon em cubos numa frigideira, sem óleo, por 6 minutos, até ficar crocante.",
+          "min": 6
+        },
+        {
+          "txt": "Refogue 1 cebola fatiada na gordura do bacon até dourar levemente.",
+          "min": 4
+        },
+        {
+          "txt": "Misture as batatas ainda mornas com o bacon, a cebola, vinagre e azeite numa tigela grande.",
+          "min": 3
+        },
+        {
+          "txt": "Tempere com sal e sirva morna ou em temperatura ambiente."
+        }
+      ]
+    },
+    {
+      "id": "uk-peixe-fritas",
+      "nome": "Peixe com fritas à inglesa",
+      "emoji": "🍟",
+      "sabor": "salgado",
+      "tempo": "35 min",
+      "pais": "Reino Unido",
+      "bandeira": "🇬🇧",
+      "sobre": "Peixe empanado e frito, servido com batatas fritas grossas e limão, clássico britânico de peixaria.",
+      "ings": [
+        "peixe",
+        "batata",
+        "farinha",
+        "azeite",
+        "limao"
+      ],
+      "qtd": {
+        "peixe": 2,
+        "batata": 4
+      },
+      "passos": [
+        "Corte a batata em bastões grossos e frite até dourar.",
+        "Passe o peixe na farinha e frite até ficar crocante por fora.",
+        "Sirva o peixe com a batata frita e gomos de limão."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 4 batatas em bastões grossos e seque bem com papel toalha.",
+          "min": 5
+        },
+        {
+          "txt": "Frite as batatas em azeite quente, em fogo médio, por 12 minutos, até dourarem e ficarem macias por dentro.",
+          "min": 12
+        },
+        {
+          "txt": "Escorra as batatas em papel toalha e tempere com sal.",
+          "min": 2
+        },
+        {
+          "txt": "Tempere 2 filés de peixe com sal e passe bem na farinha, cobrindo todo o filé.",
+          "min": 4
+        },
+        {
+          "txt": "Frite o peixe empanado em azeite quente por 4 minutos de cada lado, até dourar e ficar crocante.",
+          "min": 8
+        },
+        {
+          "txt": "Escorra o peixe em papel toalha para retirar o excesso de gordura.",
+          "min": 2
+        },
+        {
+          "txt": "Sirva o peixe com a batata frita e gomos de limão ao lado."
+        }
+      ]
+    },
+    {
+      "id": "it-carbonara",
+      "nome": "Espaguete à carbonara",
+      "emoji": "🍝",
+      "sabor": "salgado",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Clássico romano: o creme nasce do ovo com queijo, sem nenhuma gota de creme de leite.",
+      "ings": [
+        "macarrao",
+        "ovo",
+        "bacon",
+        "queijo",
+        "pimenta"
+      ],
+      "qtd": {
+        "ovo": 2
+      },
+      "passos": [
+        "Corte o bacon, ferva água com sal e doure o bacon até crocante.",
+        "Bata os ovos com queijo ralado e bastante pimenta em uma tigela.",
+        "Cozinhe o macarrão al dente e misture tudo fora do fogo até virar creme."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 150 g de bacon em cubinhos pequenos e reserve.",
+          "min": 3
+        },
+        {
+          "txt": "Encha uma panela grande com água, junte 1 colher de sopa de sal e leve para ferver em fogo alto.",
+          "min": 8
+        },
+        {
+          "txt": "Doure o bacon em fogo médio, sem óleo, mexendo até ficar bem crocante, uns 6 minutos.",
+          "min": 6
+        },
+        {
+          "txt": "Em uma tigela, bata 2 ovos com o queijo ralado e bastante pimenta até misturar bem.",
+          "min": 3
+        },
+        {
+          "txt": "Cozinhe 300 g de macarrão na água fervente até ficar al dente e reserve 1 concha da água.",
+          "min": 9
+        },
+        {
+          "txt": "Desligue o fogo do bacon, escorra o macarrão e misture os dois ainda quentes na frigideira.",
+          "min": 1
+        },
+        {
+          "txt": "Junte o creme de ovo e queijo fora do fogo, mexendo rápido e pingando água até ficar sedoso.",
+          "min": 2
+        },
+        {
+          "txt": "Sirva na hora, finalizando com mais queijo ralado e pimenta por cima."
+        }
+      ],
+      "tempo": "32 min"
+    },
+    {
+      "id": "it-risoto-abobora",
+      "nome": "Risoto de abóbora",
+      "emoji": "🍚",
+      "sabor": "salgado",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Risoto cremoso feito com o método italiano: caldo quente aos poucos, sempre mexendo.",
+      "ings": [
+        "arroz",
+        "abobora",
+        "cebola",
+        "alho",
+        "queijo",
+        "manteiga"
+      ],
+      "qtd": {
+        "abobora": 2
+      },
+      "passos": [
+        "Refogue cebola e alho na manteiga até ficarem macios.",
+        "Junte a abóbora e o arroz e refogue até os grãos ficarem translúcidos.",
+        "Adicione água quente aos poucos até o arroz ficar cremoso e finalize com queijo."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 300 g de abóbora em cubos pequenos e pique a cebola e o alho bem miúdos.",
+          "min": 6
+        },
+        {
+          "txt": "Derreta 1 colher de sopa de manteiga em fogo médio e refogue a cebola até ficar transparente.",
+          "min": 4
+        },
+        {
+          "txt": "Junte o alho e a abóbora e refogue por 3 minutos, mexendo sempre.",
+          "min": 3
+        },
+        {
+          "txt": "Adicione 1 xícara de arroz e mexa 1 minuto até os grãos ficarem translúcidos.",
+          "min": 1
+        },
+        {
+          "txt": "Cubra com água quente aos poucos, mexendo sem parar, até o arroz ficar cremoso e macio.",
+          "min": 18
+        },
+        {
+          "txt": "Desligue o fogo e misture o queijo ralado até derreter por completo.",
+          "min": 2
+        },
+        {
+          "txt": "Sirva quente, com mais queijo ralado por cima."
+        }
+      ],
+      "tempo": "34 min"
+    },
+    {
+      "id": "it-panzanella",
+      "nome": "Panzanella",
+      "emoji": "🥗",
+      "sabor": "salgado",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Salada toscana de aproveitamento: pão dormido ganha vida com tomate, azeite e vinagre.",
+      "ings": [
+        "pao",
+        "tomate",
+        "cebola",
+        "azeite",
+        "vinagre",
+        "oregano"
+      ],
+      "qtd": {
+        "tomate": 3
+      },
+      "passos": [
+        "Deixe o pão em cubos secar um pouco fora da geladeira.",
+        "Corte tomate e cebola e misture com o pão em uma tigela.",
+        "Tempere com azeite, vinagre e orégano e deixe descansar antes de servir."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte o pão em cubos e deixe descansar destampado por 20 minutos até ficar levemente seco.",
+          "min": 20
+        },
+        {
+          "txt": "Corte 3 tomates e a cebola em cubos pequenos e misture em uma tigela grande.",
+          "min": 5
+        },
+        {
+          "txt": "Junte os cubos de pão à mistura de tomate e cebola.",
+          "min": 1
+        },
+        {
+          "txt": "Regue com 3 colheres de sopa de azeite e 1 colher de sopa de vinagre.",
+          "min": 1
+        },
+        {
+          "txt": "Tempere com orégano e misture bem, amassando levemente o pão para absorver o suco do tomate.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe descansar por 10 minutos na geladeira antes de servir.",
+          "min": 10
+        }
+      ],
+      "tempo": "39 min"
+    },
+    {
+      "id": "it-minestrone",
+      "nome": "Minestrone de legumes",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Sopa italiana de aproveitamento, com legumes, feijão e macarrão cozidos juntos no caldo.",
+      "ings": [
+        "feijao",
+        "tomate",
+        "cenoura",
+        "cebola",
+        "macarrao",
+        "azeite"
+      ],
+      "qtd": {
+        "macarrao": 1
+      },
+      "passos": [
+        "Refogue cebola e cenoura no azeite até ficarem macias.",
+        "Junte tomate e água e deixe ferver antes de adicionar o feijão.",
+        "Cozinhe o feijão, junte o macarrão e cozinhe até ficar al dente."
+      ],
+      "preparo": [
+        {
+          "txt": "Pique a cebola e a cenoura em cubinhos pequenos.",
+          "min": 5
+        },
+        {
+          "txt": "Aqueça 2 colheres de sopa de azeite em fogo médio e refogue a cebola até ficar transparente.",
+          "min": 4
+        },
+        {
+          "txt": "Junte a cenoura e refogue por 3 minutos, mexendo sempre.",
+          "min": 3
+        },
+        {
+          "txt": "Adicione o tomate picado e 1 litro de água e deixe ferver em fogo alto.",
+          "min": 5
+        },
+        {
+          "txt": "Junte o feijão já cozido e cozinhe em fogo médio por 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Adicione o macarrão e cozinhe até ficar al dente, uns 8 minutos.",
+          "min": 8
+        },
+        {
+          "txt": "Tempere com sal a gosto e sirva bem quente."
+        }
+      ],
+      "tempo": "35 min"
+    },
+    {
+      "id": "it-frango-cacadora",
+      "nome": "Frango à caçadora",
+      "emoji": "🍗",
+      "sabor": "salgado",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Frango caseiro italiano cozido lentamente com tomate, cogumelos e pimentão.",
+      "ings": [
+        "frango",
+        "tomate",
+        "cebola",
+        "alho",
+        "cogumelo",
+        "pimentao"
+      ],
+      "qtd": {
+        "frango": 4
+      },
+      "passos": [
+        "Tempere e doure o frango em fogo alto até dourar.",
+        "Refogue cebola, alho, pimentão e cogumelo na mesma panela.",
+        "Volte o frango, junte o tomate e cozinhe até ficar macio."
+      ],
+      "preparo": [
+        {
+          "txt": "Tempere 4 pedaços de frango com sal e deixe descansar por 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Corte a cebola, o alho, o pimentão e o cogumelo em fatias.",
+          "min": 3
+        },
+        {
+          "txt": "Doure o frango em fogo alto até dourar dos dois lados, uns 8 minutos, e reserve.",
+          "min": 8
+        },
+        {
+          "txt": "Na mesma panela, refogue a cebola e o alho até ficarem macios.",
+          "min": 4
+        },
+        {
+          "txt": "Junte o pimentão e o cogumelo e refogue por 4 minutos.",
+          "min": 4
+        },
+        {
+          "txt": "Volte o frango à panela, acrescente o tomate picado e um pouco de água.",
+          "min": 2
+        },
+        {
+          "txt": "Tampe e cozinhe em fogo baixo até o frango ficar macio, cerca de 20 minutos.",
+          "min": 20
+        },
+        {
+          "txt": "Sirva quente com o molho de legumes por cima."
+        }
+      ],
+      "tempo": "51 min"
+    },
+    {
+      "id": "it-caponata",
+      "nome": "Caponata de berinjela",
+      "emoji": "🍆",
+      "sabor": "salgado",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Agridoce siciliano de berinjela frita com tomate, azeitona e vinagre.",
+      "ings": [
+        "berinjela",
+        "tomate",
+        "cebola",
+        "azeitona",
+        "vinagre",
+        "azeite"
+      ],
+      "qtd": {
+        "berinjela": 2
+      },
+      "passos": [
+        "Salgue a berinjela para tirar o amargor e depois frite até dourar.",
+        "Refogue cebola, tomate e azeitona na mesma panela.",
+        "Volte a berinjela, junte o vinagre e cozinhe até apurar o sabor."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 berinjelas em cubos e polvilhe sal; deixe descansar 15 minutos para tirar o amargor.",
+          "min": 15
+        },
+        {
+          "txt": "Enxágue e seque bem os cubos de berinjela com um pano limpo.",
+          "min": 2
+        },
+        {
+          "txt": "Aqueça 3 colheres de sopa de azeite em fogo médio e frite a berinjela até dourar.",
+          "min": 8
+        },
+        {
+          "txt": "Retire a berinjela e, na mesma panela, refogue a cebola até ficar macia.",
+          "min": 5
+        },
+        {
+          "txt": "Junte o tomate picado e as azeitonas e cozinhe por 5 minutos.",
+          "min": 5
+        },
+        {
+          "txt": "Volte a berinjela à panela, regue com 2 colheres de sopa de vinagre e misture bem.",
+          "min": 2
+        },
+        {
+          "txt": "Cozinhe em fogo baixo por 5 minutos até os sabores se misturarem e sirva morna ou fria.",
+          "min": 5
+        }
+      ],
+      "tempo": "42 min"
+    },
+    {
+      "id": "it-tiramisu",
+      "nome": "Tiramisù de café",
+      "emoji": "🍰",
+      "sabor": "doce",
+      "pais": "Itália",
+      "bandeira": "🇮🇹",
+      "sobre": "Sobremesa italiana em camadas: biscoito no café, creme de queijo e cacau por cima.",
+      "ings": [
+        "cafe",
+        "ovo",
+        "acucar",
+        "queijo",
+        "biscoito",
+        "cacau"
+      ],
+      "qtd": {
+        "ovo": 3
+      },
+      "passos": [
+        "Bata as gemas com açúcar em banho-maria até engrossar e misture o queijo.",
+        "Passe os biscoitos no café e monte camadas com o creme de queijo.",
+        "Leve à geladeira para firmar e finalize com cacau em pó."
+      ],
+      "preparo": [
+        {
+          "txt": "Prepare 200 ml de café forte, deixe esfriar e despeje em um prato fundo.",
+          "min": 5
+        },
+        {
+          "txt": "Separe as gemas de 3 ovos em uma tigela funda (guarde as claras para outra receita).",
+          "min": 2
+        },
+        {
+          "txt": "Bata as gemas com o açúcar em banho-maria, em fogo baixo, até engrossar e clarear, uns 8 minutos.",
+          "min": 8
+        },
+        {
+          "txt": "Retire do fogo e misture o queijo ao creme de gemas até ficar liso e homogêneo.",
+          "min": 3
+        },
+        {
+          "txt": "Passe cada biscoito rapidamente pelo café frio e forre o fundo de um refratário.",
+          "min": 4
+        },
+        {
+          "txt": "Cubra com metade do creme, repita as camadas de biscoito e creme e alise a superfície.",
+          "min": 3
+        },
+        {
+          "txt": "Leve à geladeira por pelo menos 1 hora para firmar.",
+          "min": 60
+        },
+        {
+          "txt": "Na hora de servir, polvilhe cacau em pó por cima."
+        }
+      ],
+      "tempo": "85 min"
+    },
+    {
+      "id": "fr-quiche-lorraine",
+      "nome": "Quiche lorraine",
+      "emoji": "🥧",
+      "sabor": "salgado",
+      "pais": "França",
+      "bandeira": "🇫🇷",
+      "sobre": "Torta salgada francesa: massa amanteigada com recheio cremoso de ovo, bacon e queijo.",
+      "ings": [
+        "farinha",
+        "manteiga",
+        "ovo",
+        "leite",
+        "bacon",
+        "queijo"
+      ],
+      "qtd": {
+        "ovo": 3
+      },
+      "passos": [
+        "Misture farinha e manteiga e forme uma massa; pré-asse por 10 minutos.",
+        "Frite o bacon e bata os ovos com leite e queijo para o recheio.",
+        "Despeje o recheio na massa e asse até dourar e firmar."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture 2 xícaras de farinha com 100 g de manteiga gelada até formar uma farofa grossa.",
+          "min": 5
+        },
+        {
+          "txt": "Adicione água fria aos poucos e amasse até formar uma massa lisa; deixe descansar 15 minutos na geladeira.",
+          "min": 15
+        },
+        {
+          "txt": "Abra a massa e forre o fundo e as laterais de uma forma untada; leve ao forno médio (180°C) por 10 minutos.",
+          "min": 10
+        },
+        {
+          "txt": "Enquanto isso, corte o bacon em tiras e frite em fogo médio até dourar.",
+          "min": 5
+        },
+        {
+          "txt": "Bata 3 ovos com o leite e tempere com sal; misture o bacon frito e o queijo ralado.",
+          "min": 3
+        },
+        {
+          "txt": "Despeje o recheio sobre a massa pré-assada, espalhando bem.",
+          "min": 1
+        },
+        {
+          "txt": "Asse em forno médio (180°C) por 30 minutos, até o recheio firmar e dourar por cima.",
+          "min": 30
+        },
+        {
+          "txt": "Deixe amornar 5 minutos antes de cortar e servir.",
+          "min": 5
+        }
+      ],
+      "tempo": "74 min"
+    },
+    {
+      "id": "fr-croque-monsieur",
+      "nome": "Croque monsieur",
+      "emoji": "🥪",
+      "sabor": "salgado",
+      "pais": "França",
+      "bandeira": "🇫🇷",
+      "sobre": "Sanduíche quente francês de presunto e queijo, gratinado com molho branco por cima.",
+      "ings": [
+        "pao",
+        "presunto",
+        "queijo",
+        "manteiga",
+        "farinha",
+        "leite"
+      ],
+      "qtd": {
+        "presunto": 2
+      },
+      "passos": [
+        "Prepare um molho branco com manteiga, farinha e leite.",
+        "Monte o sanduíche com pão, presunto e queijo.",
+        "Cubra com o molho branco e leve ao forno até gratinar."
+      ],
+      "preparo": [
+        {
+          "txt": "Derreta 1 colher de sopa de manteiga em fogo baixo e junte 1 colher de sopa de farinha, mexendo bem.",
+          "min": 2
+        },
+        {
+          "txt": "Adicione o leite aos poucos, sem parar de mexer, até o molho engrossar e ficar liso.",
+          "min": 5
+        },
+        {
+          "txt": "Tempere o molho branco com uma pitada de sal e reserve.",
+          "min": 1
+        },
+        {
+          "txt": "Monte o sanduíche com 2 fatias de pão, presunto e queijo entre elas.",
+          "min": 2
+        },
+        {
+          "txt": "Espalhe o molho branco por cima do sanduíche montado e finalize com mais queijo ralado.",
+          "min": 1
+        },
+        {
+          "txt": "Leve ao forno quente (200°C) ou à frigideira até o queijo derreter e dourar por cima, uns 8 minutos.",
+          "min": 8
+        }
+      ],
+      "tempo": "19 min"
+    },
+    {
+      "id": "fr-sopa-cebola-gratinada",
+      "nome": "Sopa de cebola gratinada",
+      "emoji": "🧅",
+      "sabor": "salgado",
+      "pais": "França",
+      "bandeira": "🇫🇷",
+      "sobre": "Sopa francesa de cebola bem dourada, coberta com pão e queijo gratinado no forno.",
+      "ings": [
+        "cebola",
+        "manteiga",
+        "farinha",
+        "queijo",
+        "pao"
+      ],
+      "qtd": {
+        "cebola": 4
+      },
+      "passos": [
+        "Refogue a cebola fatiada na manteiga até dourar bem.",
+        "Junte a farinha e a água e cozinhe até formar um caldo encorpado.",
+        "Cubra com pão e queijo e leve ao forno até gratinar."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 4 cebolas grandes em fatias finas.",
+          "min": 5
+        },
+        {
+          "txt": "Derreta 2 colheres de sopa de manteiga em fogo baixo e refogue a cebola, mexendo sempre, por 25 minutos, até dourar bem.",
+          "min": 25
+        },
+        {
+          "txt": "Polvilhe 1 colher de sopa de farinha sobre a cebola e mexa por 1 minuto.",
+          "min": 1
+        },
+        {
+          "txt": "Adicione 1 litro de água quente aos poucos e deixe cozinhar em fogo médio por 15 minutos.",
+          "min": 15
+        },
+        {
+          "txt": "Tempere com sal e distribua a sopa em tigelas que possam ir ao forno.",
+          "min": 2
+        },
+        {
+          "txt": "Cubra cada tigela com uma fatia de pão e bastante queijo ralado.",
+          "min": 2
+        },
+        {
+          "txt": "Leve ao forno quente até o queijo derreter e dourar, cerca de 8 minutos.",
+          "min": 8
+        }
+      ],
+      "tempo": "58 min"
+    },
+    {
+      "id": "fr-salada-nicoise",
+      "nome": "Salada niçoise",
+      "emoji": "🥗",
+      "sabor": "salgado",
+      "pais": "França",
+      "bandeira": "🇫🇷",
+      "sobre": "Salada fria francesa com atum, ovo, batata e vagem, típica da região de Nice.",
+      "ings": [
+        "atum",
+        "ovo",
+        "batata",
+        "vagem",
+        "azeitona",
+        "tomate"
+      ],
+      "qtd": {
+        "ovo": 2
+      },
+      "passos": [
+        "Cozinhe batata, ovo e vagem separadamente até ficarem macios.",
+        "Corte tudo em pedaços e arrume em um prato.",
+        "Finalize com atum e azeitonas por cima e sirva."
+      ],
+      "preparo": [
+        {
+          "txt": "Cozinhe as batatas em água fervente até ficarem macias ao espetar com um garfo, uns 15 minutos.",
+          "min": 15
+        },
+        {
+          "txt": "Cozinhe 2 ovos em água fervente por 9 minutos, depois resfrie em água fria e descasque.",
+          "min": 9
+        },
+        {
+          "txt": "Cozinhe a vagem em água fervente por 4 minutos, até ficar macia mas ainda crocante.",
+          "min": 4
+        },
+        {
+          "txt": "Corte as batatas, os ovos, o tomate e a vagem em pedaços.",
+          "min": 2
+        },
+        {
+          "txt": "Arrume os pedaços em um prato com o atum escorrido e as azeitonas por cima.",
+          "min": 1
+        },
+        {
+          "txt": "Tempere com sal e sirva em temperatura ambiente."
+        }
+      ],
+      "tempo": "31 min"
+    },
+    {
+      "id": "fr-tarte-tatin",
+      "nome": "Tarte Tatin de maçã",
+      "emoji": "🍎",
+      "sabor": "doce",
+      "pais": "França",
+      "bandeira": "🇫🇷",
+      "sobre": "Torta francesa invertida: maçã caramelizada por baixo, massa crocante por cima.",
+      "ings": [
+        "maca",
+        "acucar",
+        "manteiga",
+        "farinha",
+        "ovo"
+      ],
+      "qtd": {
+        "maca": 4
+      },
+      "passos": [
+        "Prepare a massa com farinha, manteiga e ovo e deixe descansar.",
+        "Caramelize o açúcar e cozinhe as maçãs na frigideira.",
+        "Cubra com a massa, asse e desenforme virada com as maçãs para cima."
+      ],
+      "preparo": [
+        {
+          "txt": "Descasque e corte 4 maçãs em fatias grossas.",
+          "min": 5
+        },
+        {
+          "txt": "Misture farinha, manteiga gelada, 1 ovo e 1 colher de sopa de açúcar até formar uma massa lisa; deixe descansar 15 minutos.",
+          "min": 15
+        },
+        {
+          "txt": "Em uma frigideira que possa ir ao forno, derreta 4 colheres de sopa de açúcar em fogo baixo até virar um caramelo dourado.",
+          "min": 8
+        },
+        {
+          "txt": "Junte 1 colher de sopa de manteiga ao caramelo e arrume as fatias de maçã por cima, ainda no fogo.",
+          "min": 3
+        },
+        {
+          "txt": "Cozinhe em fogo baixo por 10 minutos, até as maçãs começarem a amolecer.",
+          "min": 10
+        },
+        {
+          "txt": "Cubra as maçãs com a massa, ajustando as bordas para dentro da frigideira.",
+          "min": 2
+        },
+        {
+          "txt": "Asse em forno médio (180°C) por 25 minutos, até a massa dourar.",
+          "min": 25
+        },
+        {
+          "txt": "Espere amornar e vire a torta em um prato, com as maçãs caramelizadas para cima.",
+          "min": 5
+        }
+      ],
+      "tempo": "73 min"
+    },
+    {
+      "id": "lb-homus",
+      "nome": "Homus de grão-de-bico com azeite",
+      "emoji": "🥣",
+      "sabor": "salgado",
+      "tempo": "18 min",
+      "pais": "Líbano",
+      "bandeira": "🇱🇧",
+      "sobre": "Pasta libanesa de grão-de-bico batido com azeite e limão; aqui sem tahine, que não está no catálogo.",
+      "ings": [
+        "grao-de-bico",
+        "azeite",
+        "limao",
+        "alho",
+        "paprica"
+      ],
+      "qtd": {
+        "grao-de-bico": 2
+      },
+      "passos": [
+        "Escorra e esquente o grão-de-bico até ficar bem macio.",
+        "Bata com azeite, limão e alho até formar um creme liso.",
+        "Finalize com páprica e um fio de azeite por cima."
+      ],
+      "preparo": [
+        {
+          "txt": "Escorra 2 latas de grão-de-bico cozido e separe uma colher de grãos para decorar.",
+          "min": 3
+        },
+        {
+          "txt": "Esquente o grão-de-bico em fogo baixo por 5 minutos até ficar bem macio ao apertar.",
+          "min": 5
+        },
+        {
+          "txt": "Bata o grão-de-bico ainda morno no liquidificador com 3 colheres de sopa de azeite.",
+          "min": 3
+        },
+        {
+          "txt": "Junte o suco de 1 limão e 1 dente de alho picado e bata até formar um creme liso.",
+          "min": 3
+        },
+        {
+          "txt": "Pingue água aos poucos, batendo, até o creme ficar macio como um patê.",
+          "min": 2
+        },
+        {
+          "txt": "Espalhe no prato fazendo ondas com as costas da colher e regue com azeite.",
+          "min": 1
+        },
+        {
+          "txt": "Polvilhe páprica por cima e decore com os grãos reservados antes de servir.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "lb-mutabal-berinjela",
+      "nome": "Mutabal de berinjela assada",
+      "emoji": "🍆",
+      "sabor": "salgado",
+      "tempo": "50 min",
+      "pais": "Líbano",
+      "bandeira": "🇱🇧",
+      "sobre": "Pasta libanesa de berinjela assada com azeite, limão e iogurte, com gergelim no lugar do tahine.",
+      "ings": [
+        "berinjela",
+        "azeite",
+        "limao",
+        "alho",
+        "iogurte",
+        "gergelim"
+      ],
+      "qtd": {
+        "berinjela": 2
+      },
+      "passos": [
+        "Asse as berinjelas inteiras até a casca murchar e a polpa ficar macia.",
+        "Retire a polpa e amasse com azeite, limão e alho.",
+        "Misture o iogurte e finalize com gergelim torrado."
+      ],
+      "preparo": [
+        {
+          "txt": "Fure 2 berinjelas inteiras com um garfo e leve ao forno a 200°C por 35 minutos até murchar.",
+          "min": 35
+        },
+        {
+          "txt": "Deixe esfriar um pouco, corte ao meio e retire toda a polpa com uma colher.",
+          "min": 5
+        },
+        {
+          "txt": "Amasse a polpa da berinjela com um garfo até virar um purê.",
+          "min": 2
+        },
+        {
+          "txt": "Misture 2 colheres de sopa de azeite, o suco de 1 limão e 1 dente de alho picado.",
+          "min": 2
+        },
+        {
+          "txt": "Junte 2 colheres de sopa de iogurte natural e mexa até ficar cremoso.",
+          "min": 2
+        },
+        {
+          "txt": "Toste 1 colher de sopa de gergelim em fogo baixo, mexendo sempre, até dourar.",
+          "min": 3
+        },
+        {
+          "txt": "Sirva o mutabal com um fio de azeite e o gergelim torrado por cima.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "lb-frango-grelhado",
+      "nome": "Frango grelhado à libanesa",
+      "emoji": "🍗",
+      "sabor": "salgado",
+      "tempo": "44 min",
+      "pais": "Líbano",
+      "bandeira": "🇱🇧",
+      "sobre": "Cubos de frango marinados em iogurte, limão e páprica, grelhados como o shish taouk libanês.",
+      "ings": [
+        "frango",
+        "limao",
+        "alho",
+        "paprica",
+        "azeite",
+        "iogurte"
+      ],
+      "qtd": {
+        "frango": 4
+      },
+      "passos": [
+        "Corte o frango em cubos e tempere com sal.",
+        "Marine com iogurte, limão, alho e páprica por 20 minutos.",
+        "Grelhe até dourar por fora e cozinhar bem por dentro."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 4 filés de frango em cubos grandes e tempere com sal.",
+          "min": 5
+        },
+        {
+          "txt": "Misture 2 colheres de sopa de iogurte, suco de 1 limão, 1 dente de alho picado e páprica.",
+          "min": 3
+        },
+        {
+          "txt": "Cubra o frango com a marinada e deixe descansar na geladeira por 20 minutos.",
+          "min": 20
+        },
+        {
+          "txt": "Espete os cubos de frango em palitos, se quiser, ou deixe soltos.",
+          "min": 3
+        },
+        {
+          "txt": "Grelhe em fogo médio-alto por 5 minutos de cada lado até dourar por fora.",
+          "min": 10
+        },
+        {
+          "txt": "Verifique se o frango está bem cozido por dentro, sem partes rosadas.",
+          "min": 2
+        },
+        {
+          "txt": "Regue com azeite e mais limão antes de servir.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "lb-sfouf",
+      "nome": "Sfouf libanês de cúrcuma",
+      "emoji": "🍰",
+      "sabor": "doce",
+      "tempo": "51 min",
+      "pais": "Líbano",
+      "bandeira": "🇱🇧",
+      "sobre": "Bolo libanês amarelo, perfumado com cúrcuma e canela, com gergelim torrado por cima.",
+      "ings": [
+        "farinha",
+        "curcuma",
+        "acucar",
+        "leite",
+        "manteiga",
+        "gergelim"
+      ],
+      "qtd": {
+        "farinha": 2,
+        "acucar": 1
+      },
+      "passos": [
+        "Misture os secos com cúrcuma e canela.",
+        "Junte manteiga derretida com leite e misture tudo.",
+        "Asse até dourar e corte em losangos depois de frio."
+      ],
+      "preparo": [
+        {
+          "txt": "Preaqueça o forno a 180°C e unte uma forma retangular com manteiga.",
+          "min": 5
+        },
+        {
+          "txt": "Misture 2 xícaras de farinha, 1 xícara de açúcar, 1 colher de sopa de cúrcuma e canela.",
+          "min": 3
+        },
+        {
+          "txt": "Derreta 100g de manteiga e misture com 1 xícara de leite morno.",
+          "min": 3
+        },
+        {
+          "txt": "Junte os líquidos aos secos e mexa até formar uma massa lisa, sem grumos.",
+          "min": 3
+        },
+        {
+          "txt": "Despeje na forma untada e polvilhe gergelim por toda a superfície.",
+          "min": 2
+        },
+        {
+          "txt": "Asse por 30 minutos até dourar e um palito sair limpo do centro.",
+          "min": 30
+        },
+        {
+          "txt": "Deixe esfriar um pouco e corte em losangos antes de servir.",
+          "min": 5
+        }
+      ]
+    },
+    {
+      "id": "gr-salada-grega",
+      "nome": "Salada grega",
+      "emoji": "🥗",
+      "sabor": "salgado",
+      "tempo": "11 min",
+      "pais": "Grécia",
+      "bandeira": "🇬🇷",
+      "sobre": "Salada fria com tomate, pepino, azeitona e queijo, temperada só com azeite e orégano.",
+      "ings": [
+        "tomate",
+        "pepino",
+        "azeitona",
+        "queijo",
+        "azeite",
+        "oregano"
+      ],
+      "passos": [
+        "Corte o tomate e o pepino em pedaços grandes.",
+        "Junte as azeitonas e o queijo em cubos.",
+        "Regue com azeite e finalize com orégano."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte 2 tomates em gomos grandes e 1 pepino em rodelas grossas.",
+          "min": 5
+        },
+        {
+          "txt": "Junte os tomates e o pepino em uma travessa funda.",
+          "min": 1
+        },
+        {
+          "txt": "Adicione um punhado de azeitonas e misture com cuidado.",
+          "min": 1
+        },
+        {
+          "txt": "Corte o queijo em cubos e espalhe por cima da salada.",
+          "min": 2
+        },
+        {
+          "txt": "Regue com bastante azeite e polvilhe orégano por toda a salada.",
+          "min": 1
+        },
+        {
+          "txt": "Sirva em seguida, sem misturar demais para o queijo não desmanchar.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "gr-tzatziki",
+      "nome": "Tzatziki grego de pepino",
+      "emoji": "🥒",
+      "sabor": "salgado",
+      "tempo": "28 min",
+      "pais": "Grécia",
+      "bandeira": "🇬🇷",
+      "sobre": "Molho grego cremoso de iogurte e pepino, ótimo para acompanhar pão ou legumes.",
+      "ings": [
+        "iogurte",
+        "pepino",
+        "alho",
+        "azeite",
+        "limao"
+      ],
+      "qtd": {
+        "iogurte": 2
+      },
+      "passos": [
+        "Rale o pepino e esprema bem a água.",
+        "Misture com iogurte, alho, azeite e limão.",
+        "Leve à geladeira e sirva bem gelado."
+      ],
+      "preparo": [
+        {
+          "txt": "Rale 1 pepino inteiro e esprema bem para tirar o excesso de água.",
+          "min": 5
+        },
+        {
+          "txt": "Misture o pepino ralado com 2 xícaras de iogurte natural.",
+          "min": 2
+        },
+        {
+          "txt": "Junte 1 dente de alho bem picado e mexa até incorporar.",
+          "min": 2
+        },
+        {
+          "txt": "Adicione 1 colher de sopa de azeite e o suco de meio limão.",
+          "min": 2
+        },
+        {
+          "txt": "Tempere com sal e misture tudo até ficar homogêneo.",
+          "min": 2
+        },
+        {
+          "txt": "Leve à geladeira por 15 minutos antes de servir bem gelado.",
+          "min": 15
+        }
+      ]
+    },
+    {
+      "id": "gr-loukoumades",
+      "nome": "Bolinho grego de mel",
+      "emoji": "🍯",
+      "sabor": "doce",
+      "tempo": "42 min",
+      "pais": "Grécia",
+      "bandeira": "🇬🇷",
+      "sobre": "Bolinhos fritos gregos, crocantes por fora e macios por dentro, servidos com mel e canela.",
+      "ings": [
+        "farinha",
+        "ovo",
+        "mel",
+        "canela",
+        "azeite"
+      ],
+      "qtd": {
+        "farinha": 2
+      },
+      "passos": [
+        "Misture a massa e deixe descansar 20 minutos.",
+        "Frite colheradas da massa até dourar.",
+        "Regue com mel e polvilhe canela ainda quente."
+      ],
+      "preparo": [
+        {
+          "txt": "Misture 2 xícaras de farinha com 1 ovo e água morna até formar uma massa mole e pegajosa.",
+          "min": 5
+        },
+        {
+          "txt": "Cubra a massa e deixe descansar por 20 minutos em local morno.",
+          "min": 20
+        },
+        {
+          "txt": "Aqueça bastante azeite em fogo médio numa panela funda.",
+          "min": 5
+        },
+        {
+          "txt": "Pingue colheradas da massa no azeite quente e frite até dourar, virando os bolinhos.",
+          "min": 8
+        },
+        {
+          "txt": "Retire com uma escumadeira e escorra em papel toalha.",
+          "min": 2
+        },
+        {
+          "txt": "Regue com mel morno e polvilhe canela por cima ainda quentes.",
+          "min": 2
+        }
+      ]
+    },
+    {
+      "id": "ma-cuscuz-grao-de-bico",
+      "nome": "Cuscuz marroquino com grão-de-bico",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "tempo": "29 min",
+      "pais": "Marrocos",
+      "bandeira": "🇲🇦",
+      "sobre": "Cuscuz marroquino refogado com grão-de-bico, cenoura e especiarias, um prato vegetariano completo.",
+      "ings": [
+        "cuscuz",
+        "grao-de-bico",
+        "cenoura",
+        "abobora",
+        "curcuma",
+        "azeite"
+      ],
+      "qtd": {
+        "cuscuz": 2,
+        "grao-de-bico": 1
+      },
+      "passos": [
+        "Refogue cenoura e abóbora com cúrcuma até amaciar.",
+        "Junte o grão-de-bico cozido e esquente tudo.",
+        "Hidrate o cuscuz na água fervente e misture com os legumes."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte a cenoura e a abóbora em cubos pequenos.",
+          "min": 5
+        },
+        {
+          "txt": "Refogue os legumes em 2 colheres de sopa de azeite em fogo médio por 8 minutos até amaciar.",
+          "min": 8
+        },
+        {
+          "txt": "Tempere com 1 colher de chá de cúrcuma e mexa até os legumes ficarem bem amarelos.",
+          "min": 1
+        },
+        {
+          "txt": "Junte o grão-de-bico cozido e escorrido e esquente tudo por 3 minutos.",
+          "min": 3
+        },
+        {
+          "txt": "Ferva 2 xícaras de água à parte e desligue o fogo.",
+          "min": 5
+        },
+        {
+          "txt": "Despeje a água fervente sobre 2 xícaras de cuscuz, tampe e deixe hidratar por 5 minutos.",
+          "min": 5
+        },
+        {
+          "txt": "Solte o cuscuz com um garfo e misture com os legumes e o grão-de-bico.",
+          "min": 2
+        }
+      ]
+    },
+    {
+      "id": "ma-tagine-frango",
+      "nome": "Tagine de frango com azeitona",
+      "emoji": "🍗",
+      "sabor": "salgado",
+      "tempo": "50 min",
+      "pais": "Marrocos",
+      "bandeira": "🇲🇦",
+      "sobre": "Ensopado marroquino de frango com azeitonas, limão e especiarias, cozido bem devagar.",
+      "ings": [
+        "frango",
+        "azeitona",
+        "limao",
+        "cebola",
+        "curcuma",
+        "canela"
+      ],
+      "qtd": {
+        "frango": 4
+      },
+      "passos": [
+        "Doure o frango e refogue a cebola.",
+        "Tempere com cúrcuma e canela e cozinhe em fogo baixo até macio.",
+        "Finalize com azeitonas e limão antes de servir."
+      ],
+      "preparo": [
+        {
+          "txt": "Corte a cebola em fatias finas e o frango em pedaços grandes.",
+          "min": 8
+        },
+        {
+          "txt": "Doure o frango em fogo médio-alto por 6 minutos até pegar cor por fora.",
+          "min": 6
+        },
+        {
+          "txt": "Junte a cebola e refogue até ficar transparente, por 4 minutos.",
+          "min": 4
+        },
+        {
+          "txt": "Tempere com 1 colher de chá de cúrcuma e uma pitada de canela e mexa bem.",
+          "min": 1
+        },
+        {
+          "txt": "Cubra com água, tampe e cozinhe em fogo baixo por 25 minutos até o frango ficar macio.",
+          "min": 25
+        },
+        {
+          "txt": "Junte um punhado de azeitonas e o suco de 1 limão nos últimos 5 minutos.",
+          "min": 5
+        },
+        {
+          "txt": "Prove o caldo, ajuste o sal e sirva bem quente.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "ma-laranja-canela",
+      "nome": "Salada marroquina de laranja",
+      "emoji": "🍊",
+      "sabor": "doce",
+      "tempo": "38 min",
+      "pais": "Marrocos",
+      "bandeira": "🇲🇦",
+      "sobre": "Sobremesa marroquina refrescante de laranja fatiada com canela, mel e hortelã.",
+      "ings": [
+        "laranja",
+        "canela",
+        "mel",
+        "hortela"
+      ],
+      "qtd": {
+        "laranja": 4
+      },
+      "passos": [
+        "Descasque e fatie as laranjas em rodelas.",
+        "Arrume no prato e polvilhe canela.",
+        "Regue com mel, gele e finalize com hortelã."
+      ],
+      "preparo": [
+        {
+          "txt": "Descasque 4 laranjas retirando bem a parte branca amarga.",
+          "min": 8
+        },
+        {
+          "txt": "Fatie as laranjas em rodelas finas e retire as sementes.",
+          "min": 5
+        },
+        {
+          "txt": "Arrume as rodelas em um prato fundo, uma ao lado da outra.",
+          "min": 2
+        },
+        {
+          "txt": "Polvilhe canela por cima de todas as rodelas.",
+          "min": 1
+        },
+        {
+          "txt": "Regue com 2 colheres de sopa de mel espalhando bem.",
+          "min": 1
+        },
+        {
+          "txt": "Leve à geladeira por 20 minutos para gelar bem.",
+          "min": 20
+        },
+        {
+          "txt": "Decore com folhas de hortelã picadas antes de servir.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "tr-sopa-lentilha",
+      "nome": "Sopa turca de lentilha vermelha",
+      "emoji": "🍲",
+      "sabor": "salgado",
+      "tempo": "40 min",
+      "pais": "Turquia",
+      "bandeira": "🇹🇷",
+      "sobre": "Sopa turca cremosa de lentilha temperada com cúrcuma, páprica e um toque de limão.",
+      "ings": [
+        "lentilha",
+        "cebola",
+        "cenoura",
+        "curcuma",
+        "paprica",
+        "limao"
+      ],
+      "qtd": {
+        "lentilha": 1
+      },
+      "passos": [
+        "Refogue a cebola e junte a cenoura e a lentilha.",
+        "Tempere com cúrcuma e páprica e cozinhe até a lentilha desmanchar.",
+        "Bata ou amasse a sopa e finalize com limão."
+      ],
+      "preparo": [
+        {
+          "txt": "Pique a cebola e a cenoura em pedaços pequenos.",
+          "min": 5
+        },
+        {
+          "txt": "Refogue a cebola em fogo médio por 3 minutos até ficar transparente.",
+          "min": 3
+        },
+        {
+          "txt": "Junte a cenoura, 1 xícara de lentilha lavada e cubra tudo com água.",
+          "min": 2
+        },
+        {
+          "txt": "Tempere com 1 colher de chá de cúrcuma e 1 colher de chá de páprica.",
+          "min": 1
+        },
+        {
+          "txt": "Cozinhe em fogo baixo por 25 minutos até a lentilha desmanchar.",
+          "min": 25
+        },
+        {
+          "txt": "Bata a sopa com um mixer até ficar cremosa, ou amasse com um garfo.",
+          "min": 3
+        },
+        {
+          "txt": "Finalize com gotas de limão fresco antes de servir.",
+          "min": 1
+        }
+      ]
+    },
+    {
+      "id": "tr-gergelim-mel",
+      "nome": "Barrinha turca de gergelim e mel",
+      "emoji": "🍯",
+      "sabor": "doce",
+      "tempo": "38 min",
+      "pais": "Turquia",
+      "bandeira": "🇹🇷",
+      "sobre": "Barrinha turca crocante de gergelim torrado caramelizado com mel, cortada em pedaços.",
+      "ings": [
+        "gergelim",
+        "mel",
+        "acucar",
+        "canela"
+      ],
+      "qtd": {
+        "gergelim": 2
+      },
+      "passos": [
+        "Toste o gergelim até dourar.",
+        "Derreta açúcar e mel até virar caramelo e junte o gergelim.",
+        "Espalhe na forma, deixe esfriar e corte em barrinhas."
+      ],
+      "preparo": [
+        {
+          "txt": "Forre uma assadeira pequena com papel manteiga.",
+          "min": 2
+        },
+        {
+          "txt": "Toste 2 xícaras de gergelim em fogo médio, mexendo sempre, até dourar e soltar aroma.",
+          "min": 5
+        },
+        {
+          "txt": "Numa panela, aqueça meia xícara de açúcar com 3 colheres de sopa de mel em fogo baixo.",
+          "min": 3
+        },
+        {
+          "txt": "Mexa sem parar até o açúcar derreter e virar um caramelo claro.",
+          "min": 5
+        },
+        {
+          "txt": "Desligue o fogo, junte o gergelim torrado e uma pitada de canela e misture rápido.",
+          "min": 1
+        },
+        {
+          "txt": "Despeje na assadeira forrada e alise bem com as costas de uma colher molhada.",
+          "min": 2
+        },
+        {
+          "txt": "Deixe esfriar completamente por 20 minutos antes de cortar em barrinhas.",
+          "min": 20
+        }
       ]
     }
   ]

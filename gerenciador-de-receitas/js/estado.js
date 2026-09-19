@@ -13,8 +13,9 @@ export const estado = {
   ingredientesProprios: [], // produtos cadastrados pela pessoa (mesmo formato de ingrediente, com casa: true)
   estoque: {},             // { idIngrediente: quantidade que tenho em casa, na unidade do ingrediente (g, ml ou un) }
   notas: {},               // { idIngrediente: 1..5 }
+  preparo: {},             // { idReceita: [índices dos passos já marcados] } — o checklist do modo de preparo
   busca: "", tipo: "todos",
-  buscaReceita: "", filtroReceita: "todas",
+  buscaReceita: "", filtroReceita: "todas", pais: "todos",
   limiteLivro: 24,         // quantos cards do livro estão visíveis (botão "ver mais")
   panela: [],              // ids na ordem em que caíram
   receitaSelecionada: null,
@@ -92,13 +93,15 @@ export function avaliarPanela(e) {
 export function receitasVisiveis(e) {
   const set = new Set(e.panela), t = norm(e.buscaReceita), ING = porId(e);
   return todasReceitas(e).filter(r => {
-    const bateBusca = t === "" || norm(r.nome).includes(t) || r.ings.some(id => norm(ING[id]?.nome || id).includes(t));
+    const bateBusca = t === "" || norm(r.nome).includes(t) || norm(r.pais || "").includes(t) || norm(r.sobre || "").includes(t) || r.ings.some(id => norm(ING[id]?.nome || id).includes(t));
     const tags = tagsDe(e, r);
     const bateFiltro = e.filtroReceita === "todas" ? true
       : e.filtroReceita === "da-para-fazer" ? r.ings.every(i => set.has(i))
       : e.filtroReceita === "em-casa" ? r.ings.every(i => qtdEmCasa(e, i) >= precisa(e, r, i))
+      : e.filtroReceita === "do-mundo" ? !!r.pais
       : tags.includes(e.filtroReceita);
-    return bateBusca && bateFiltro;
+    const batePais = e.pais === "todos" || r.pais === e.pais;
+    return bateBusca && bateFiltro && batePais;
   });
 }
 
@@ -108,4 +111,29 @@ export function notaDaReceita(e, r) {
   return notas.length ? notas.reduce((a, b) => a + b, 0) / notas.length : 0;
 }
 
-export const criterioInicial = () => ({ busca: "", tipo: "todos", buscaReceita: "", filtroReceita: "todas", limiteLivro: LIMITE_LIVRO });
+// ---------- modo de preparo (o checklist) ----------
+// Toda receita tem um roteiro. As do mundo trazem o preparo detalhado; as demais
+// ganham um primeiro passo de mise en place montado a partir da própria gramagem.
+export function roteiro(e, r) {
+  if (Array.isArray(r.preparo) && r.preparo.length)
+    return r.preparo.map(p => typeof p === "string" ? { txt: p } : { txt: p.txt, min: p.min });
+  const lista = gramagem(e, r).map(x => `${x.nome.toLowerCase()} ${formatarQtd(porId(e)[x.id], x.qtd)}`).join(", ");
+  const abre = lista ? [{ txt: `Separe e deixe à mão: ${lista}.`, min: 5 }] : [];
+  return [...abre, ...(r.passos || ["Junte tudo na panela e cozinhe do seu jeito."]).map(txt => ({ txt }))];
+}
+export const passosFeitos = (e, id) => Array.isArray(e.preparo[id]) ? e.preparo[id] : [];
+export const passoFeito = (e, id, i) => passosFeitos(e, id).includes(i);
+export function progresso(e, r) {
+  const total = roteiro(e, r).length, feitos = passosFeitos(e, r.id).filter(i => i < total).length;
+  return { feitos, total, pct: total ? Math.round(feitos / total * 100) : 0, completa: total > 0 && feitos === total, atual: feitos < total ? roteiro(e, r).findIndex((_, i) => !passoFeito(e, r.id, i)) : -1 };
+}
+export const tempoDoRoteiro = (e, r) => roteiro(e, r).reduce((a, p) => a + (+p.min || 0), 0);
+
+// ---------- países ----------
+export function paises(e) {
+  const m = new Map();
+  todasReceitas(e).filter(r => r.pais).forEach(r => { const o = m.get(r.pais) || { pais: r.pais, bandeira: r.bandeira || "🌍", n: 0 }; o.n++; m.set(r.pais, o); });
+  return [...m.values()].sort((a, b) => a.pais.localeCompare(b.pais, "pt-BR"));
+}
+
+export const criterioInicial = () => ({ busca: "", tipo: "todos", buscaReceita: "", filtroReceita: "todas", pais: "todos", limiteLivro: LIMITE_LIVRO });

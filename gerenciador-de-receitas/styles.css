@@ -308,3 +308,39 @@ main { display: grid; gap: 22px; margin-top: 22px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .pot.cozinhando .vapor i { opacity: .6; transform: translateY(-30px) scaleX(1.6); }
 }
+
+/* ====== receitas do mundo: bandeira, país e "sobre" ====== */
+.plate .flag { position: absolute; top: -6px; right: -8px; font-size: 1.05rem; line-height: 1; background: var(--paper); border: 2px solid var(--ink); border-radius: 999px; padding: 1px 3px; filter: none; }
+.tag--pais { background: var(--teal); color: var(--paper); }
+.ficha .sobre { margin-top: 8px; font-family: var(--serif); font-style: italic; font-size: .92rem; color: var(--choc-2); }
+.campo--pais { display: inline-grid; }
+.campo--pais select { font: inherit; background: var(--paper); border: 3px solid var(--ink); border-radius: 999px; padding: 6px 12px; box-shadow: 3px 3px 0 var(--ink); max-width: 230px; }
+
+/* ====== modo de preparo: o checklist que se marca cozinhando ====== */
+.preparo { margin-top: 14px; border: 3px solid var(--ink); border-radius: 16px; background: var(--paper); padding: 12px; box-shadow: 4px 4px 0 var(--ink); }
+.preparo__cab { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.preparo__cab h4 { font-size: 1rem; }
+.preparo__cont { font-family: var(--display); font-weight: 800; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--choc-2); }
+.preparo__barra { display: block; height: 14px; margin: 8px 0 12px; border: 3px solid var(--ink); border-radius: 999px; background: var(--cream); overflow: hidden; }
+.preparo__fill { display: block; height: 100%; width: 0; background: repeating-linear-gradient(135deg, var(--avocado) 0 10px, var(--avocado-deep) 10px 20px); transition: width .25s ease-out; }
+.preparo .passos { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.passo__btn { width: 100%; min-height: 44px; display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 10px; text-align: left; padding: 8px 10px; background: var(--cream); border: 3px solid var(--ink); border-radius: 14px; transition: transform .12s, background .15s; }
+.passo__btn:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink); }
+.passo__marca { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); font-family: var(--display); font-weight: 900; font-size: .92rem; }
+.passo__txt { font-size: .93rem; line-height: 1.35; }
+.passo__min { font-style: normal; font-family: var(--display); font-weight: 800; font-size: .7rem; text-transform: uppercase; background: var(--cream-2); border: 2px solid var(--ink); border-radius: 999px; padding: 1px 7px; white-space: nowrap; }
+.passo.atual .passo__btn { background: #fff0c2; border-color: var(--tomato-deep); box-shadow: 3px 3px 0 var(--tomato-deep); }
+.passo.atual .passo__marca { background: var(--tomato); color: var(--paper); }
+.passo.feito .passo__btn { background: #e6f2d9; }
+.passo.feito .passo__marca { background: var(--avocado-deep); color: var(--paper); }
+.passo.feito .passo__txt { color: var(--choc-2); }
+.preparo__acts { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.preparo__dica { font-size: .82rem; color: var(--choc-2); }
+.preparo__fim { font-family: var(--display); font-weight: 900; color: var(--avocado-deep); }
+.preparo.completo { border-color: var(--avocado-deep); box-shadow: 4px 4px 0 var(--avocado-deep); }
+.preparo.completo .preparo__fill { background: var(--avocado-deep); }
+@media (max-width: 720px) {
+  .passo__btn { grid-template-columns: 28px 1fr; }
+  .passo__min { grid-column: 2; justify-self: start; }
+  .campo--pais select { max-width: 100%; width: 100%; }
+}

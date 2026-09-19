@@ -13,7 +13,7 @@
     <header class="hero">
       <span class="badge">Gerenciador de receitas</span>
       <h1>Cozinha Retrô <span>arraste, misture, descubra</span></h1>
-      <p>Monte sua <b>despensa</b> no mercado, pegue um ingrediente e solte na <b>panela</b>. Quando a combinação bater com uma receita, ela aparece cozinhando — com gramagem, calorias e macros. Cozinhou? O estoque baixa e avisa quando algo estiver acabando.</p>
+      <p>Monte sua <b>despensa</b> no mercado, pegue um ingrediente e solte na <b>panela</b>. Quando a combinação bater com uma receita, ela aparece cozinhando — com gramagem, calorias e macros. No livro tem <b>receitas de 22 países</b>, cada uma com o <b>modo de preparo completo</b>: você vai marcando os passos na tela enquanto cozinha, e ele fica salvo se sair no meio.</p>
     </header>
 
     <p id="status" class="status" role="status" aria-live="polite"></p>
@@ -140,9 +140,13 @@
               <button class="chip" type="button" data-rf="sem-gluten">sem glúten</button>
               <button class="chip" type="button" data-rf="sem-lactose">sem lactose</button>
               <button class="chip" type="button" data-rf="minha">minhas</button>
+              <button class="chip" type="button" data-rf="do-mundo">🌍 do mundo</button>
               <button class="chip" type="button" data-rf="em-casa">🏠 com o que tenho em casa</button>
               <button class="chip" type="button" data-rf="da-para-fazer">dá pra fazer agora</button>
             </div>
+            <label class="campo campo--pais"><span class="somente-leitor">País</span>
+              <select id="filtro-pais" aria-label="Filtrar por país"><option value="todos">🌍 todos os países</option></select>
+            </label>
             <button class="btn ghostb" id="limpar-filtros" type="button">Limpar filtros</button>
           </form>
           <div class="book" id="book"></div>

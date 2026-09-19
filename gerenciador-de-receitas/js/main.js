@@ -1,12 +1,25 @@
 // PONTO DE ENTRADA — ciclo único: evento → altera o estado → renderizar(estado).
 // Cada ouvinte só escreve no estado e chama atualizar(). Quem desenha é tela.js.
 import { carregarDados, lerPreferencias, salvarPreferencias } from "./api.js";
-import { estado, porId, avaliarPanela, criterioInicial, LIMITE_LIVRO, norm, precisa, qtdEmCasa, nivelEstoque, alertasEstoque, formatarQtd } from "./estado.js";
+import { estado, porId, avaliarPanela, criterioInicial, LIMITE_LIVRO, norm, precisa, qtdEmCasa, nivelEstoque, alertasEstoque, formatarQtd, progresso, passosFeitos } from "./estado.js";
 import { renderizar, popover, fecharPopover, toast, confete, art, el } from "./tela.js";
 
 const $ = id => document.getElementById(id);
 function atualizar() { renderizar(estado); }
-function persistir() { salvarPreferencias({ notas: estado.notas, receitasProprias: estado.receitasProprias, ingredientesProprios: estado.ingredientesProprios, estoque: estado.estoque }); }
+function persistir() { salvarPreferencias({ notas: estado.notas, receitasProprias: estado.receitasProprias, ingredientesProprios: estado.ingredientesProprios, estoque: estado.estoque, preparo: estado.preparo }); }
+
+// Marca ou desmarca um passo do modo de preparo. Só mexe no estado; quem desenha é a tela.
+function marcarPasso(rc, i) {
+  const feitos = new Set(passosFeitos(estado, rc.id));
+  feitos.has(i) ? feitos.delete(i) : feitos.add(i);
+  const lista = [...feitos].sort((a, b) => a - b);
+  if (lista.length) estado.preparo[rc.id] = lista; else delete estado.preparo[rc.id];
+  persistir(); atualizar();
+  const pr = progresso(estado, rc);
+  if (pr.completa && feitos.has(i)) { confete([rc.emoji, "🎉", "👏"]); toast(`${rc.emoji} ${rc.nome}: preparo concluído!`); }
+  else if (feitos.has(i)) toast(`✓ passo ${i + 1} de ${pr.total}${pr.atual >= 0 ? ` · agora o ${pr.atual + 1}` : ""}`);
+  else toast(`passo ${i + 1} desmarcado`);
+}
 
 // Cozinhar uma receita completa desconta da despensa o que ela gasta e avisa o que ficou baixo.
 function consumir(rc) {
@@ -69,6 +82,7 @@ function instalarOuvintes() {
   $("busca-receita").addEventListener("input", e => { estado.buscaReceita = e.target.value; estado.limiteLivro = LIMITE_LIVRO; atualizar(); });
   $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; estado.tipo = b.dataset.tipo; atualizar(); });
   document.querySelectorAll("[data-rf]").forEach(b => b.addEventListener("click", () => { estado.filtroReceita = b.dataset.rf; estado.limiteLivro = LIMITE_LIVRO; atualizar(); }));
+  $("filtro-pais").addEventListener("change", e => { estado.pais = e.target.value; estado.limiteLivro = LIMITE_LIVRO; atualizar(); });
   $("limpar-filtros").addEventListener("click", () => { Object.assign(estado, criterioInicial()); atualizar(); });
   document.querySelectorAll("form").forEach(f => f.addEventListener("submit", e => e.preventDefault()));
 
@@ -100,10 +114,14 @@ function instalarOuvintes() {
 
   // ---- livro (delegação: os cards são recriados a cada render)
   $("book").addEventListener("click", e => {
+    if (e.target.id === "limpar-pais") { estado.pais = "todos"; estado.limiteLivro = LIMITE_LIVRO; atualizar(); return; }
     if (e.target.id === "ver-mais") { estado.limiteLivro += LIMITE_LIVRO; atualizar(); $("book").querySelectorAll(".recipe")[estado.limiteLivro - LIMITE_LIVRO]?.focus({ preventScroll: false }); return; }
     const b = e.target.closest(".recipe"); if (!b) return; estado.receitaSelecionada = estado.receitaSelecionada === b.dataset.rid ? null : b.dataset.rid; atualizar(); if (estado.receitaSelecionada) $("ficha").scrollIntoView({ behavior: "smooth", block: "nearest" }); });
   $("ficha").addEventListener("click", e => {
     const rc = [...estado.receitas, ...estado.receitasProprias].find(r => r.id === estado.receitaSelecionada); if (!rc) return;
+    const passo = e.target.closest("[data-passo]");
+    if (passo) { marcarPasso(rc, +passo.dataset.passo); return; }
+    if (e.target.id === "reiniciar-preparo") { delete estado.preparo[rc.id]; persistir(); atualizar(); document.querySelector('.passo__btn[data-passo="0"]')?.focus({ preventScroll: true }); toast("Preparo zerado — dá pra começar de novo"); return; }
     if (e.target.id === "montar") montar(rc);
     if (e.target.id === "fechar-ficha") { estado.receitaSelecionada = null; atualizar(); }
     if (e.target.id === "excluir-receita") { estado.receitasProprias = estado.receitasProprias.filter(r => r.id !== rc.id); estado.receitaSelecionada = null; persistir(); atualizar(); toast("Receita excluída"); }
@@ -212,6 +230,7 @@ async function iniciar() {
     estado.ingredientes = dados.ingredientes; estado.receitas = dados.receitas;
     const pref = lerPreferencias(); estado.notas = pref.notas || {}; estado.receitasProprias = Array.isArray(pref.receitasProprias) ? pref.receitasProprias : [];
     estado.ingredientesProprios = Array.isArray(pref.ingredientesProprios) ? pref.ingredientesProprios : []; estado.estoque = pref.estoque && typeof pref.estoque === "object" ? pref.estoque : {};
+    estado.preparo = pref.preparo && typeof pref.preparo === "object" ? pref.preparo : {};
     estado.carregamento = "sucesso";
   } catch (erro) { console.error(erro); estado.carregamento = "erro"; estado.erro = erro; }
   atualizar();

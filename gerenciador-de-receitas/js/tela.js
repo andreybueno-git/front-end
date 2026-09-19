@@ -1,6 +1,6 @@
 // TELA — projeta o estado. Nenhuma requisição, nenhuma regra de negócio.
 // renderizar(estado) é o ÚNICO ponto de renderização.
-import { TIPOS, rotuloTipo, LIMITE_LIVRO, ROTULO_TAG, porId, todosIngredientes, ingredientesVisiveis, despensaVisivel, mercadoVisivel, receitasVisiveis, avaliarPanela, macros, tagsDe, notaDaReceita, temEmCasa, qtdEmCasa, nivelEstoque, alertasEstoque, formatarQtd, gramagem, idsEmCasa } from "./estado.js";
+import { TIPOS, rotuloTipo, LIMITE_LIVRO, ROTULO_TAG, roteiro, progresso, passoFeito, tempoDoRoteiro, paises, porId, todosIngredientes, ingredientesVisiveis, despensaVisivel, mercadoVisivel, receitasVisiveis, avaliarPanela, macros, tagsDe, notaDaReceita, temEmCasa, qtdEmCasa, nivelEstoque, alertasEstoque, formatarQtd, gramagem, idsEmCasa } from "./estado.js";
 
 const $ = id => document.getElementById(id);
 export const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; };
@@ -26,6 +26,9 @@ function renderChips(e) {
   const c = $("chips");
   if (!c.children.length) [["todos", "todos"], ...Object.entries(TIPOS)].forEach(([v, rot]) => { const b = el("button", "chip", rot); b.type = "button"; b.dataset.tipo = v; c.append(b); });
   c.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.tipo === e.tipo));
+  const sel = $("filtro-pais");
+  if (sel && sel.options.length <= 1) paises(e).forEach(x => { const o = document.createElement("option"); o.value = x.pais; o.textContent = `${x.bandeira} ${x.pais} (${x.n})`; sel.append(o); });
+  if (sel && sel.value !== e.pais) sel.value = e.pais;
   document.querySelectorAll("[data-rf]").forEach(b => b.setAttribute("aria-pressed", b.dataset.rf === e.filtroReceita));
   if ($("busca").value !== e.busca) $("busca").value = e.busca;
   if ($("busca-receita").value !== e.buscaReceita) $("busca-receita").value = e.buscaReceita;
@@ -120,8 +123,10 @@ function cardReceita(e, rc) {
   const set = new Set(e.panela), m = macros(e, rc.ings, rc.qtd || {}), tags = tagsDe(e, rc), nota = notaDaReceita(e, rc), gr = gramagem(e, rc), totalG = gr.reduce((a, x) => a + x.gramas, 0), daCasa = gr.every(x => x.falta === 0);
   const b = el("button", "recipe" + (rc.minha ? " minha" : "")); b.type = "button"; b.dataset.rid = rc.id; b.setAttribute("aria-expanded", e.receitaSelecionada === rc.id); b.setAttribute("aria-controls", "ficha");
   const plate = el("span", "plate"); plate.append(el("span", "dish", rc.emoji));
+  if (rc.pais) { const b = el("span", "flag"); b.textContent = rc.bandeira || "🌍"; b.title = rc.pais; plate.append(b); }
   const info = el("span", "info");
-  info.append(el("b", "", rc.nome), el("small", "", `${rc.tempo || "sua receita"} · ${rc.ings.length} ingredientes · ≈${Math.round(totalG)} g · ${Math.round(m.kcal)} kcal${rc.ings.every(i => set.has(i)) ? " · ✓ tudo na panela" : ""}${daCasa ? " · 🏠 tenho tudo" : ""}`));
+  const pr = progresso(e, rc);
+  info.append(el("b", "", rc.nome), el("small", "", `${rc.pais ? rc.pais + " · " : ""}${rc.tempo || "sua receita"} · ${rc.ings.length} ingredientes · ≈${Math.round(totalG)} g · ${Math.round(m.kcal)} kcal${rc.ings.every(i => set.has(i)) ? " · ✓ tudo na panela" : ""}${daCasa ? " · 🏠 tenho tudo" : ""}${pr.completa ? " · ✅ você já fez" : pr.feitos ? ` · 👩‍🍳 no passo ${pr.feitos + 1}` : ""}`));
   const tg = el("span", "tags"); tags.forEach(t => tg.append(el("i", "", ROTULO_TAG[t]))); info.append(tg);
   if (nota) info.append(estrelas(Math.round(nota), false));
   const ings = el("span", "ing"); gr.forEach(x => { const s = el("span", set.has(x.id) ? "ok" : ""); s.append(art(e, x.id), el("i", "q", formatarQtd(porId(e)[x.id], x.qtd))); s.title = `${x.nome}: ${formatarQtd(porId(e)[x.id], x.qtd)}`; ings.append(s); });
@@ -134,12 +139,14 @@ function renderBook(e) {
   if (lista.length > visiveis.length) { const m = Object.assign(el("button", "btn ghostb ver-mais", `Ver mais ${Math.min(LIMITE_LIVRO, lista.length - visiveis.length)} receitas (${lista.length - visiveis.length} restantes)`), { type: "button", id: "ver-mais" }); book.append(m); }
   if (!lista.length) {
     const v = el("div", "empty");
-    v.append(el("p", "", e.filtroReceita === "da-para-fazer" && e.panela.length < 2 ? "Coloque ingredientes na panela para ver o que dá pra fazer agora."
+    v.append(el("p", "", e.pais !== "todos" ? `Nada com essa busca na cozinha de ${e.pais}.`
+      : e.filtroReceita === "da-para-fazer" && e.panela.length < 2 ? "Coloque ingredientes na panela para ver o que dá pra fazer agora."
       : e.filtroReceita === "em-casa" ? (idsEmCasa(e).length ? "Nenhuma receita fecha com a quantidade que você tem em casa. Marque mais alimentos ou ajuste o estoque na ficha deles." : "Marque na prateleira o que você tem em casa (clique no alimento → “Tenho em casa”).")
       : "Nenhuma receita com esse filtro ou busca."));
+    if (e.pais !== "todos") v.append(Object.assign(el("button", "btn ghostb", "🌍 ver em todos os países"), { type: "button", id: "limpar-pais" }));
     book.append(v);
   }
-  $("cont-livro").textContent = `${lista.length} de ${e.receitas.length + e.receitasProprias.length}${lista.length > visiveis.length ? ` · mostrando ${visiveis.length}` : ""}`;
+  $("cont-livro").textContent = `${lista.length} de ${e.receitas.length + e.receitasProprias.length}${e.pais !== "todos" ? ` · ${e.pais}` : ""}${lista.length > visiveis.length ? ` · mostrando ${visiveis.length}` : ""}`;
 }
 
 function renderFicha(e) {
@@ -148,8 +155,9 @@ function renderFicha(e) {
   const set = new Set(e.panela), m = macros(e, rc.ings, rc.qtd || {}), ING = porId(e), gr = gramagem(e, rc), totalG = gr.reduce((a, x) => a + x.gramas, 0);
   f.className = "ficha show";
   const cab = el("div", "ficha__cab"); cab.append(el("h3", "", `${rc.emoji} ${rc.nome}`), el("span", "tag", rc.tempo || "minha receita"), el("span", "tag", `≈ ${Math.round(totalG)} g`));
+  if (rc.pais) cab.append(el("span", "tag tag--pais", `${rc.bandeira || "🌍"} ${rc.pais}`));
   const ings = el("div", "ings"); gr.forEach(x => { const s = el("span", set.has(x.id) ? "ok" : (x.falta > 0 && x.emCasa >= 0 && x.id in e.estoque ? "pouco" : "")); s.append(art(e, x.id), document.createTextNode(` ${x.porcoes > 1 ? String(x.porcoes).replace(".", ",") + "× " : ""}${x.nome} · ${formatarQtd(ING[x.id], x.qtd)}${x.unidade === "un" ? ` (≈${x.gramas} g)` : ""}${x.id in e.estoque ? (x.falta > 0 ? ` · falta ${formatarQtd(ING[x.id], x.falta)}` : " · 🏠 tem") : ""}${set.has(x.id) ? " ✓" : ""}`)); ings.append(s); });
-  const passos = el("ol"); (rc.passos || ["Junte tudo na panela e cozinhe do seu jeito."]).forEach(p => passos.append(el("li", "", p)));
+  const preparo = blocoPreparo(e, rc);
   const nutri = el("div", "nutri nutri--ficha");
   nutri.innerHTML = `<div class="nutri__cab"><h4>Por porção</h4><span class="kcal-big">${Math.round(m.kcal)} <small>kcal</small></span></div>
     <div class="macros"><span class="donut" style="--p:${m.pctP}%;--c:${m.pctP + m.pctC}%" role="img" aria-label="proporção de macros"></span>
@@ -162,8 +170,41 @@ function renderFicha(e) {
   acts.append(Object.assign(el("button", "btn green", "🪄 Colocar tudo na panela"), { type: "button", id: "montar" }));
   if (rc.minha) acts.append(Object.assign(el("button", "btn ghostb", "Excluir receita"), { type: "button", id: "excluir-receita" }));
   acts.append(Object.assign(el("button", "btn ghostb", "Fechar"), { type: "button", id: "fechar-ficha" }));
-  const esq = el("div"); esq.append(cab, ings, passos, acts);
+  const esq = el("div");
+  esq.append(cab);
+  if (rc.sobre) esq.append(el("p", "sobre", rc.sobre));
+  esq.append(ings, preparo, acts);
   f.replaceChildren(esq, nutri);
+}
+
+// Modo de preparo: cada passo é um botão que a pessoa marca enquanto cozinha.
+// O estado mora em estado.preparo; aqui só se desenha o que já está marcado.
+function blocoPreparo(e, rc) {
+  const passos = roteiro(e, rc), pr = progresso(e, rc), total = tempoDoRoteiro(e, rc);
+  const box = el("section", "preparo" + (pr.completa ? " completo" : ""));
+  const cab = el("div", "preparo__cab");
+  cab.append(el("h4", "", "👩‍🍳 Modo de preparo"), el("span", "preparo__cont", `${pr.feitos} de ${pr.total} passos${total ? ` · ~${total} min` : ""}`));
+  const trilho = el("span", "preparo__barra"); const fill = el("span", "preparo__fill"); fill.style.width = pr.pct + "%";
+  trilho.append(fill); trilho.setAttribute("role", "progressbar"); trilho.setAttribute("aria-valuenow", pr.pct);
+  trilho.setAttribute("aria-valuemin", "0"); trilho.setAttribute("aria-valuemax", "100"); trilho.setAttribute("aria-label", "progresso do preparo");
+  const ol = el("ol", "passos"); ol.setAttribute("aria-label", "Passos do preparo");
+  passos.forEach((p, i) => {
+    const feito = passoFeito(e, rc.id, i), atual = !feito && i === pr.atual;
+    const li = el("li", "passo" + (feito ? " feito" : "") + (atual ? " atual" : ""));
+    const b = el("button", "passo__btn"); b.type = "button"; b.dataset.passo = i;
+    b.setAttribute("role", "checkbox"); b.setAttribute("aria-checked", feito);
+    b.setAttribute("aria-label", `Passo ${i + 1}${feito ? ", feito" : ""}: ${p.txt}`);
+    b.append(el("span", "passo__marca", feito ? "✓" : String(i + 1)), el("span", "passo__txt", p.txt));
+    if (p.min) b.append(el("i", "passo__min", `${p.min} min`));
+    li.append(b); ol.append(li);
+  });
+  const acts = el("div", "preparo__acts");
+  if (pr.completa) acts.append(el("span", "preparo__fim", "🎉 Receita concluída — bom apetite!"));
+  else if (pr.feitos) acts.append(el("span", "preparo__dica", `Próximo: passo ${pr.atual + 1}.`));
+  else acts.append(el("span", "preparo__dica", "Clique em cada passo conforme for fazendo — fica salvo."));
+  if (pr.feitos) acts.append(Object.assign(el("button", "btn ghostb sm", "↺ recomeçar"), { type: "button", id: "reiniciar-preparo" }));
+  box.append(cab, trilho, ol, acts);
+  return box;
 }
 
 function renderCarregamento(e) {
@@ -187,6 +228,7 @@ export function renderizar(e) {
   const a = document.activeElement;
   const chave = a?.closest?.(".tile")?.dataset.id ? `.tile[data-id="${a.closest(".tile").dataset.id}"]`
     : a?.closest?.(".recipe")?.dataset.rid ? `.recipe[data-rid="${a.closest(".recipe").dataset.rid}"]`
+    : a?.dataset?.passo !== undefined ? `.passo__btn[data-passo="${a.dataset.passo}"]`
     : a?.id ? `#${a.id}` : null;
   renderCarregamento(e);
   if (e.carregamento !== "sucesso") return;
