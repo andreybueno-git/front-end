@@ -109,15 +109,15 @@ function renderResultado(e) {
   r.replaceChildren(el("span", "prato", av.r.emoji), bloco);
 }
 
-// Lista tudo que a panela alcança: primeiro o que fecha, depois o que está perto.
+// Lista o que a panela alcança. Quanto mais ingredientes, menor a lista.
 const LIMITE_SUG = 8;
 function renderSugestoes(e) {
-  const box = $("sugestoes"), lista = $("sug-lista"), todas = sugestoesDaPanela(e);
-  box.hidden = !todas.length;
-  if (!todas.length) { lista.replaceChildren(); $("cont-sug").textContent = ""; return; }
-  const ING = porId(e), prontas = todas.filter(x => x.completa).length;
+  const box = $("sugestoes"), lista = $("sug-lista"), s = sugestoesDaPanela(e);
+  box.hidden = !s.lista.length;
+  if (!s.lista.length) { lista.replaceChildren(); $("cont-sug").textContent = ""; $("sug-aviso").hidden = true; return; }
+  const ING = porId(e), prontas = s.lista.filter(x => x.completa).length;
   const destaque = avaliarPanela(e)?.r.id;   // essa já aparece logo acima, em destaque
-  const mostrar = todas.filter(x => x.r.id !== destaque).slice(0, LIMITE_SUG);
+  const mostrar = s.lista.filter(x => x.r.id !== destaque).slice(0, LIMITE_SUG);
   lista.replaceChildren(...mostrar.map(x => {
     const b = el("button", "sug" + (x.completa ? " pronta" : "")); b.type = "button"; b.dataset.rid = x.r.id;
     b.append(el("span", "sug__emoji", x.r.emoji));
@@ -135,12 +135,19 @@ function renderSugestoes(e) {
       }
     }
     info.append(st); b.append(info);
-    b.title = `${x.r.nome} — ${x.tem} de ${x.r.ings.length} ingredientes na panela${x.temTudoEmCasa ? "; o resto você tem em casa" : ""}`;
+    b.title = `${x.r.nome} — usa ${x.tem} de ${x.r.ings.length} ingredientes${x.temTudoEmCasa ? "; o resto você tem em casa" : ""}`;
     return b;
   }));
-  if (todas.length > mostrar.length)
-    lista.append(Object.assign(el("button", "btn ghostb sm sug__mais", `ver as ${todas.length} no livro`), { type: "button", id: "ver-todas-panela" }));
-  $("cont-sug").textContent = `${todas.length} receita${todas.length > 1 ? "s" : ""}${prontas ? ` · ${prontas} fecha${prontas > 1 ? "m" : ""} agora` : ""}`;
+  // a receita em destaque conta no total, mas não entra na lista
+  const escondidas = s.total - mostrar.length - (s.lista.some(x => x.r.id === destaque) ? 1 : 0);
+  if (!mostrar.length) lista.append(el("p", "sug-vazio", "Essa combinação fecha só a receita que está logo acima."));
+  else if (!s.parcial && escondidas > 0)
+    lista.append(Object.assign(el("button", "btn ghostb sm sug__mais", `ver as ${s.total} no livro`), { type: "button", id: "ver-todas-panela" }));
+  const itens = s.naPanela === 1 ? "esse ingrediente" : `esses ${s.naPanela} ingredientes`;
+  $("cont-sug").textContent = `${s.total} receita${s.total > 1 ? "s" : ""}${s.parcial ? "" : ` com ${itens}`}${prontas ? ` · ${prontas} fecha${prontas > 1 ? "m" : ""} agora` : ""}`;
+  const aviso = $("sug-aviso");
+  aviso.hidden = !s.parcial;
+  if (s.parcial) aviso.textContent = `Nenhuma receita junta ${itens}. Estas são as que mais aproveitam a panela (${s.aproveitam} de ${s.naPanela}) — tire algo para ver mais opções.`;
 }
 
 function renderNutri(e) {

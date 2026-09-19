@@ -90,22 +90,31 @@ export function avaliarPanela(e) {
   return melhor;
 }
 
-// Todas as receitas que usam pelo menos um ingrediente da panela, das mais
-// prontas para as mais distantes. avaliarPanela dá a melhor; esta dá o resto.
+// O que a panela alcança. A regra é "usa TUDO o que está na panela": a cada
+// ingrediente novo a lista afunila, que é o jeito que a pessoa espera.
+// Se nada usar a combinação inteira, cai para as que aproveitam mais dela e
+// avisa com parcial: true.
 export function sugestoesDaPanela(e) {
   const set = new Set(e.panela);
-  if (!set.size) return [];
-  return todasReceitas(e).map(r => {
+  if (!set.size) return { lista: [], total: 0, parcial: false, aproveitam: 0, naPanela: 0 };
+  const avaliadas = todasReceitas(e).map(r => {
     const tem = r.ings.filter(i => set.has(i)).length;
     const faltam = r.ings.filter(i => !set.has(i));
-    const sobram = [...set].filter(i => !r.ings.includes(i));
+    const sobram = [...set].filter(i => !r.ings.includes(i));   // o que a panela tem e a receita não usa
     const emCasa = faltam.filter(i => qtdEmCasa(e, i) >= precisa(e, r, i));
     return { r, tem, faltam, sobram, emCasa, temTudoEmCasa: faltam.length > 0 && emCasa.length === faltam.length, completa: !faltam.length };
-  }).filter(x => x.tem > 0)
-    .sort((a, b) => (b.completa - a.completa) || (b.temTudoEmCasa - a.temTudoEmCasa)
-      || (a.faltam.length - b.faltam.length) || (b.emCasa.length - a.emCasa.length)
-      || (b.tem - a.tem) || (a.sobram.length - b.sobram.length)
-      || a.r.nome.localeCompare(b.r.nome, "pt-BR"));
+  }).filter(x => x.tem > 0);
+
+  const ordenar = l => l.sort((a, b) => (b.completa - a.completa) || (b.temTudoEmCasa - a.temTudoEmCasa)
+    || (a.faltam.length - b.faltam.length) || (b.emCasa.length - a.emCasa.length)
+    || (b.tem - a.tem) || a.r.nome.localeCompare(b.r.nome, "pt-BR"));
+
+  const usamTudo = avaliadas.filter(x => !x.sobram.length);
+  if (usamTudo.length) return { lista: ordenar(usamTudo), total: usamTudo.length, parcial: false, aproveitam: set.size, naPanela: set.size };
+  // ninguém usa a combinação inteira: mostra quem aproveita o máximo dela
+  const maximo = Math.max(...avaliadas.map(x => x.tem));
+  const perto = avaliadas.filter(x => x.tem === maximo);
+  return { lista: ordenar(perto), total: perto.length, parcial: true, aproveitam: maximo, naPanela: set.size };
 }
 
 export function receitasVisiveis(e) {
@@ -117,7 +126,7 @@ export function receitasVisiveis(e) {
       : e.filtroReceita === "da-para-fazer" ? r.ings.every(i => set.has(i))
       : e.filtroReceita === "em-casa" ? r.ings.every(i => qtdEmCasa(e, i) >= precisa(e, r, i))
       : e.filtroReceita === "do-mundo" ? !!r.pais
-      : e.filtroReceita === "usa-panela" ? r.ings.some(i => set.has(i))
+      : e.filtroReceita === "usa-panela" ? set.size > 0 && [...set].every(i => r.ings.includes(i))
       : tags.includes(e.filtroReceita);
     const batePais = e.pais === "todos" || r.pais === e.pais;
     return bateBusca && bateFiltro && batePais;

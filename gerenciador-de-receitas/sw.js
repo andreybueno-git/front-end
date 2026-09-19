@@ -1,7 +1,7 @@
 // Service worker: guarda o app inteiro no aparelho para abrir offline.
 // Estratégia: o shell é pré-carregado na instalação; navegação tenta a rede
 // e cai no cache; o resto responde do cache e se atualiza por trás.
-const VERSAO = "cozinha-retro-v4";
+const VERSAO = "cozinha-retro-v5";
 const SHELL = [
   "./", "./index.html", "./styles.css", "./manifest.webmanifest", "./dados.json",
   "./js/estado.js", "./js/api.js", "./js/tela.js", "./js/main.js",
