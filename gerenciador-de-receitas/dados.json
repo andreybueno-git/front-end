@@ -33,7 +33,8 @@
       "dica": "Peito grelhado fica pronto em 6 min de cada lado.",
       "unidade": "g",
       "porcaoQtd": 100,
-      "gramas": 100
+      "gramas": 100,
+      "imagem": "assets/frango.webp"
     },
     {
       "id": "carne",
@@ -293,7 +294,8 @@
       "dica": "Queima rápido: entra depois da cebola.",
       "unidade": "un",
       "porcaoQtd": 1,
-      "gramas": 5
+      "gramas": 5,
+      "imagem": "assets/alho.webp"
     },
     {
       "id": "batata",
@@ -722,7 +724,8 @@
       "dica": "Refogue no alho antes de pôr a água: fica soltinho.",
       "unidade": "g",
       "porcaoQtd": 50,
-      "gramas": 50
+      "gramas": 50,
+      "imagem": "assets/arroz.webp"
     },
     {
       "id": "feijao",
@@ -739,7 +742,8 @@
       "dica": "Deixe de molho de véspera e cozinhe na pressão.",
       "unidade": "g",
       "porcaoQtd": 60,
-      "gramas": 60
+      "gramas": 60,
+      "imagem": "assets/feijao.webp"
     },
     {
       "id": "macarrao",

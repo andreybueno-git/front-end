@@ -197,8 +197,15 @@ function instalarOuvintes() {
   document.addEventListener("pointercancel", fimDrag); window.addEventListener("blur", fimDrag);
 }
 
+// panela 3D: só troca a panela em CSS quando o render carregou de verdade (senão fica a de reserva)
+function ativarRender() {
+  const img = $("panela-3d"); if (!img) return;
+  const ok = () => { if (img.naturalWidth) $("pot").classList.add("com-render"); };
+  if (img.complete) ok(); else img.addEventListener("load", ok, { once: true });
+}
+
 async function iniciar() {
-  instalarOuvintes();
+  instalarOuvintes(); ativarRender();
   estado.carregamento = "carregando"; atualizar();
   try {
     const dados = await carregarDados();

@@ -177,6 +177,18 @@ main { display: grid; gap: 22px; margin-top: 22px; }
 .pot.cozinhando .vapor i { animation: vapor 2.2s ease-in infinite; }
 .vapor i:nth-child(1) { left: -40px; } .vapor i:nth-child(2) { left: -8px; animation-delay: .7s; } .vapor i:nth-child(3) { left: 26px; animation-delay: 1.4s; }
 @keyframes vapor { 0% { opacity: 0; transform: translateY(0) scaleX(1); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateY(-58px) scaleX(2.1); } }
+/* ====== panela 3D (render do Higgsfield); a panela em CSS fica de reserva se a imagem não carregar ====== */
+.pot .panela-3d { display: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: drop-shadow(0 14px 0 rgba(43,26,16,.22)); }
+.pot.com-render { aspect-ratio: 1; background: none; border: 0; box-shadow: none; transform: none; border-radius: 0; }
+.pot.com-render .panela-3d { display: block; }
+.pot.com-render::before, .pot.com-render::after, .pot.com-render .alca, .pot.com-render .tampa, .pot.com-render .colher { display: none; }
+.pot.com-render .caldo { left: 20%; right: 20%; top: 33%; height: 26%; border-radius: 50%; border: 0; box-shadow: none; background: radial-gradient(ellipse at 50% 40%, rgba(255,211,122,.5), rgba(224,138,42,.3) 70%, transparent 100%); }
+.pot.com-render .caldo.vazio { background: radial-gradient(ellipse at 50% 40%, rgba(216,219,227,.75), rgba(120,123,135,.6) 75%, transparent 100%); }
+.pot.com-render.cozinhando .caldo { box-shadow: 0 0 34px rgba(232,74,59,.55); }
+.pot.com-render .itens { left: 20%; right: 20%; top: 29%; height: 32%; }
+.pot.com-render .vapor { top: 30%; }
+.pot.com-render.over { transform: scale(1.04); box-shadow: none; filter: drop-shadow(0 0 12px rgba(42,127,123,.7)); }
+.pot-scene:has(.pot.com-render) { padding: 10px 10px 0; }
 .burner { height: 16px; border-radius: 999px; background: repeating-linear-gradient(90deg, var(--ink) 0 10px, var(--tomato-deep) 10px 20px); border: 3px solid var(--ink); margin: 8px 30px 0; }
 .pot-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
 .btn { min-height: 44px; border: 3px solid var(--ink); border-radius: 999px; padding: 9px 16px; font-family: var(--display); font-weight: 900; font-size: .9rem; background: var(--paper); box-shadow: 4px 4px 0 var(--ink); transition: transform .1s, box-shadow .1s; }
