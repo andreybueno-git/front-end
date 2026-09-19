@@ -1,6 +1,6 @@
 // TELA — projeta o estado. Nenhuma requisição, nenhuma regra de negócio.
 // renderizar(estado) é o ÚNICO ponto de renderização.
-import { TIPOS, rotuloTipo, LIMITE_LIVRO, ROTULO_TAG, roteiro, progresso, passoFeito, tempoDoRoteiro, paises, porId, todosIngredientes, ingredientesVisiveis, despensaVisivel, mercadoVisivel, receitasVisiveis, avaliarPanela, macros, tagsDe, notaDaReceita, temEmCasa, qtdEmCasa, nivelEstoque, alertasEstoque, formatarQtd, gramagem, idsEmCasa } from "./estado.js";
+import { TIPOS, rotuloTipo, LIMITE_LIVRO, ROTULO_TAG, roteiro, progresso, passoFeito, tempoDoRoteiro, paises, sugestoesDaPanela, porId, todosIngredientes, ingredientesVisiveis, despensaVisivel, mercadoVisivel, receitasVisiveis, avaliarPanela, macros, tagsDe, notaDaReceita, temEmCasa, qtdEmCasa, nivelEstoque, alertasEstoque, formatarQtd, gramagem, idsEmCasa } from "./estado.js";
 
 const $ = id => document.getElementById(id);
 export const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; };
@@ -107,6 +107,40 @@ function renderResultado(e) {
     const f = el("div", "faltam"); av.faltam.forEach(i => f.append(el("span", "", `${ING[i].emoji} ${ING[i].nome}`))); bloco.append(f);
   }
   r.replaceChildren(el("span", "prato", av.r.emoji), bloco);
+}
+
+// Lista tudo que a panela alcança: primeiro o que fecha, depois o que está perto.
+const LIMITE_SUG = 8;
+function renderSugestoes(e) {
+  const box = $("sugestoes"), lista = $("sug-lista"), todas = sugestoesDaPanela(e);
+  box.hidden = !todas.length;
+  if (!todas.length) { lista.replaceChildren(); $("cont-sug").textContent = ""; return; }
+  const ING = porId(e), prontas = todas.filter(x => x.completa).length;
+  const destaque = avaliarPanela(e)?.r.id;   // essa já aparece logo acima, em destaque
+  const mostrar = todas.filter(x => x.r.id !== destaque).slice(0, LIMITE_SUG);
+  lista.replaceChildren(...mostrar.map(x => {
+    const b = el("button", "sug" + (x.completa ? " pronta" : "")); b.type = "button"; b.dataset.rid = x.r.id;
+    b.append(el("span", "sug__emoji", x.r.emoji));
+    const info = el("span", "sug__info");
+    info.append(el("b", "", `${x.r.bandeira ? x.r.bandeira + " " : ""}${x.r.nome}`));
+    const st = el("small", "");
+    if (x.completa) st.textContent = "✓ tem tudo na panela";
+    else {
+      // 🏠 marca o que falta e você já tem na despensa: é só pegar
+      const nomes = x.faltam.slice(0, 3).map(i => (x.emCasa.includes(i) ? "🏠 " : "") + (ING[i]?.nome || i));
+      st.textContent = `falta ${x.faltam.length}: ${nomes.join(", ")}${x.faltam.length > 3 ? "…" : ""}`;
+      if (x.temTudoEmCasa) { // tudo o que falta está na despensa: o 🏠 vai uma vez só, no começo
+        b.classList.add("emcasa");
+        st.textContent = `🏠 só pegar na despensa: ${x.faltam.slice(0, 3).map(i => ING[i]?.nome || i).join(", ")}${x.faltam.length > 3 ? "…" : ""}`;
+      }
+    }
+    info.append(st); b.append(info);
+    b.title = `${x.r.nome} — ${x.tem} de ${x.r.ings.length} ingredientes na panela${x.temTudoEmCasa ? "; o resto você tem em casa" : ""}`;
+    return b;
+  }));
+  if (todas.length > mostrar.length)
+    lista.append(Object.assign(el("button", "btn ghostb sm sug__mais", `ver as ${todas.length} no livro`), { type: "button", id: "ver-todas-panela" }));
+  $("cont-sug").textContent = `${todas.length} receita${todas.length > 1 ? "s" : ""}${prontas ? ` · ${prontas} fecha${prontas > 1 ? "m" : ""} agora` : ""}`;
 }
 
 function renderNutri(e) {
@@ -232,7 +266,7 @@ export function renderizar(e) {
     : a?.id ? `#${a.id}` : null;
   renderCarregamento(e);
   if (e.carregamento !== "sucesso") return;
-  renderChips(e); renderShelf(e); renderMercado(e); renderPot(e); renderResultado(e); renderNutri(e); renderBook(e); renderFicha(e);
+  renderChips(e); renderShelf(e); renderMercado(e); renderPot(e); renderResultado(e); renderSugestoes(e); renderNutri(e); renderBook(e); renderFicha(e);
   if (chave) document.querySelector(chave)?.focus({ preventScroll: true });
 }
 

@@ -98,6 +98,15 @@ function instalarOuvintes() {
   $("limpar").addEventListener("click", () => { geracaoMontar++; estado.panela = []; estado.cozinhando = false; atualizar(); toast("Panela limpa"); });
   $("pot-itens").addEventListener("click", e => { const b = e.target.closest("[data-tirar]"); if (b) tirar(b.dataset.tirar); });
 
+  // ---- sugestões: tudo que a panela alcança
+  $("sug-lista").addEventListener("click", e => {
+    if (e.target.id === "ver-todas-panela") { estado.filtroReceita = "usa-panela"; estado.buscaReceita = ""; estado.pais = "todos"; estado.limiteLivro = LIMITE_LIVRO; atualizar(); $("livro").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    const b = e.target.closest("[data-rid]"); if (!b) return;
+    estado.receitaSelecionada = estado.receitaSelecionada === b.dataset.rid ? null : b.dataset.rid;
+    atualizar();
+    if (estado.receitaSelecionada) $("ficha").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
   // ---- salvar receita própria a partir da panela
   $("form-receita").addEventListener("submit", e => {
     e.preventDefault();
@@ -215,6 +224,50 @@ function instalarOuvintes() {
   document.addEventListener("pointercancel", fimDrag); window.addEventListener("blur", fimDrag);
 }
 
+
+// ---- app instalável (PWA) ----------------------------------------------
+// O service worker guarda o app no aparelho; o cartão ensina a instalar.
+// Tudo aqui falha em silêncio: sem HTTPS, sem suporte ou sem armazenamento,
+// a página continua funcionando igual.
+const CHAVE_INSTALAR = "cozinha-retro-instalar-fechado";
+const jaFechou = () => { try { return localStorage.getItem(CHAVE_INSTALAR) === "1"; } catch { return false; } };
+const marcarFechado = () => { try { localStorage.setItem(CHAVE_INSTALAR, "1"); } catch { /* sem armazenamento */ } };
+const instalado = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+
+function registrarSW() {
+  if (!("serviceWorker" in navigator)) return;
+  if (location.protocol !== "https:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") return;
+  addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => { /* segue sem offline */ }));
+}
+
+function prepararInstalacao() {
+  const caixa = $("instalar"); if (!caixa) return;
+  const botao = $("instalar-btn"), comoFazer = $("instalar-como");
+  let convite = null;
+  const mostrar = () => { if (!instalado() && !jaFechou()) caixa.hidden = false; };
+  const esconder = () => { caixa.hidden = true; };
+
+  const iOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (iOS) mostrar(); // no iPhone não existe botão: a instalação é pelo menu Compartilhar
+
+  addEventListener("beforeinstallprompt", e => {
+    e.preventDefault(); convite = e;
+    comoFazer.textContent = "Ele vira um ícone na sua tela de início, abre em tela cheia e funciona sem internet.";
+    botao.hidden = false; mostrar();
+  });
+
+  botao.addEventListener("click", async () => {
+    if (!convite) return;
+    botao.disabled = true;
+    try { await convite.prompt(); const r = await convite.userChoice; if (r.outcome !== "accepted") toast("Sem problema — dá pra instalar depois pelo menu do navegador"); }
+    catch { toast("Não deu para abrir a instalação aqui"); }
+    finally { convite = null; botao.disabled = false; esconder(); }
+  });
+
+  $("instalar-fechar").addEventListener("click", () => { esconder(); marcarFechado(); });
+  addEventListener("appinstalled", () => { esconder(); marcarFechado(); toast("🍲 Cozinha Retrô instalada — procure o ícone na tela de início"); });
+}
+
 // panela 3D: só troca a panela em CSS quando o render carregou de verdade (senão fica a de reserva)
 function ativarRender() {
   const img = $("panela-3d"); if (!img) return;
@@ -223,7 +276,7 @@ function ativarRender() {
 }
 
 async function iniciar() {
-  instalarOuvintes(); ativarRender();
+  instalarOuvintes(); ativarRender(); registrarSW(); prepararInstalacao();
   estado.carregamento = "carregando"; atualizar();
   try {
     const dados = await carregarDados();

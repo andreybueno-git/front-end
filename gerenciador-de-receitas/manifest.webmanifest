@@ -1,0 +1,24 @@
+{
+  "name": "Cozinha Retrô — gerenciador de receitas",
+  "short_name": "Cozinha Retrô",
+  "description": "Monte sua despensa, jogue os ingredientes na panela e descubra o que dá pra fazer: 402 receitas com gramagem, macros e modo de preparo em checklist.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fff3d6",
+  "theme_color": "#e84a3b",
+  "categories": ["food", "lifestyle", "utilities"],
+  "icons": [
+    { "src": "assets/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Livro de receitas", "url": "./#livro", "description": "Abrir direto no livro" },
+    { "name": "Minha despensa", "url": "./#cozinha", "description": "Abrir direto na despensa" }
+  ]
+}

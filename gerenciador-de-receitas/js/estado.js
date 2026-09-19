@@ -90,6 +90,24 @@ export function avaliarPanela(e) {
   return melhor;
 }
 
+// Todas as receitas que usam pelo menos um ingrediente da panela, das mais
+// prontas para as mais distantes. avaliarPanela dá a melhor; esta dá o resto.
+export function sugestoesDaPanela(e) {
+  const set = new Set(e.panela);
+  if (!set.size) return [];
+  return todasReceitas(e).map(r => {
+    const tem = r.ings.filter(i => set.has(i)).length;
+    const faltam = r.ings.filter(i => !set.has(i));
+    const sobram = [...set].filter(i => !r.ings.includes(i));
+    const emCasa = faltam.filter(i => qtdEmCasa(e, i) >= precisa(e, r, i));
+    return { r, tem, faltam, sobram, emCasa, temTudoEmCasa: faltam.length > 0 && emCasa.length === faltam.length, completa: !faltam.length };
+  }).filter(x => x.tem > 0)
+    .sort((a, b) => (b.completa - a.completa) || (b.temTudoEmCasa - a.temTudoEmCasa)
+      || (a.faltam.length - b.faltam.length) || (b.emCasa.length - a.emCasa.length)
+      || (b.tem - a.tem) || (a.sobram.length - b.sobram.length)
+      || a.r.nome.localeCompare(b.r.nome, "pt-BR"));
+}
+
 export function receitasVisiveis(e) {
   const set = new Set(e.panela), t = norm(e.buscaReceita), ING = porId(e);
   return todasReceitas(e).filter(r => {
@@ -99,6 +117,7 @@ export function receitasVisiveis(e) {
       : e.filtroReceita === "da-para-fazer" ? r.ings.every(i => set.has(i))
       : e.filtroReceita === "em-casa" ? r.ings.every(i => qtdEmCasa(e, i) >= precisa(e, r, i))
       : e.filtroReceita === "do-mundo" ? !!r.pais
+      : e.filtroReceita === "usa-panela" ? r.ings.some(i => set.has(i))
       : tags.includes(e.filtroReceita);
     const batePais = e.pais === "todos" || r.pais === e.pais;
     return bateBusca && bateFiltro && batePais;

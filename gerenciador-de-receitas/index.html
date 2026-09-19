@@ -6,6 +6,15 @@
     <meta name="description" content="Gerenciador de receitas: arraste ingredientes, descubra receitas e veja os macros.">
     <title>Cozinha Retrô | Gerenciador de receitas</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- instalável: vira app na tela de início do iPhone e do Android, e abre offline -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#e84a3b">
+    <link rel="icon" href="assets/icone-192.png" sizes="192x192" type="image/png">
+    <link rel="apple-touch-icon" href="assets/icone-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Cozinha Retrô">
   </head>
   <body>
     <a class="skip-link" href="#cozinha">Pular para a cozinha</a>
@@ -15,6 +24,16 @@
       <h1>Cozinha Retrô <span>arraste, misture, descubra</span></h1>
       <p>Monte sua <b>despensa</b> no mercado, pegue um ingrediente e solte na <b>panela</b>. Quando a combinação bater com uma receita, ela aparece cozinhando — com gramagem, calorias e macros. No livro tem <b>receitas de 22 países</b>, cada uma com o <b>modo de preparo completo</b>: você vai marcando os passos na tela enquanto cozinha, e ele fica salvo se sair no meio.</p>
     </header>
+
+    <aside class="instalar" id="instalar" hidden>
+      <span class="instalar__icone" aria-hidden="true">📲</span>
+      <div class="instalar__texto">
+        <b>Dá pra instalar no celular</b>
+        <p id="instalar-como">No iPhone: botão <b>Compartilhar</b> → <b>Adicionar à Tela de Início</b>. Fica com ícone próprio e funciona sem internet.</p>
+      </div>
+      <button class="btn green sm" id="instalar-btn" type="button" hidden>Instalar</button>
+      <button class="instalar__x" id="instalar-fechar" type="button" aria-label="Fechar aviso de instalação">✕</button>
+    </aside>
 
     <p id="status" class="status" role="status" aria-live="polite"></p>
 
@@ -97,6 +116,10 @@
             <button class="btn ghostb" id="limpar" type="button">🧽 Esvaziar</button>
           </div>
           <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+          <section class="sugestoes" id="sugestoes" aria-labelledby="t-sug" hidden>
+            <div class="sugestoes__cab"><h4 id="t-sug"><span aria-hidden="true">💡</span> O que essa panela alcança</h4><span class="count" id="cont-sug"></span></div>
+            <div class="sugestoes__lista" id="sug-lista" role="group" aria-label="Receitas que usam o que está na panela"></div>
+          </section>
 
           <div class="nutri" aria-live="polite" aria-atomic="true">
             <div class="nutri__cab"><h4 id="nutri-titulo">Informação nutricional da panela</h4><span class="kcal-big"><span id="n-kcal">0</span> <small>kcal</small></span></div>
@@ -143,6 +166,7 @@
               <button class="chip" type="button" data-rf="do-mundo">🌍 do mundo</button>
               <button class="chip" type="button" data-rf="em-casa">🏠 com o que tenho em casa</button>
               <button class="chip" type="button" data-rf="da-para-fazer">dá pra fazer agora</button>
+              <button class="chip" type="button" data-rf="usa-panela">🍲 usa o que está na panela</button>
             </div>
             <label class="campo campo--pais"><span class="somente-leitor">País</span>
               <select id="filtro-pais" aria-label="Filtrar por país"><option value="todos">🌍 todos os países</option></select>
